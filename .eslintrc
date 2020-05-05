@@ -1,0 +1,61 @@
+{
+  "env": {
+    "browser": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "prettier",
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".d.ts", ".ts", ".tsx", ".js", ".jsx"]
+      }
+    }
+  },
+  "rules": {
+    "no-console": "off",
+    "no-tabs": "off",
+    "indent": [2, "tab"],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never",
+        "jsx": "never"
+      }
+    ],
+    "quotes": ["error", "single"],
+    "comma-dangle": ["error", "never"],
+    "jsx-a11y/anchor-is-valid": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-param-reassign": ["error", {
+      "props": true,
+      "ignorePropertyModificationsFor": ["registration", "ctx"]
+    }],
+    "function-paren-newline": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-curly-brace-presence": ["error", "always"],
+    "react/jsx-indent-props": [2, "tab"],
+    "react/jsx-indent": [2, "tab"],
+    "react/jsx-filename-extension": [1, {
+      "extensions": ["ts", "tsx", "js", "jsx"]
+    }],
+    "react/jsx-one-expression-per-line": "off",
+    "@typescript-eslint/no-use-before-define": ["error", {
+      "functions": false,
+      "classes": true
+    }],
+    "@typescript-eslint/no-explicit-any": ["error", {
+      "ignoreRestArgs": true
+    }],
+    "@typescript-eslint/no-var-requires": "off"
+  }
+}
