@@ -1,11 +1,21 @@
-import React from 'react';
-import { NextApiRequest } from 'next';
+import React, { useEffect } from 'react';
+import { NextPageContext } from 'next';
+
+// Actions
+import { fetchMainContents } from '../src/modules/home';
 
 // Components
 import DailyPopularPost from '../components/index/DailyPopularPost';
 import NewPost from '../components/index/NewPost';
 
-function Index() {
+function Index({ isServer, store }: NextPageContext) {
+	useEffect(() => {
+		console.log(isServer);
+		if (!isServer) {
+			store.dispatch(fetchMainContents());
+		}
+	}, [isServer, store]);
+
 	return (
 		<>
 			<DailyPopularPost />
@@ -14,12 +24,14 @@ function Index() {
 	);
 }
 
-Index.getInitialProps = (req: NextApiRequest) => {
-	const isSSR = req ? 'SSR' : 'NoSSR';
-	console.log(isSSR);
+Index.getInitialProps = ({ isServer, store }: NextPageContext) => {
+	if (isServer) {
+		store.dispatch(fetchMainContents());
+	}
 
 	return {
-		isSSR
+		isServer,
+		store
 	};
 };
 

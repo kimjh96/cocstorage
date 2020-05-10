@@ -1,8 +1,7 @@
 import React from 'react';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 // Material UI
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
 

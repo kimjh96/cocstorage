@@ -1,21 +1,27 @@
 import React, { memo } from 'react';
+import Link from 'next/link';
 import {
 	createStyles, fade, makeStyles, Theme
 } from '@material-ui/core/styles';
 
 // Material UI
-import Grow from '@material-ui/core/Grow';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Skeleton from '@material-ui/lab/Skeleton';
-import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Grow from '@material-ui/core/Grow';
+import Pagination from '@material-ui/lab/Pagination';
+
+// Material UI Colors
+import { grey } from '@material-ui/core/colors';
+
+// Material UI Labs
+import Skeleton from '@material-ui/lab/Skeleton';
+
+// Material UI Icons
 import ImageIcon from '@material-ui/icons/Image';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Pagination from '@material-ui/lab/Pagination';
-import Container from '@material-ui/core/Container';
-import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

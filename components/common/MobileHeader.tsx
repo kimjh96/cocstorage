@@ -1,21 +1,17 @@
 import React, { useState, memo } from 'react';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 // Material UI
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Typography from '@material-ui/core/Typography';
-import StorageIcon from '@material-ui/icons/Storage';
-
 import Box from '@material-ui/core/Box';
-
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 
 // Material UI Icons
 import WhatshotIcon from '@material-ui/icons/Whatshot';
@@ -27,8 +23,7 @@ import SchoolIcon from '@material-ui/icons/School';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
 import InfoIcon from '@material-ui/icons/Info';
-
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
 
 // Logo Image
 import Logo from '../../public/logo_m.png';

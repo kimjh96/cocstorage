@@ -1,16 +1,15 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState, memo } from 'react';
 import { useRouter } from 'next/router';
-
-// Material UI
 import {
 	makeStyles, createStyles, Theme
 } from '@material-ui/core/styles';
+
+// Material UI
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
-
-import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Paper from '@material-ui/core/Paper';
 
 // Logo Image
 import Logo from '../../public/logo.png';
