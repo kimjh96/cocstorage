@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { NextPageContext } from 'next';
 
-// Actions
+// Modules
 import { fetchMainContents } from '../src/modules/home';
 
 // Components
-import DailyPopularPost from '../components/index/DailyPopularPost';
-import NewPost from '../components/index/NewPost';
+import DailyPopularPost from '../components/index/DailyPopularBoard';
+import NewPost from '../components/index/NewBoard';
 
 function Index({ isServer, store }: NextPageContext) {
 	useEffect(() => {

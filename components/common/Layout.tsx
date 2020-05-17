@@ -22,6 +22,7 @@ const useStyles = makeStyles(() =>
 
 function Layout({ children }: LayoutProps) {
 	const classes = useStyles();
+
 	return (
 		<>
 			<Hidden mdDown>

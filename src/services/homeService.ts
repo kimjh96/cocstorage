@@ -1,7 +1,7 @@
-import fetch from 'node-fetch';
+import axios from '.';
 
 export function fetchMainContents() {
-	return fetch(`${process.env.API_BASE_URL}/main/content`);
+	return axios().get('/main/content');
 }
 
 export default fetchMainContents;

@@ -145,7 +145,7 @@ const config = {
 	wrapperClass: 'customized-daily-swiper-wrapper'
 };
 
-function DailyPopularPost() {
+function DailyPopularBoard() {
 	const classes = useStyles();
 	const { dailyPopularList, pending } = useHome();
 
@@ -331,4 +331,4 @@ function DailyPopularPost() {
 	);
 }
 
-export default memo(DailyPopularPost);
+export default memo(DailyPopularBoard);

@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+// Modules
 import { RootState } from '../src/modules';
 
 export default function useHome() {

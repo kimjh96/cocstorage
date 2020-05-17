@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import {
 	createStyles, fade, makeStyles, Theme
 } from '@material-ui/core/styles';
@@ -22,6 +22,19 @@ import Dialog from '@material-ui/core/Dialog';
 // Material UI Icons
 import SearchIcon from '@material-ui/icons/Search';
 import CastIcon from '@material-ui/icons/Cast';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import SchoolIcon from '@material-ui/icons/School';
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
+
+// Custom Hooks
+import useBoard from '../../hooks/useBoard';
+
+// Snippets
+import { getSearchTypeLabelByType, getCategoryNameByCategoryId } from '../../src/snippet/board';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -104,13 +117,53 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
+function getCategoryIconByCategoryId(categoryId: string | string[]) {
+	let categoryIcon = <CastIcon />;
+
+	switch (categoryId) {
+	case 'daily_popular':
+		categoryIcon = <WhatshotIcon fontSize={'large'} />;
+		break;
+	case 'ib_new1':
+		categoryIcon = <CastIcon fontSize={'large'} />;
+		break;
+	case 'stream':
+		categoryIcon = <PlayArrowIcon fontSize={'large'} />;
+		break;
+	case 'football_new6':
+		categoryIcon = <SportsSoccerIcon fontSize={'large'} />;
+		break;
+	case 'issuezoom':
+		categoryIcon = <CalendarTodayIcon fontSize={'large'} />;
+		break;
+	case 'exam_new':
+		categoryIcon = <SchoolIcon fontSize={'large'} />;
+		break;
+	case 'extra':
+		categoryIcon = <FitnessCenterIcon fontSize={'large'} />;
+		break;
+	case 'baseball_new8':
+		categoryIcon = <SportsBaseballIcon fontSize={'large'} />;
+		break;
+	default:
+		categoryIcon = <CastIcon fontSize={'large'} />;
+		break;
+	}
+
+	return categoryIcon;
+}
+
 function BackgroundSearch() {
 	const classes = useStyles();
-	const [dialogState, setDialogState] = useState<boolean>(false);
-
-	const handleDialog = () => {
-		setDialogState(!dialogState);
-	};
+	const {
+		categoryId,
+		searchState,
+		dialogState,
+		onHandleSearchTypeSelect,
+		onHandleSearchValueInput,
+		onHandleSearchValueInputKey,
+		onHandleDialog
+	} = useBoard();
 
 	return (
 		<>
@@ -119,33 +172,35 @@ function BackgroundSearch() {
 					<Grid container justify={'space-between'}>
 						<Grid className={classes.gridItem} item xs={6}>
 							<Typography className={classes.typography} variant={'h5'} component={'h5'}>
-								<CastIcon fontSize={'large'} />
-								<Box component={'span'} ml={1}>{'인터넷방송'}</Box>
+								{getCategoryIconByCategoryId(categoryId)}
+								<Box component={'span'} ml={1}>{getCategoryNameByCategoryId(categoryId)}</Box>
 							</Typography>
 						</Grid>
 						<Grid className={classes.gridItem} item xs={6}>
 							<Box className={classes.gridBox}>
 								<Box>
-									<Button className={classes.searchButton} color={'inherit'} onClick={handleDialog}>{'전체'}</Button>
+									<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>{getSearchTypeLabelByType(searchState.type)}</Button>
 								</Box>
 								<Box className={classes.search}>
 									<Box className={classes.searchIcon}>
 										<SearchIcon />
 									</Box>
 									<InputBase
-										placeholder={'검색'}
 										classes={{
 											root: classes.inputRoot,
 											input: classes.inputInput
 										}}
-										inputProps={{ 'aria-label': 'search' }}
+										onChange={onHandleSearchValueInput}
+										onKeyUp={onHandleSearchValueInputKey}
+										value={searchState.value}
+										placeholder={'검색'}
 									/>
 								</Box>
 							</Box>
 						</Grid>
 					</Grid>
 				</Container>
-				<Dialog disableBackdropClick disableEscapeKeyDown open={dialogState} onClose={handleDialog}>
+				<Dialog disableBackdropClick disableEscapeKeyDown open={dialogState} onClose={onHandleDialog}>
 					<DialogTitle>{'검색 조건'}</DialogTitle>
 					<DialogContent>
 						<form className={classes.dialogContainer}>
@@ -153,24 +208,21 @@ function BackgroundSearch() {
 								<Select
 									labelId={'demo-dialog-select-label'}
 									id={'demo-dialog-select'}
-									value={10}
-									onChange={() => console.log('Change')}
+									value={searchState.type}
+									onChange={onHandleSearchTypeSelect}
 									input={<Input />}
 								>
-									<MenuItem value={10}>{'전체'}</MenuItem>
-									<MenuItem value={25}>{'제목'}</MenuItem>
-									<MenuItem value={35}>{'닉네임'}</MenuItem>
-									<MenuItem value={45}>{'내용'}</MenuItem>
+									<MenuItem value={'all'}>{'전체'}</MenuItem>
+									<MenuItem value={'subject'}>{'제목'}</MenuItem>
+									<MenuItem value={'nickname'}>{'닉네임'}</MenuItem>
+									<MenuItem value={'content'}>{'내용'}</MenuItem>
 								</Select>
 							</FormControl>
 						</form>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={handleDialog} color={'primary'}>
-							{'취소'}
-						</Button>
-						<Button onClick={handleDialog} color={'primary'}>
-							{'확인'}
+						<Button onClick={onHandleDialog} color={'primary'}>
+							{'닫기'}
 						</Button>
 					</DialogActions>
 				</Dialog>

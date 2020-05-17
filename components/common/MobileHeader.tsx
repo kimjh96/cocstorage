@@ -94,28 +94,6 @@ function MobileHeader(): JSX.Element {
 		}
 	]);
 
-	const list = (): JSX.Element => (
-		<div className={classes.list} role={'presentation'}>
-			<List>
-				{listItems.map((item) => (
-					<ListItem button key={item.label}>
-						<ListItemIcon>{item.icon}</ListItemIcon>
-						<ListItemText primary={item.label} />
-					</ListItem>
-				))}
-			</List>
-			<Divider />
-			<List>
-				<ListItem button key={'새로운 소식'}>
-					<ListItemIcon>
-						<InfoIcon className={classes.listItemIcon} />
-					</ListItemIcon>
-					<ListItemText primary={'새로운 소식'} />
-				</ListItem>
-			</List>
-		</div>
-	);
-
 	const handleMenuList = (): void => {
 		setMenuListState(!menuListState);
 	};
@@ -133,7 +111,25 @@ function MobileHeader(): JSX.Element {
 				</Toolbar>
 			</AppBar>
 			<SwipeableDrawer anchor={'right'} onClose={handleMenuList} onOpen={handleMenuList} open={menuListState}>
-				{list()}
+				<div className={classes.list} role={'presentation'}>
+					<List>
+						{listItems.map((item) => (
+							<ListItem button key={item.label}>
+								<ListItemIcon>{item.icon}</ListItemIcon>
+								<ListItemText primary={item.label} />
+							</ListItem>
+						))}
+					</List>
+					<Divider />
+					<List>
+						<ListItem button key={'새로운 소식'}>
+							<ListItemIcon>
+								<InfoIcon className={classes.listItemIcon} />
+							</ListItemIcon>
+							<ListItemText primary={'새로운 소식'} />
+						</ListItem>
+					</List>
+				</div>
 			</SwipeableDrawer>
 		</>
 	);

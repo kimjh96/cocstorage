@@ -1,9 +1,14 @@
 import { createReducer } from 'typesafe-actions';
-import { FETCH_MAIN_CONTENTS_REQUESTED, FETCH_MAIN_CONTENTS_SUCCEEDED, FETCH_MAIN_CONTENTS_FAILED } from './actions';
+import { FETCH_MAIN_CONTENTS, FETCH_MAIN_CONTENTS_SUCCEEDED, FETCH_MAIN_CONTENTS_FAILED } from './actions';
 import { HomeAction, HomeState } from './types';
 
 const initialState: HomeState = {
-	category: null,
+	category: {
+		id: null,
+		name: null,
+		register_date: null,
+		update_date: null
+	},
 	boardList: [],
 	dailyPopularList: [],
 	storageList: [],
@@ -14,7 +19,7 @@ const initialState: HomeState = {
 };
 
 const home = createReducer<HomeState, HomeAction>(initialState, {
-	[FETCH_MAIN_CONTENTS_REQUESTED]: (state) => ({
+	[FETCH_MAIN_CONTENTS]: (state) => ({
 		...state,
 		pending: true,
 		error: false,

@@ -43,7 +43,7 @@ export type Notice = {
 };
 
 export type HomeState = {
-	category: Category | null;
+	category: Category;
 	boardList: Board[];
 	dailyPopularList: Board[];
 	storageList: Board[];

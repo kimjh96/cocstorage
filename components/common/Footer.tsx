@@ -19,6 +19,7 @@ const useStyles = makeStyles(() =>
 
 function Footer() {
 	const classes = useStyles();
+
 	return (
 		<Container>
 			<Grid container>
