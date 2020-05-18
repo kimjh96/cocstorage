@@ -15,13 +15,13 @@ const actions = {
 	clearBoardsSearchState
 };
 
+export type BoardAction = ActionType<typeof actions>;
+
 export type FetchBoardPayload = {
 	categoryId: string | string[];
 	searchState?: SearchState;
 	page: number;
 };
-
-export type BoardAction = ActionType<typeof actions>;
 
 export type SearchState = {
 	handle: boolean;

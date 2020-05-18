@@ -22,9 +22,11 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 // Custom Hooks
 import useHome from '../../hooks/useHome';
 
+// Modules
+import { Board } from '../../src/modules/board';
+
 // Image
 import Image from '../../public/test.jpg';
-import { Board } from '../../src/modules/home';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

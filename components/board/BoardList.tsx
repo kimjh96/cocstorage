@@ -180,6 +180,7 @@ function getRegisterDate(date: string | null) {
 function BoardList() {
 	const classes = useStyles();
 	const {
+		categoryId,
 		boardList,
 		pagination,
 		pending,
@@ -842,7 +843,7 @@ function BoardList() {
 								{boardList.map((item: Board) => (
 									<Grid key={`board-${item.id}`} container alignItems={'center'}>
 										<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
-											<Link href={'/board/[id]/[post]'} as={`/board/daily_popular/${item.id}`}>
+											<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
 												<a>
 													<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
 														<Typography noWrap variant={'subtitle2'}>

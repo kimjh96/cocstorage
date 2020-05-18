@@ -21,9 +21,11 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import Swiper from 'react-id-swiper';
 import Image from '../../public/test.jpg';
 
+// Modules
+import { Board } from '../../src/modules/board';
+
 // Custom Hooks
 import useHome from '../../hooks/useHome';
-import { Board } from '../../src/modules/home';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

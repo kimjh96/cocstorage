@@ -38,7 +38,7 @@
     "implicit-arrow-linebreak": "off",
     "no-param-reassign": ["error", {
       "props": true,
-      "ignorePropertyModificationsFor": ["registration", "ctx"]
+      "ignorePropertyModificationsFor": ["registration", "ctx", "element"]
     }],
     "function-paren-newline": "off",
     "max-len": "off",

@@ -9,11 +9,11 @@ import BackgroundSearch from '../../../components/board/BackgroundSearch';
 import BoardList from '../../../components/board/BoardList';
 
 function Board({ isServer, store, query }: NextPageContext) {
-	useEffect(() => {
-		if (!isServer) {
-			store.dispatch(fetchBoards({ categoryId: query.id, page: 1 }));
-		}
-	}, [isServer, store, query]);
+	// useEffect(() => {
+	// 	if (!isServer) {
+	// 		store.dispatch(fetchBoards({ categoryId: query.id, page: 1 }));
+	// 	}
+	// }, [isServer, store, query]);
 
 	return (
 		<>
@@ -24,9 +24,7 @@ function Board({ isServer, store, query }: NextPageContext) {
 }
 
 Board.getInitialProps = ({ isServer, store, query }: NextPageContext) => {
-	if (isServer) {
-		store.dispatch(fetchBoards({ categoryId: query.id, page: 1 }));
-	}
+	store.dispatch(fetchBoards({ categoryId: query.id, page: 1 }));
 
 	return {
 		isServer,
