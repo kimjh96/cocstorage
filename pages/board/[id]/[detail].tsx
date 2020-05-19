@@ -10,8 +10,8 @@ import Box from '@material-ui/core/Box';
 import { fetchBoardDetail } from '../../../src/modules/boardDetail';
 
 // Components
-import BoardDetail from '../../../components/board/BoardDetail';
-import Comment from '../../../components/board/Comment';
+import BoardDetail from '../../../components/boardDetail/BoardDetail';
+import Comment from '../../../components/boardDetail/Comment';
 
 function Detail() {
 	return (
@@ -32,7 +32,12 @@ function Detail() {
 }
 
 Detail.getInitialProps = ({ isServer, store, query }: NextPageContext) => {
-	store.dispatch(fetchBoardDetail({ id: Number(query.detail), categoryId: query.id }));
+	const payload = {
+		id: Number(query.detail),
+		categoryId: query.id
+	};
+
+	store.dispatch(fetchBoardDetail(payload));
 
 	return {
 		isServer,

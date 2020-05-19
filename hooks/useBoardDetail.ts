@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../src/modules';
 
 export default function useBoardDetail() {
-	const boardDetailState = useSelector((state: RootState) => state.boardDetail);
+	const boardDetailState = useSelector((state: RootState) => state.boardDetail.board);
 
 	return {
 		...boardDetailState

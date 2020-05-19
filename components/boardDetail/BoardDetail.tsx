@@ -59,13 +59,13 @@ function setContentHTML(element: HTMLElement | null, content: string | null) {
 function BoardDetail() {
 	const classes = useStyles();
 	const contentRef = useRef<HTMLElement | null>(null);
-	const { board, pending } = useBoardDetail();
+	const { data, pending } = useBoardDetail();
 
 	useEffect(() => {
 		if (!pending) {
-			setContentHTML(contentRef.current, board.content);
+			setContentHTML(contentRef.current, data.content);
 		}
-	}, [pending, board.content, contentRef]);
+	}, [pending, data.content, contentRef]);
 
 	return (
 		<>
@@ -116,44 +116,44 @@ function BoardDetail() {
 					<Box>
 						<Box mt={2} pt={2} pb={1}>
 							<Typography component={'h5'} variant={'h5'}>
-								{board.subject}
+								{data.subject}
 							</Typography>
 						</Box>
 						<Box className={classes.writerInfoBox} display={'flex'} alignItems={'center'} justifyContent={'space-between'} mb={2} pt={1} pb={1}>
 							<Box display={'flex'} alignItems={'center'}>
 								<Avatar className={classes.writerAvatar}>{'K'}</Avatar>
-								<Box ml={1}>{board.nickname}</Box>
+								<Box ml={1}>{`${data.nickname} ${data.ip && `(${data.ip})`}`}</Box>
 							</Box>
-							<Box>{moment(board.register_date).format('YYYY. MM. DD hh:mm:ss')}</Box>
+							<Box>{moment(data.register_date).format('YYYY. MM. DD hh:mm:ss')}</Box>
 						</Box>
 						<Box className={classes.otherInfoBox} display={'flex'} alignItems={'center'} pt={2} pb={2}>
 							<Button startIcon={<MessageIcon />} disabled>
-								{Number(board.commentCount).toLocaleString()}
+								{Number(data.commentCount).toLocaleString()}
 							</Button>
 							<Button startIcon={<VisibilityIcon />} disabled>
-								{Number(board.view).toLocaleString()}
+								{Number(data.view).toLocaleString()}
 							</Button>
 							<Button startIcon={<ThumbUpAltSharpIcon />} disabled>
-								{Number(board.up).toLocaleString()}
+								{Number(data.up).toLocaleString()}
 							</Button>
 							<Button startIcon={<ThumbDownSharpIcon />} disabled>
-								{Number(board.down).toLocaleString()}
+								{Number(data.down).toLocaleString()}
 							</Button>
 						</Box>
 						<Box pt={2} pb={2}>
 							<RootRef rootRef={contentRef}>
 								<Box>
-									{board.content}
+									{data.content}
 								</Box>
 							</RootRef>
 							<Box textAlign={'center'}>
 								<Box>
 									<ButtonGroup className={classes.recommendButtonGroup}>
 										<Button endIcon={<ThumbUpAltSharpIcon />}>
-											{Number(board.up).toLocaleString()}
+											{Number(data.up).toLocaleString()}
 										</Button>
 										<Button startIcon={<ThumbDownSharpIcon />}>
-											{Number(board.down).toLocaleString()}
+											{Number(data.down).toLocaleString()}
 										</Button>
 									</ButtonGroup>
 								</Box>

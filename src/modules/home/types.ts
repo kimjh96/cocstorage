@@ -1,6 +1,6 @@
 import { ActionType } from 'typesafe-actions';
 import { fetchMainContents, fetchMainContentsSucceeded, fetchMainContentsFailed } from './actions';
-import { Board } from '../board';
+import { Board } from '../boardDetail';
 
 const actions = { fetchMainContents, fetchMainContentsSucceeded, fetchMainContentsFailed };
 

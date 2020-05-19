@@ -22,7 +22,7 @@ import Swiper from 'react-id-swiper';
 import Image from '../../public/test.jpg';
 
 // Modules
-import { Board } from '../../src/modules/board';
+import { Board } from '../../src/modules/boardDetail';
 
 // Custom Hooks
 import useHome from '../../hooks/useHome';

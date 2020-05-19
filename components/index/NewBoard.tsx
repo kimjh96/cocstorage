@@ -23,7 +23,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import useHome from '../../hooks/useHome';
 
 // Modules
-import { Board } from '../../src/modules/board';
+import { Board } from '../../src/modules/boardDetail';
 
 // Image
 import Image from '../../public/test.jpg';
