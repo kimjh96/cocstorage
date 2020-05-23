@@ -17,6 +17,7 @@ import { grey } from '@material-ui/core/colors';
 
 // Material UI Icons
 import AddCommentIcon from '@material-ui/icons/AddComment';
+import PersonIcon from '@material-ui/icons/Person';
 
 // Modules
 import { BoardDetailComment } from '../../src/modules/boardDetail';
@@ -333,12 +334,14 @@ function Comment() {
 						</Grow>
 					) : (
 						data.map((item: BoardDetailComment) => (
-							<Grow in>
+							<Grow key={`board-comment-${item.id}`} in>
 								<Box>
 									<Box pt={2} pb={2}>
 										<Box className={classes.commentListItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
 											<Box display={'flex'} alignItems={'center'}>
-												<Avatar className={classes.commentListItemWriterAvatar}>{'K'}</Avatar>
+												<Avatar className={classes.commentListItemWriterAvatar}>
+													<PersonIcon />
+												</Avatar>
 												<Box className={classes.commentListItemWriterNickname} component={'span'} ml={1}>
 													{item.nickname}
 												</Box>
@@ -355,10 +358,12 @@ function Comment() {
 										</Box>
 									</Box>
 									{item.commentReplyList.map((child) => (
-										<Box className={classes.replyBox} p={2}>
+										<Box key={`board-comment-reply-${child.id}`} className={classes.replyBox} p={2}>
 											<Box className={classes.replyBoxItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
 												<Box display={'flex'} alignItems={'center'}>
-													<Avatar className={classes.replyBoxItemWriterAvatar}>{'K'}</Avatar>
+													<Avatar className={classes.replyBoxItemWriterAvatar}>
+														<PersonIcon />
+													</Avatar>
 													<Box className={classes.replyBoxItemWriterNickname} component={'span'} ml={1}>
 														{child.nickname}
 													</Box>

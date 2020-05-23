@@ -19,6 +19,9 @@ import RootRef from '@material-ui/core/RootRef';
 // Material UI Colors
 import { grey } from '@material-ui/core/colors';
 
+// Material UI Icons
+import PersonIcon from '@material-ui/icons/Person';
+
 // CustomHooks
 import useBoardDetail from '../../hooks/useBoardDetail';
 
@@ -121,7 +124,9 @@ function BoardDetail() {
 						</Box>
 						<Box className={classes.writerInfoBox} display={'flex'} alignItems={'center'} justifyContent={'space-between'} mb={2} pt={1} pb={1}>
 							<Box display={'flex'} alignItems={'center'}>
-								<Avatar className={classes.writerAvatar}>{'K'}</Avatar>
+								<Avatar className={classes.writerAvatar}>
+									<PersonIcon />
+								</Avatar>
 								<Box ml={1}>{`${data.nickname} ${data.ip && `(${data.ip})`}`}</Box>
 							</Box>
 							<Box>{moment(data.register_date).format('YYYY. MM. DD hh:mm:ss')}</Box>
