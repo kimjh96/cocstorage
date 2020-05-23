@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			minWidth: 72
 		},
 		indicator: {
+			'& *': {
+				fontFamily: 'NanumSquareRoundEB'
+			},
 			'& .MuiTabs-indicator': {
 				height: 5
 			}

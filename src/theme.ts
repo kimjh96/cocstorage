@@ -16,6 +16,12 @@ const theme = createMuiTheme({
 		background: {
 			default: '#fff'
 		}
+	},
+	typography: {
+		fontFamily: 'NanumSquareRoundR',
+		h5: {
+			fontFamily: 'NanumSquareRoundEB'
+		}
 	}
 });
 

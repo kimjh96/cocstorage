@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			height: '100%',
 			flexDirection: 'column',
-			justifyContent: 'flex-end'
+			justifyContent: 'flex-end',
 		},
 		typography: {
 			display: 'flex',
@@ -65,9 +65,15 @@ const useStyles = makeStyles((theme: Theme) =>
 			verticalAlign: 'middle'
 		},
 		pagination: {
-			padding: theme.spacing(2),
+			padding: theme.spacing(2, 2, 0, 2),
 			'& > ul': {
-				justifyContent: 'center'
+				justifyContent: 'center',
+				'& *': {
+					color: 'rgba(0, 0, 0, 0.5)'
+				},
+				'& .Mui-selected': {
+					color: 'white'
+				}
 			}
 		},
 		paginationSkeleton: {
@@ -889,7 +895,13 @@ function BoardList() {
 									<Grid className={classes.gridItem} item xs={12}>
 										<Box className={classes.gridBox}>
 											<Box>
-												<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>{getSearchTypeLabelByType(searchState.type)}</Button>
+												<Button
+													className={classes.searchButton}
+													color={'inherit'}
+													onClick={onHandleDialog}
+												>
+													{getSearchTypeLabelByType(searchState.type)}
+												</Button>
 											</Box>
 											<Box className={classes.search}>
 												<Box className={classes.searchIcon}>
@@ -911,7 +923,14 @@ function BoardList() {
 								</Grid>
 							</Box>
 						</Hidden>
-						<Pagination className={classes.pagination} page={pagination.page} count={pagination.pageCount} color={'primary'} shape={'rounded'} onChange={onHandlePagination} />
+						<Pagination
+							className={classes.pagination}
+							page={pagination.page}
+							count={pagination.pageCount}
+							color={'primary'}
+							shape={'rounded'}
+							onChange={onHandlePagination}
+						/>
 					</Grid>
 				)}
 				<Grid item xs={12} md={3}>

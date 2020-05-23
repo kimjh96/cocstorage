@@ -28,9 +28,6 @@ import '../styles/index.scss';
 import 'swiper/swiper.scss';
 import '../styles/common/swiper.scss';
 
-// Global Font
-import 'typeface-roboto';
-
 import Layout from '../components/common/Layout';
 
 function App({ Component, pageProps, store }: AppProps | any) {

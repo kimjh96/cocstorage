@@ -1,4 +1,68 @@
-//@import url('//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css');
+@charset "utf-8";
+@font-face {
+  font-family: "NanumSquareRoundL";
+  font-weight: 200;
+  src: url('../styles/fonts/NanumSquareRoundL.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumSquareRoundR";
+  font-weight: 300;
+  src: url('../styles/fonts/NanumSquareRoundR.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumSquareRoundB";
+  font-style: normal;
+  font-weight: 400;
+  src: url('../styles/fonts/NanumSquareRoundB.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumSquareRoundEB";
+  font-weight: 500;
+  src: url('../styles/fonts/NanumSquareRoundEB.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumSquareL";
+  font-weight: 200;
+  src: url('../styles/fonts/NanumSquareL.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumSquareR";
+  font-weight: 300;
+  src: url('../styles/fonts/NanumSquareR.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumSquareB";
+  font-style: normal;
+  font-weight: 400;
+  src: url('../styles/fonts/NanumSquareB.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumSquareEB";
+  font-weight: 500;
+  src: url('../styles/fonts/NanumSquareEB.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumBarunGothic";
+  font-weight: 200;
+  src: url('../styles/fonts/NanumBarunGothicUltraLight.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumBarunGothicLight";
+  font-weight: 300;
+  src: url('../styles/fonts/NanumBarunGothicLight.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumBarunGothic";
+  font-style: normal;
+  font-weight: 400;
+  src: url('../styles/fonts/NanumBarunGothic.ttf') format('truetype');
+}
+@font-face {
+  font-family: "NanumBarunGothicBold";
+  font-weight: 500;
+  src: url('../styles/fonts/NanumBarunGothicBold.ttf') format('truetype');
+}
+
 body {
   margin: 0;
 }
