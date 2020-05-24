@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import moment from 'moment';
 
@@ -7,28 +7,32 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import MessageIcon from '@material-ui/icons/Message';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import ThumbUpAltSharpIcon from '@material-ui/icons/ThumbUpAltSharp';
-import ThumbDownSharpIcon from '@material-ui/icons/ThumbDownSharp';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Skeleton from '@material-ui/lab/Skeleton';
-import Grow from '@material-ui/core/Grow';
 import RootRef from '@material-ui/core/RootRef';
-
-// Material UI Colors
-import { grey } from '@material-ui/core/colors';
+import Grow from '@material-ui/core/Grow';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { TransitionProps } from '@material-ui/core/transitions';
 
 // Material UI Icons
 import PersonIcon from '@material-ui/icons/Person';
+import MessageIcon from '@material-ui/icons/Message';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import ThumbUpAltSharpIcon from '@material-ui/icons/ThumbUpAltSharp';
+import ThumbDownAltSharpIcon from '@material-ui/icons/ThumbDownAltSharp';
+import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 
-// CustomHooks
+// Custom Hooks
 import useBoardDetail from '../../hooks/useBoardDetail';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		writerInfoBox: {
-			color: grey.A200
+			color: theme.palette.grey.A200
 		},
 		writerAvatar: {
 			[theme.breakpoints.down('md')]: {
@@ -38,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		otherInfoBox: {
 			border: '1px solid',
-			borderColor: grey.A100,
+			borderColor: theme.palette.grey.A100,
 			borderLeft: 'none',
 			borderRight: 'none'
 		},
@@ -46,12 +50,20 @@ const useStyles = makeStyles((theme: Theme) =>
 			'& > button': {
 				padding: theme.spacing(2),
 				borderRadius: '0',
-				borderColor: grey.A100,
-				color: grey.A200
+				borderColor: theme.palette.grey.A100,
+				color: theme.palette.grey.A200
 			}
+		},
+		backdrop: {
+			zIndex: theme.zIndex.drawer + 1,
+			color: '#fff'
 		}
 	})
 );
+
+function SlideTransition(props: TransitionProps) {
+	return <Slide {...props} direction={'up'} />;
+}
 
 function setContentHTML(element: HTMLElement | null, content: string | null) {
 	if (element && content) {
@@ -59,13 +71,53 @@ function setContentHTML(element: HTMLElement | null, content: string | null) {
 	}
 }
 
+function getAlterMessageByResponseBody(data: string | null): string | null {
+	let alertMessage: string | null = null;
+
+	switch (data) {
+	case 'up':
+		alertMessage = '추천을 누르셨습니다.';
+		break;
+	case 'up_rollback':
+		alertMessage = '추천을 취소하셨습니다.';
+		break;
+	case 'down':
+		alertMessage = '비추천을 누르셨습니다.';
+		break;
+	case 'down_rollback':
+		alertMessage = '비추천을 취소하셨습니다.';
+		break;
+	case 'Already pressed the up button':
+		alertMessage = '이미 추천을 누르셨습니다.';
+		break;
+	case 'Already pressed the down button':
+		alertMessage = '이미 비추천을 누르셨습니다.';
+		break;
+	default:
+		alertMessage = '알 수 없는 오류입니다.';
+		break;
+	}
+
+	return alertMessage;
+}
+
 function BoardDetail() {
 	const classes = useStyles();
 	const contentRef = useRef<HTMLElement | null>(null);
-	const { data, pending } = useBoardDetail();
+	const {
+		board: { data, pending },
+		comment: { count: commentCount },
+		recommend: { data: alertMessage, pending: backdropOpen, errorMessage },
+		thumbsSnackBarOpen,
+		errorThumbsSnackBarOpen,
+		disabledRecommend,
+		onHandleBoardDetailRecommend,
+		onHandleCloseSnackBar,
+		onHandleExitedSnackBar
+	} = useBoardDetail();
 
 	useEffect(() => {
-		if (!pending) {
+		if (!pending && data.content) {
 			setContentHTML(contentRef.current, data.content);
 		}
 	}, [pending, data.content, contentRef]);
@@ -133,7 +185,7 @@ function BoardDetail() {
 						</Box>
 						<Box className={classes.otherInfoBox} display={'flex'} alignItems={'center'} pt={2} pb={2}>
 							<Button startIcon={<MessageIcon />} disabled>
-								{Number(data.commentCount).toLocaleString()}
+								{Number(commentCount).toLocaleString()}
 							</Button>
 							<Button startIcon={<VisibilityIcon />} disabled>
 								{Number(data.view).toLocaleString()}
@@ -141,7 +193,7 @@ function BoardDetail() {
 							<Button startIcon={<ThumbUpAltSharpIcon />} disabled>
 								{Number(data.up).toLocaleString()}
 							</Button>
-							<Button startIcon={<ThumbDownSharpIcon />} disabled>
+							<Button startIcon={<ThumbDownAltSharpIcon />} disabled>
 								{Number(data.down).toLocaleString()}
 							</Button>
 						</Box>
@@ -152,10 +204,10 @@ function BoardDetail() {
 							<Box textAlign={'center'}>
 								<Box>
 									<ButtonGroup className={classes.recommendButtonGroup}>
-										<Button endIcon={<ThumbUpAltSharpIcon />}>
+										<Button endIcon={<ThumbUpAltSharpIcon />} data-thumbs-type={'up'} onClick={onHandleBoardDetailRecommend} disabled={disabledRecommend}>
 											{Number(data.up).toLocaleString()}
 										</Button>
-										<Button startIcon={<ThumbDownSharpIcon />}>
+										<Button startIcon={<ThumbDownAltSharpIcon />} data-thumbs-type={'down'} onClick={onHandleBoardDetailRecommend} disabled={disabledRecommend}>
 											{Number(data.down).toLocaleString()}
 										</Button>
 									</ButtonGroup>
@@ -165,8 +217,33 @@ function BoardDetail() {
 					</Box>
 				</Grow>
 			)}
+			<Snackbar
+				open={thumbsSnackBarOpen}
+				onClose={onHandleCloseSnackBar}
+				onExited={onHandleExitedSnackBar}
+				TransitionComponent={SlideTransition}
+				autoHideDuration={1500}
+			>
+				<Alert icon={<ThumbsUpDownIcon fontSize={'inherit'} />} severity={'info'}>
+					{getAlterMessageByResponseBody(alertMessage)}
+				</Alert>
+			</Snackbar>
+			<Snackbar
+				open={errorThumbsSnackBarOpen}
+				onClose={onHandleCloseSnackBar}
+				onExited={onHandleExitedSnackBar}
+				TransitionComponent={SlideTransition}
+				autoHideDuration={1500}
+			>
+				<Alert severity={'error'}>
+					{getAlterMessageByResponseBody(errorMessage)}
+				</Alert>
+			</Snackbar>
+			<Backdrop className={classes.backdrop} open={backdropOpen}>
+				<CircularProgress color={'inherit'} />
+			</Backdrop>
 		</>
 	);
 }
 
-export default BoardDetail;
+export default memo(BoardDetail);

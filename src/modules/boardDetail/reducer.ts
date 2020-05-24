@@ -5,7 +5,11 @@ import {
 	FETCH_BOARD_DETAIL_FAILED,
 	FETCH_BOARD_DETAIL_COMMENTS,
 	FETCH_BOARD_DETAIL_COMMENTS_SUCCEEDED,
-	FETCH_BOARD_DETAIL_COMMENTS_FAILED
+	FETCH_BOARD_DETAIL_COMMENTS_FAILED,
+	POST_BOARD_DETAIL_RECOMMEND,
+	POST_BOARD_DETAIL_RECOMMEND_SUCCEEDED,
+	POST_BOARD_DETAIL_RECOMMEND_FAILED,
+	CLEAR_BOARD_DETAIL_RECOMMEND_STATE
 } from './actions';
 import { BoardDetailAction, BoardDetailState } from './types';
 
@@ -43,11 +47,18 @@ const initialState: BoardDetailState = {
 		pending: true,
 		error: false,
 		errorMessage: null
+	},
+	recommend: {
+		data: null,
+		pending: false,
+		error: false,
+		errorMessage: null
 	}
 };
 
 const boardDetail = createReducer<BoardDetailState, BoardDetailAction>(initialState, {
 	[FETCH_BOARD_DETAIL]: (state) => ({
+		...state,
 		board: {
 			...state.board,
 			pending: true,
@@ -85,6 +96,92 @@ const boardDetail = createReducer<BoardDetailState, BoardDetailAction>(initialSt
 			data: payload.commentList,
 			count: payload.count,
 			loadedCount: payload.loadedCount,
+			pending: false,
+			error: false,
+			errorMessage: null
+		}
+	}),
+	[POST_BOARD_DETAIL_RECOMMEND]: (state) => ({
+		...state,
+		recommend: {
+			...state.recommend,
+			pending: true,
+			error: false,
+			errorMessage: null
+		}
+	}),
+	[POST_BOARD_DETAIL_RECOMMEND_SUCCEEDED]: (state, { payload }) => {
+		let tempState = { ...state };
+
+		if (payload === 'up') {
+			tempState = {
+				...tempState,
+				board: {
+					...tempState.board,
+					data: {
+						...tempState.board.data,
+						up: Number(tempState.board.data.up) + 1
+					}
+				}
+			};
+		} else if (payload === 'up_rollback') {
+			tempState = {
+				...tempState,
+				board: {
+					...tempState.board,
+					data: {
+						...tempState.board.data,
+						up: Number(tempState.board.data.up) - 1
+					}
+				}
+			};
+		} else if (payload === 'down') {
+			tempState = {
+				...tempState,
+				board: {
+					...tempState.board,
+					data: {
+						...tempState.board.data,
+						down: Number(tempState.board.data.down) + 1
+					}
+				}
+			};
+		} else if (payload === 'down_rollback') {
+			tempState = {
+				...tempState,
+				board: {
+					...tempState.board,
+					data: {
+						...tempState.board.data,
+						down: Number(tempState.board.data.down) - 1
+					}
+				}
+			};
+		}
+
+		return {
+			...tempState,
+			recommend: {
+				data: payload,
+				pending: false,
+				error: false,
+				errorMessage: null
+			}
+		};
+	},
+	[POST_BOARD_DETAIL_RECOMMEND_FAILED]: (state, { payload }) => ({
+		...state,
+		recommend: {
+			...state.recommend,
+			pending: false,
+			error: payload.error,
+			errorMessage: payload.errorMessage
+		}
+	}),
+	[CLEAR_BOARD_DETAIL_RECOMMEND_STATE]: (state) => ({
+		...state,
+		recommend: {
+			data: null,
 			pending: false,
 			error: false,
 			errorMessage: null

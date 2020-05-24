@@ -5,7 +5,11 @@ import {
 	fetchBoardDetailFailed,
 	fetchBoardDetailComments,
 	fetchBoardDetailCommentsSucceeded,
-	fetchBoardDetailCommentsFailed
+	fetchBoardDetailCommentsFailed,
+	postBoardDetailRecommend,
+	postBoardDetailRecommendSucceeded,
+	postBoardDetailRecommendFailed,
+	clearBoardDetailRecommendState
 } from './actions';
 
 const actions = {
@@ -14,7 +18,11 @@ const actions = {
 	fetchBoardDetailFailed,
 	fetchBoardDetailComments,
 	fetchBoardDetailCommentsSucceeded,
-	fetchBoardDetailCommentsFailed
+	fetchBoardDetailCommentsFailed,
+	postBoardDetailRecommend,
+	postBoardDetailRecommendSucceeded,
+	postBoardDetailRecommendFailed,
+	clearBoardDetailRecommendState
 };
 
 export type BoardDetailAction = ActionType<typeof actions>;
@@ -28,6 +36,17 @@ export type FetchBoardDetailCommentPayload = {
 	id: number;
 	categoryId: string | string[];
 	row: number;
+};
+
+export type PostBoardDetailRecommendPayload = {
+	id: number;
+	categoryId: string | string[];
+	recommendType: string;
+};
+
+export type PostBoardDetailRecommendFailedPayload = {
+	error: boolean;
+	errorMessage: string;
 };
 
 export type FetchBoardDetailCommentSucceededPayload = {
@@ -102,6 +121,12 @@ export type BoardDetailState = {
 		data: BoardDetailComment[];
 		count: number;
 		loadedCount: number;
+		pending: boolean;
+		error: boolean;
+		errorMessage: string | null;
+	};
+	recommend: {
+		data: string | null;
 		pending: boolean;
 		error: boolean;
 		errorMessage: string | null;

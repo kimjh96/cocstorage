@@ -12,9 +12,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Grow from '@material-ui/core/Grow';
 
-// Material UI Colors
-import { grey } from '@material-ui/core/colors';
-
 // Material UI Icons
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import PersonIcon from '@material-ui/icons/Person';
@@ -31,13 +28,13 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			paddingTop: theme.spacing(2),
 			paddingBottom: theme.spacing(2),
-			borderBottom: `1px solid ${grey.A100}`
+			borderBottom: `1px solid ${theme.palette.grey.A100}`
 		},
 		commentOrderListItem: {
 			width: 'auto',
 			padding: 0,
 			cursor: 'pointer',
-			color: grey.A200,
+			color: theme.palette.grey.A200,
 			transition: 'color .5s',
 			'&::after': {
 				content: '""',
@@ -45,9 +42,9 @@ const useStyles = makeStyles((theme: Theme) =>
 				marginLeft: theme.spacing(1),
 				width: 3,
 				height: 3,
-				border: `1px solid ${grey.A200}`,
+				border: `1px solid ${theme.palette.grey.A200}`,
 				borderRadius: '50%',
-				backgroundColor: grey.A200
+				backgroundColor: theme.palette.grey.A200
 			},
 			'&:last-child::after': {
 				display: 'none'
@@ -65,24 +62,24 @@ const useStyles = makeStyles((theme: Theme) =>
 		commentListMoreButton: {
 			padding: theme.spacing(2),
 			borderRadius: 'inherit',
-			color: grey.A200
+			color: theme.palette.grey.A200
 		},
 		commentListItem: {
 			display: 'block',
 			padding: 0,
-			borderBottom: `1px solid ${grey.A100}`
+			borderBottom: `1px solid ${theme.palette.grey.A100}`
 		},
 		commentListItemWriterBox: {
-			color: grey.A200,
+			color: theme.palette.grey.A200,
 			'& > div::after': {
 				content: '""',
 				display: 'inline-block',
 				margin: theme.spacing(1),
 				width: 3,
 				height: 3,
-				border: `1px solid ${grey.A200}`,
+				border: `1px solid ${theme.palette.grey.A200}`,
 				borderRadius: '50%',
-				backgroundColor: grey.A200,
+				backgroundColor: theme.palette.grey.A200,
 				verticalAlign: 'middle'
 			},
 			'& > div:last-child::after': {
@@ -92,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		commentListItemWriterNickname: {
 			fontSize: 16,
 			fontWeight: 700,
-			color: grey.A700
+			color: theme.palette.grey.A700
 		},
 		commentListItemWriterAvatar: {
 			width: theme.spacing(4),
@@ -104,19 +101,19 @@ const useStyles = makeStyles((theme: Theme) =>
 			}
 		},
 		replyBox: {
-			borderTop: `1px solid ${grey.A100}`,
-			backgroundColor: grey['50']
+			borderTop: `1px solid ${theme.palette.grey.A100}`,
+			backgroundColor: theme.palette.grey['50']
 		},
 		replyBoxItemWriterBox: {
-			color: grey.A200,
+			color: theme.palette.grey.A200,
 			'&::before': {
 				content: '""',
 				display: 'inline-block',
 				width: 20,
 				height: 20,
 				marginBottom: 15,
-				borderLeft: `2px solid ${grey.A200}`,
-				borderBottom: `2px solid ${grey.A200}`
+				borderLeft: `2px solid ${theme.palette.grey.A200}`,
+				borderBottom: `2px solid ${theme.palette.grey.A200}`
 			},
 			'& > div::after': {
 				content: '""',
@@ -124,9 +121,9 @@ const useStyles = makeStyles((theme: Theme) =>
 				margin: theme.spacing(1),
 				width: 3,
 				height: 3,
-				border: `1px solid ${grey.A200}`,
+				border: `1px solid ${theme.palette.grey.A200}`,
 				borderRadius: '50%',
-				backgroundColor: grey.A200,
+				backgroundColor: theme.palette.grey.A200,
 				verticalAlign: 'middle'
 			},
 			'& > div:last-child::after': {
@@ -136,7 +133,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		replyBoxItemWriterNickname: {
 			fontSize: 16,
 			fontWeight: 700,
-			color: grey.A700
+			color: theme.palette.grey.A700
 		},
 		replyBoxItemWriterAvatar: {
 			width: theme.spacing(4),

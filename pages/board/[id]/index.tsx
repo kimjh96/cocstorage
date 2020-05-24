@@ -8,6 +8,8 @@ import { fetchBoards } from '../../../src/modules/board';
 // Components
 import BackgroundSearch from '../../../components/board/BackgroundSearch';
 import BoardList from '../../../components/board/BoardList';
+
+// Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
 
 function Board({ query }: NextPageContext) {

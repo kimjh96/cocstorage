@@ -1,4 +1,9 @@
-import React, { useState, useCallback, useMemo, memo } from 'react';
+import React, {
+	useState,
+	useCallback,
+	useMemo,
+	memo
+} from 'react';
 import { useRouter } from 'next/router';
 import {
 	makeStyles, createStyles, Theme

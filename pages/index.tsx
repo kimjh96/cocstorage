@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NextPageContext } from 'next';
 
 // Modules
@@ -9,13 +9,6 @@ import DailyPopularPost from '../components/index/DailyPopularBoard';
 import NewPost from '../components/index/NewBoard';
 
 function Index({ isServer, store }: NextPageContext) {
-	useEffect(() => {
-		console.log(isServer);
-		if (!isServer) {
-			store.dispatch(fetchMainContents());
-		}
-	}, [isServer, store]);
-
 	return (
 		<>
 			<DailyPopularPost />
@@ -25,9 +18,7 @@ function Index({ isServer, store }: NextPageContext) {
 }
 
 Index.getInitialProps = ({ isServer, store }: NextPageContext) => {
-	if (isServer) {
-		store.dispatch(fetchMainContents());
-	}
+	store.dispatch(fetchMainContents());
 
 	return {
 		isServer,

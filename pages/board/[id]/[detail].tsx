@@ -15,6 +15,8 @@ import { fetchBoardDetail } from '../../../src/modules/boardDetail';
 import BoardDetail from '../../../components/boardDetail/BoardDetail';
 import Comment from '../../../components/boardDetail/Comment';
 import { RootState } from '../../../src/modules';
+
+// Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
 
 function getMetaTagTitle(data: any, id: any) {

@@ -5,7 +5,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
 
-// Components
+// Common Components
 import Header from './Header';
 import MobileHeader from './MobileHeader';
 import Footer from './Footer';

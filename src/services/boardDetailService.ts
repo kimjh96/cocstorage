@@ -28,4 +28,17 @@ export function fetchBoardDetailComments({ id, categoryId, row }: FetchBoardDeta
 	return axios()(config);
 }
 
+export function postBoardDetailRecommend({ id, categoryId, recommendType }: any) {
+	const config: AxiosRequestConfig = {
+		url: `/storage/${categoryId}/${id}/recommend`,
+		method: 'post',
+		params: {
+			orderType: 'collect-new',
+			recommendType
+		}
+	};
+
+	return axios()(config);
+}
+
 export default fetchBoardDetail;

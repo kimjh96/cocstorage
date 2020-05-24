@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import Hidden from '@material-ui/core/Hidden';
 import Grow from '@material-ui/core/Grow';
 import Pagination from '@material-ui/lab/Pagination';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,10 +23,6 @@ import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import InputBase from '@material-ui/core/InputBase';
 import DialogActions from '@material-ui/core/DialogActions';
-import Hidden from '@material-ui/core/Hidden';
-
-// Material UI Colors
-import { grey } from '@material-ui/core/colors';
 
 // Material UI Labs
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -96,22 +93,22 @@ const useStyles = makeStyles((theme: Theme) =>
 				color: 'inherit'
 			},
 			'& > a:visited': {
-				color: grey.A200,
+				color: theme.palette.grey.A200,
 				'& *': {
-					color: grey.A200
+					color: theme.palette.grey.A200
 				}
 			}
 		},
 		gridItemWriterInfo: {
 			textAlign: 'center',
-			color: grey.A200
+			color: theme.palette.grey.A200
 		},
 		gridBox: {
 			display: 'flex',
 			justifyContent: 'flex-end'
 		},
 		commentCountBox: {
-			color: grey.A200
+			color: theme.palette.grey.A200
 		},
 		search: {
 			position: 'relative',
