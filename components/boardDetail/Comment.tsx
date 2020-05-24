@@ -170,13 +170,6 @@ function Comment() {
 						</Typography>
 					</Box>
 				</ListItem>
-				<ListItem className={classes.commentOrderListItem}>
-					<Box pl={1}>
-						<Typography variant={'body1'}>
-							{'인기순'}
-						</Typography>
-					</Box>
-				</ListItem>
 			</List>
 			<List disablePadding>
 				<ListItem className={classes.commentListItem}>

@@ -48,9 +48,14 @@ const initialState: BoardDetailState = {
 
 const boardDetail = createReducer<BoardDetailState, BoardDetailAction>(initialState, {
 	[FETCH_BOARD_DETAIL]: (state) => ({
-		...state,
 		board: {
 			...state.board,
+			pending: true,
+			error: false,
+			errorMessage: null
+		},
+		comment: {
+			...state.comment,
 			pending: true,
 			error: false,
 			errorMessage: null

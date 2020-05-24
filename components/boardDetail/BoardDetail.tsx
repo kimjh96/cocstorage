@@ -147,9 +147,7 @@ function BoardDetail() {
 						</Box>
 						<Box pt={2} pb={2}>
 							<RootRef rootRef={contentRef}>
-								<Box>
-									{data.content}
-								</Box>
+								<Box />
 							</RootRef>
 							<Box textAlign={'center'}>
 								<Box>

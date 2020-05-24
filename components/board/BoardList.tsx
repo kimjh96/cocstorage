@@ -934,7 +934,7 @@ function BoardList() {
 					</Grid>
 				)}
 				<Grid item xs={12} md={3}>
-					<Box border={1}>
+					<Box mt={1} ml={1} border={1}>
 						{'AD'}
 					</Box>
 				</Grid>

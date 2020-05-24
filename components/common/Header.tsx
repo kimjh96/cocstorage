@@ -1,4 +1,4 @@
-import React, { useState, useMemo, memo } from 'react';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 import { useRouter } from 'next/router';
 import {
 	makeStyles, createStyles, Theme
@@ -54,7 +54,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			padding: theme.spacing(3, 0)
 		},
 		logo: {
-			verticalAlign: 'middle'
+			verticalAlign: 'middle',
+			cursor: 'pointer'
 		},
 		tabsIndicator: {
 			height: 5
@@ -132,7 +133,7 @@ function Header() {
 	const [activatedTab, setActivatedTab] = useState<string>(window.location.pathname);
 	const isBoardDetail = useMemo(() => (route === '/board/[id]/[detail]'), [route]);
 
-	const handleTabChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+	const handleTabChange = useCallback((event: React.ChangeEvent<{}>, newValue: string) => {
 		const isIndexRoute: boolean = newValue === '/' && true;
 
 		if (isIndexRoute) {
@@ -140,16 +141,33 @@ function Header() {
 				pathname: '/'
 			}).then(() => setActivatedTab(newValue));
 		} else {
-			const id = newValue.split('/')[2];
+			const boardId: string = newValue.split('/')[2];
 
 			router.push({
 				pathname: '/board/[id]',
 				query: {
-					id
+					id: boardId
 				}
 			}, newValue).then(() => setActivatedTab(newValue));
 		}
-	};
+	}, [router]);
+
+	const handleChip = useCallback(() => {
+		const categoryId = typeof id === 'string' ? id : '';
+
+		router.push({
+			pathname: '/board/[id]',
+			query: {
+				id: categoryId
+			}
+		}, `/board/${categoryId}`).then(() => setActivatedTab(`/board/${categoryId}`));
+	}, [router, id]);
+
+	const handleLogo = useCallback(() => (
+		router.push({
+			pathname: '/'
+		}).then(() => setActivatedTab('/'))
+	), [router]);
 
 	return (
 		<>
@@ -157,7 +175,9 @@ function Header() {
 				<AppBar className={classes.appBar} position={'static'} color={'inherit'}>
 					<Container>
 						<Box className={classes.logoBox}>
-							<img className={classes.logo} src={Logo} alt={'Logo'} />
+							<Box component={'span'} onClick={handleLogo}>
+								<img className={classes.logo} src={Logo} alt={'Logo'} />
+							</Box>
 						</Box>
 					</Container>
 				</AppBar>
@@ -165,11 +185,19 @@ function Header() {
 				<>
 					<HideOnScroll>
 						<AppBar className={classes.appBar} color={'inherit'}>
-							<Toolbar>
+							<Toolbar disableGutters={false}>
 								<Container>
 									<Box className={classes.logoBox}>
-										<img className={classes.logo} src={Logo} alt={'Logo'} />
-										<Chip className={classes.chip} color={'primary'} label={getCategoryNameByCategoryId(id)} icon={getCategoryIconByCategoryId(id)} />
+										<Box component={'span'} onClick={handleLogo}>
+											<img className={classes.logo} src={Logo} alt={'Logo'} />
+										</Box>
+										<Chip
+											className={classes.chip}
+											color={'primary'}
+											label={getCategoryNameByCategoryId(id)}
+											icon={getCategoryIconByCategoryId(id)}
+											onClick={handleChip}
+										/>
 									</Box>
 								</Container>
 							</Toolbar>
