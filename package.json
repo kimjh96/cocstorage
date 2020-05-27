@@ -53,7 +53,7 @@
   },
   "scripts": {
     "start": "next start -p 8081",
-    "build": "react-scripts build",
+    "build": "next build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "next",
