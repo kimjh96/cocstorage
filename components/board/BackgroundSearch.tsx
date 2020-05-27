@@ -35,11 +35,16 @@ import useBoard from '../../hooks/useBoard';
 
 // Snippets
 import { getSearchTypeLabelByType, getCategoryNameByCategoryId } from '../../src/snippet/board';
+import { Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			background: 'linear-gradient(to right, #E0C3FC, #8EC5FC)'
+			height: 200,
+			background: 'linear-gradient(to right, #E0C3FC, #8EC5FC)',
+			[theme.breakpoints.down('md')]: {
+				height: 'auto'
+			}
 		},
 		container: {
 			display: 'flex',
@@ -167,7 +172,7 @@ function BackgroundSearch() {
 
 	return (
 		<>
-			<Box className={classes.root} height={200}>
+			<Box className={classes.root}>
 				<Container className={classes.container}>
 					<Grid container justify={'space-between'}>
 						<Grid className={classes.gridItem} item xs={6}>
@@ -177,26 +182,28 @@ function BackgroundSearch() {
 							</Typography>
 						</Grid>
 						<Grid className={classes.gridItem} item xs={6}>
-							<Box className={classes.gridBox}>
-								<Box>
-									<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>{getSearchTypeLabelByType(searchState.type)}</Button>
-								</Box>
-								<Box className={classes.search}>
-									<Box className={classes.searchIcon}>
-										<SearchIcon />
+							<Hidden mdDown>
+								<Box className={classes.gridBox}>
+									<Box>
+										<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>{getSearchTypeLabelByType(searchState.type)}</Button>
 									</Box>
-									<InputBase
-										classes={{
-											root: classes.inputRoot,
-											input: classes.inputInput
-										}}
-										onChange={onHandleSearchValueInput}
-										onKeyUp={onHandleSearchValueInputKey}
-										value={searchState.value}
-										placeholder={'검색'}
-									/>
+									<Box className={classes.search}>
+										<Box className={classes.searchIcon}>
+											<SearchIcon />
+										</Box>
+										<InputBase
+											classes={{
+												root: classes.inputRoot,
+												input: classes.inputInput
+											}}
+											onChange={onHandleSearchValueInput}
+											onKeyUp={onHandleSearchValueInputKey}
+											value={searchState.value}
+											placeholder={'검색'}
+										/>
+									</Box>
 								</Box>
-							</Box>
+							</Hidden>
 						</Grid>
 					</Grid>
 				</Container>

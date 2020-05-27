@@ -1,9 +1,10 @@
 import React, { useEffect, memo } from 'react';
 import Link from 'next/link';
 import {
-	createStyles, fade, makeStyles, Theme
+	createStyles, fade, makeStyles, Theme, useTheme
 } from '@material-ui/core/styles';
 import moment from 'moment';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
@@ -46,11 +47,14 @@ moment.locale('ko');
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
+		root: {
+			backgroundColor: 'white'
+		},
 		container: {
 			display: 'flex',
 			height: '100%',
 			flexDirection: 'column',
-			justifyContent: 'flex-end',
+			justifyContent: 'flex-end'
 		},
 		typography: {
 			display: 'flex',
@@ -62,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			verticalAlign: 'middle'
 		},
 		pagination: {
-			padding: theme.spacing(2, 2, 0, 2),
+			padding: theme.spacing(2),
 			'& > ul': {
 				justifyContent: 'center',
 				'& *': {
@@ -70,17 +74,6 @@ const useStyles = makeStyles((theme: Theme) =>
 				},
 				'& .Mui-selected': {
 					color: 'white'
-				}
-			}
-		},
-		paginationSkeleton: {
-			padding: theme.spacing(2),
-			'& > ul': {
-				textAlign: 'center',
-				padding: 0,
-				'& > li': {
-					display: 'inline-block',
-					padding: 0
 				}
 			}
 		},
@@ -103,12 +96,52 @@ const useStyles = makeStyles((theme: Theme) =>
 			textAlign: 'center',
 			color: theme.palette.grey.A200
 		},
+		gridItemWriterInfoBox: {
+			display: 'flex',
+			alignItems: 'center',
+			padding: theme.spacing(1, 0, 0, 0),
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(0, 0, 0.5, 0)
+			}
+		},
 		gridBox: {
 			display: 'flex',
 			justifyContent: 'flex-end'
 		},
 		commentCountBox: {
 			color: theme.palette.grey.A200
+		},
+		nickname: {
+			minWidth: 80,
+			maxWidth: 80,
+			[theme.breakpoints.down('sm')]: {
+				minWidth: 'auto',
+				marginRight: theme.spacing(2)
+			}
+		},
+		registerDate: {
+			minWidth: 100,
+			maxWidth: 100,
+			[theme.breakpoints.down('sm')]: {
+				minWidth: 'auto',
+				marginRight: theme.spacing(2)
+			}
+		},
+		thumbs: {
+			minWidth: 80,
+			maxWidth: 80,
+			[theme.breakpoints.down('sm')]: {
+				minWidth: 'auto',
+				marginRight: theme.spacing(2)
+			}
+		},
+		view: {
+			minWidth: 80,
+			maxWidth: 80,
+			[theme.breakpoints.down('sm')]: {
+				minWidth: 'auto',
+				marginRight: theme.spacing(2)
+			}
 		},
 		search: {
 			position: 'relative',
@@ -182,6 +215,9 @@ function getRegisterDate(date: string | null) {
 
 function BoardList() {
 	const classes = useStyles();
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
 	const {
 		categoryId,
 		boardList,
@@ -197,7 +233,7 @@ function BoardList() {
 	} = useBoard();
 
 	return (
-		<Container>
+		<Container className={classes.root}>
 			<Grid container>
 				{pending ? (
 					<Grow in>
@@ -822,7 +858,7 @@ function BoardList() {
 									</Box>
 								</Grid>
 							</Grid>
-							<Box display={'flex'} justifyContent={'center'}>
+							<Box display={'flex'} justifyContent={'center'} p={2} pt={0}>
 								<Box ml={1}>
 									<Skeleton width={30} height={40} animation={'wave'} />
 								</Box>
@@ -865,19 +901,19 @@ function BoardList() {
 											</Link>
 										</Grid>
 										<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-											<Box display={'flex'} p={1} pl={0} pr={0}>
-												<Box minWidth={80} maxWidth={80}>
+											<Box className={classes.gridItemWriterInfoBox}>
+												<Box className={classes.nickname}>
 													<Typography noWrap variant={'subtitle2'}>
 														{item.nickname}
 													</Typography>
 												</Box>
-												<Box minWidth={100}>
+												<Box className={classes.registerDate}>
 													{getRegisterDate(item.register_date)}
 												</Box>
-												<Box minWidth={80}>
+												<Box className={classes.thumbs}>
 													<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
 												</Box>
-												<Box minWidth={80}>
+												<Box className={classes.view}>
 													<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
 												</Box>
 											</Box>
@@ -927,6 +963,8 @@ function BoardList() {
 							color={'primary'}
 							shape={'rounded'}
 							onChange={onHandlePagination}
+							size={isMobile ? 'small' : 'medium'}
+							siblingCount={isMobile ? 0 : 2}
 						/>
 					</Grid>
 				)}

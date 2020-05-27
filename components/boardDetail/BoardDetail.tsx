@@ -31,8 +31,23 @@ import useBoardDetail from '../../hooks/useBoardDetail';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
+		root: {
+			backgroundColor: 'white'
+		},
+		subjectBox: {
+			marginTop: theme.spacing(2),
+			padding: theme.spacing(2, 0, 1, 0),
+			color: theme.palette.grey.A700,
+			[theme.breakpoints.down('md')]: {
+				margin: 0,
+				padding: theme.spacing(2, 2, 0, 2)
+			}
+		},
 		writerInfoBox: {
-			color: theme.palette.grey.A200
+			color: theme.palette.grey.A200,
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(1, 2, 0, 2)
+			}
 		},
 		writerAvatar: {
 			[theme.breakpoints.down('md')]: {
@@ -41,10 +56,35 @@ const useStyles = makeStyles((theme: Theme) =>
 			}
 		},
 		otherInfoBox: {
+			padding: theme.spacing(2, 0),
 			border: '1px solid',
 			borderColor: theme.palette.grey.A100,
 			borderLeft: 'none',
-			borderRight: 'none'
+			borderRight: 'none',
+			[theme.breakpoints.down('md')]: {
+				paddingLeft: theme.spacing(1),
+				paddingRight: theme.spacing(1)
+			}
+		},
+		otherInfoSkeletonBox: {
+			display: 'flex',
+			alignItems: 'center',
+			padding: theme.spacing(2, 0),
+			border: '1px solid',
+			borderColor: theme.palette.grey.A100,
+			borderLeft: 'none',
+			borderRight: 'none',
+			[theme.breakpoints.down('md')]: {
+				paddingLeft: theme.spacing(2),
+				paddingRight: theme.spacing(2)
+			}
+		},
+		contentBox: {
+			padding: theme.spacing(2, 0),
+			[theme.breakpoints.down('md')]: {
+				paddingLeft: theme.spacing(2),
+				paddingRight: theme.spacing(2)
+			}
 		},
 		recommendButtonGroup: {
 			'& > button': {
@@ -126,8 +166,8 @@ function BoardDetail() {
 		<>
 			{pending ? (
 				<Grow in>
-					<Box>
-						<Box mt={2} pt={2} pb={1}>
+					<Box className={classes.root}>
+						<Box className={classes.subjectBox}>
 							<Typography component={'h5'} variant={'h5'}>
 								<Skeleton animation={'wave'} />
 							</Typography>
@@ -139,7 +179,7 @@ function BoardDetail() {
 							</Box>
 							<Box><Skeleton animation={'wave'} width={100} /></Box>
 						</Box>
-						<Box className={classes.otherInfoBox} display={'flex'} alignItems={'center'} pt={2} pb={2}>
+						<Box className={classes.otherInfoSkeletonBox}>
 							<Box><Skeleton variant={'circle'} animation={'wave'} width={20} height={20} /></Box>
 							<Box ml={1} mr={1}><Skeleton animation={'wave'} width={35} /></Box>
 							<Box><Skeleton variant={'circle'} animation={'wave'} width={20} height={20} /></Box>
@@ -149,7 +189,7 @@ function BoardDetail() {
 							<Box><Skeleton variant={'circle'} animation={'wave'} width={20} height={20} /></Box>
 							<Box ml={1}><Skeleton animation={'wave'} width={35} /></Box>
 						</Box>
-						<Box pt={2} pb={2}>
+						<Box className={classes.contentBox}>
 							<Skeleton animation={'wave'} />
 							<Skeleton animation={'wave'} />
 							<Skeleton animation={'wave'} />
@@ -168,8 +208,8 @@ function BoardDetail() {
 				</Grow>
 			) : (
 				<Grow in>
-					<Box>
-						<Box mt={2} pt={2} pb={1}>
+					<Box className={classes.root}>
+						<Box className={classes.subjectBox}>
 							<Typography component={'h5'} variant={'h5'}>
 								{data.subject}
 							</Typography>
@@ -183,7 +223,7 @@ function BoardDetail() {
 							</Box>
 							<Box>{moment(data.register_date).format('YYYY. MM. DD hh:mm:ss')}</Box>
 						</Box>
-						<Box className={classes.otherInfoBox} display={'flex'} alignItems={'center'} pt={2} pb={2}>
+						<Box className={classes.otherInfoBox} display={'flex'} alignItems={'center'}>
 							<Button startIcon={<MessageIcon />} disabled>
 								{Number(commentCount).toLocaleString()}
 							</Button>
@@ -197,7 +237,7 @@ function BoardDetail() {
 								{Number(data.down).toLocaleString()}
 							</Button>
 						</Box>
-						<Box pt={2} pb={2}>
+						<Box className={classes.contentBox}>
 							<RootRef rootRef={contentRef}>
 								<Box />
 							</RootRef>

@@ -21,14 +21,22 @@ import { BoardDetailComment } from '../../src/modules/boardDetail';
 
 // Custom Hooks
 import useBoardDetailComment from '../../hooks/useBoardDetailComment';
+import { Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
+		root: {
+			backgroundColor: 'white'
+		},
 		commentOrderList: {
 			display: 'flex',
 			paddingTop: theme.spacing(2),
 			paddingBottom: theme.spacing(2),
-			borderBottom: `1px solid ${theme.palette.grey.A100}`
+			borderBottom: `1px solid ${theme.palette.grey.A100}`,
+			[theme.breakpoints.down('md')]: {
+				paddingLeft: theme.spacing(2),
+				paddingRight: theme.spacing(2)
+			}
 		},
 		commentOrderListItem: {
 			width: 'auto',
@@ -55,21 +63,33 @@ const useStyles = makeStyles((theme: Theme) =>
 			},
 			'&.Mui-selected': {
 				backgroundColor: 'white',
-				color: theme.palette.primary.main,
-				fontWeight: 700
+				color: theme.palette.primary.main
+			},
+			'& p': {
+				fontFamily: 'NanumSquareRoundEB'
 			}
 		},
 		commentListMoreButton: {
 			padding: theme.spacing(2),
 			borderRadius: 'inherit',
-			color: theme.palette.grey.A200
+			color: theme.palette.grey.A200,
+			[theme.breakpoints.down('md')]: {
+				borderBottom: `1px solid ${theme.palette.grey.A100}`
+			}
 		},
 		commentListItem: {
 			display: 'block',
-			padding: 0,
-			borderBottom: `1px solid ${theme.palette.grey.A100}`
+			padding: 0
+		},
+		commentListBox: {
+			padding: theme.spacing(2, 0),
+			[theme.breakpoints.down('md')]: {
+				borderBottom: `1px solid ${theme.palette.grey.A100}`
+			}
 		},
 		commentListItemWriterBox: {
+			display: 'flex',
+			alignItems: 'center',
 			color: theme.palette.grey.A200,
 			'& > div::after': {
 				content: '""',
@@ -84,12 +104,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			},
 			'& > div:last-child::after': {
 				display: 'none'
+			},
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(0, 2)
 			}
-		},
-		commentListItemWriterNickname: {
-			fontSize: 16,
-			fontWeight: 700,
-			color: theme.palette.grey.A700
 		},
 		commentListItemWriterAvatar: {
 			width: theme.spacing(4),
@@ -100,11 +118,41 @@ const useStyles = makeStyles((theme: Theme) =>
 				fontSize: 14
 			}
 		},
+		commentListItemWriterNickname: {
+			marginLeft: theme.spacing(1),
+			fontSize: 16,
+			fontWeight: 700,
+			color: theme.palette.grey.A700
+		},
+		commentListItemContent: {
+			paddingTop: theme.spacing(1),
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(1, 2, 0, 2)
+			}
+		},
+		commentListItemDate: {
+			color: theme.palette.grey.A200,
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(1, 2, 0, 2)
+			}
+		},
+		commentListItemDateSkeleton: {
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(0, 2, 0, 2)
+			}
+		},
 		replyBox: {
+			padding: theme.spacing(2),
 			borderTop: `1px solid ${theme.palette.grey.A100}`,
-			backgroundColor: theme.palette.grey['50']
+			backgroundColor: theme.palette.grey['50'],
+			[theme.breakpoints.down('md')]: {
+				borderTop: 'none',
+				borderBottom: `1px solid ${theme.palette.grey.A100}`
+			}
 		},
 		replyBoxItemWriterBox: {
+			display: 'flex',
+			alignItems: 'center',
 			color: theme.palette.grey.A200,
 			'&::before': {
 				content: '""',
@@ -130,11 +178,6 @@ const useStyles = makeStyles((theme: Theme) =>
 				display: 'none'
 			}
 		},
-		replyBoxItemWriterNickname: {
-			fontSize: 16,
-			fontWeight: 700,
-			color: theme.palette.grey.A700
-		},
 		replyBoxItemWriterAvatar: {
 			width: theme.spacing(4),
 			height: theme.spacing(4),
@@ -142,6 +185,30 @@ const useStyles = makeStyles((theme: Theme) =>
 				width: theme.spacing(3),
 				height: theme.spacing(3),
 				fontSize: 14
+			}
+		},
+		replyBoxItemWriterNickname: {
+			marginLeft: theme.spacing(1),
+			fontSize: 16,
+			fontWeight: 700,
+			color: theme.palette.grey.A700
+		},
+		replyBoxItemContent: {
+			padding: theme.spacing(1, 0, 0, 3),
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(1, 0, 0, 3)
+			}
+		},
+		replyBoxItemWriterDate: {
+			color: theme.palette.grey.A200,
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(1, 0, 0,3)
+			}
+		},
+		replyBoxItemWriterDateSkeleton: {
+			color: theme.palette.grey.A200,
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(0, 0, 0,3)
 			}
 		}
 	})
@@ -158,7 +225,7 @@ function Comment() {
 	} = useBoardDetailComment();
 
 	return (
-		<>
+		<Box className={classes.root}>
 			<List className={classes.commentOrderList} disablePadding>
 				<ListItem className={classes.commentOrderListItem} selected>
 					<Box>
@@ -173,152 +240,201 @@ function Comment() {
 					{pending ? (
 						<Grow in>
 							<Box>
-								<Box pt={2} pb={2}>
-									<Box className={classes.commentListItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
+								<Box className={classes.commentListBox}>
+									<Box className={classes.commentListItemWriterBox}>
 										<Box display={'flex'} alignItems={'center'}>
 											<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
-											<Box className={classes.commentListItemWriterNickname} component={'span'} ml={1}>
+											<Box className={classes.commentListItemWriterNickname} component={'span'}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 											<Box component={'span'} ml={1}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 										</Box>
-										<Box>
+										<Hidden mdDown>
+											<Box>
+												<Skeleton animation={'wave'} width={100} />
+											</Box>
+										</Hidden>
+									</Box>
+									<Box className={classes.commentListItemContent}>
+										<Skeleton animation={'wave'} />
+										<Skeleton animation={'wave'} />
+										<Skeleton animation={'wave'} />
+									</Box>
+									<Hidden lgUp>
+										<Box className={classes.commentListItemDateSkeleton}>
 											<Skeleton animation={'wave'} width={100} />
 										</Box>
-									</Box>
-									<Box pt={1}>
-										<Skeleton animation={'wave'} />
-										<Skeleton animation={'wave'} />
-										<Skeleton animation={'wave'} />
-									</Box>
+									</Hidden>
 								</Box>
-								<Box className={classes.replyBox} p={2}>
-									<Box className={classes.replyBoxItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
+								<Box className={classes.replyBox}>
+									<Box className={classes.replyBoxItemWriterBox}>
 										<Box display={'flex'} alignItems={'center'}>
 											<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
-											<Box className={classes.replyBoxItemWriterNickname} component={'span'} ml={1}>
+											<Box className={classes.replyBoxItemWriterNickname} component={'span'}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 											<Box component={'span'} ml={1}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 										</Box>
-										<Box>
-											<Skeleton animation={'wave'} width={100} />
-										</Box>
+										<Hidden mdDown>
+											<Box>
+												<Skeleton animation={'wave'} width={100} />
+											</Box>
+										</Hidden>
 									</Box>
 									<Box pt={1} pl={3}>
 										<Skeleton animation={'wave'} />
 										<Skeleton animation={'wave'} />
 										<Skeleton animation={'wave'} />
 									</Box>
+									<Hidden lgUp>
+										<Box className={classes.replyBoxItemWriterDateSkeleton}>
+											<Skeleton animation={'wave'} width={100} />
+										</Box>
+									</Hidden>
 								</Box>
-								<Box pt={2} pb={2}>
-									<Box className={classes.commentListItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
+								<Box className={classes.commentListBox}>
+									<Box className={classes.commentListItemWriterBox}>
 										<Box display={'flex'} alignItems={'center'}>
 											<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
-											<Box className={classes.commentListItemWriterNickname} component={'span'} ml={1}>
+											<Box className={classes.commentListItemWriterNickname} component={'span'}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 											<Box component={'span'} ml={1}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 										</Box>
-										<Box>
+										<Hidden mdDown>
+											<Box>
+												<Skeleton animation={'wave'} width={100} />
+											</Box>
+										</Hidden>
+									</Box>
+									<Box className={classes.commentListItemContent}>
+										<Skeleton animation={'wave'} />
+										<Skeleton animation={'wave'} />
+										<Skeleton animation={'wave'} />
+									</Box>
+									<Hidden lgUp>
+										<Box className={classes.commentListItemDateSkeleton}>
 											<Skeleton animation={'wave'} width={100} />
 										</Box>
-									</Box>
-									<Box pt={1}>
-										<Skeleton animation={'wave'} />
-										<Skeleton animation={'wave'} />
-										<Skeleton animation={'wave'} />
-									</Box>
+									</Hidden>
 								</Box>
-								<Box pt={2} pb={2}>
-									<Box className={classes.commentListItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
+								<Box className={classes.commentListBox}>
+									<Box className={classes.commentListItemWriterBox}>
 										<Box display={'flex'} alignItems={'center'}>
 											<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
-											<Box className={classes.commentListItemWriterNickname} component={'span'} ml={1}>
+											<Box className={classes.commentListItemWriterNickname} component={'span'}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 											<Box component={'span'} ml={1}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 										</Box>
-										<Box>
+										<Hidden mdDown>
+											<Box>
+												<Skeleton animation={'wave'} width={100} />
+											</Box>
+										</Hidden>
+									</Box>
+									<Box className={classes.commentListItemContent}>
+										<Skeleton animation={'wave'} />
+										<Skeleton animation={'wave'} />
+										<Skeleton animation={'wave'} />
+									</Box>
+									<Hidden lgUp>
+										<Box className={classes.commentListItemDateSkeleton}>
 											<Skeleton animation={'wave'} width={100} />
 										</Box>
-									</Box>
-									<Box pt={1}>
-										<Skeleton animation={'wave'} />
-										<Skeleton animation={'wave'} />
-										<Skeleton animation={'wave'} />
-									</Box>
+									</Hidden>
 								</Box>
-								<Box className={classes.replyBox} p={2}>
-									<Box className={classes.replyBoxItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
+								<Box className={classes.replyBox}>
+									<Box className={classes.replyBoxItemWriterBox}>
 										<Box display={'flex'} alignItems={'center'}>
 											<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
-											<Box className={classes.replyBoxItemWriterNickname} component={'span'} ml={1}>
+											<Box className={classes.replyBoxItemWriterNickname} component={'span'}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 											<Box component={'span'} ml={1}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 										</Box>
-										<Box>
-											<Skeleton animation={'wave'} width={100} />
-										</Box>
+										<Hidden mdDown>
+											<Box>
+												<Skeleton animation={'wave'} width={100} />
+											</Box>
+										</Hidden>
 									</Box>
 									<Box pt={1} pl={3}>
 										<Skeleton animation={'wave'} />
 										<Skeleton animation={'wave'} />
 										<Skeleton animation={'wave'} />
 									</Box>
+									<Hidden lgUp>
+										<Box className={classes.replyBoxItemWriterDateSkeleton}>
+											<Skeleton animation={'wave'} width={100} />
+										</Box>
+									</Hidden>
 								</Box>
-								<Box pt={2} pb={2}>
-									<Box className={classes.commentListItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
+								<Box className={classes.replyBox}>
+									<Box className={classes.replyBoxItemWriterBox}>
 										<Box display={'flex'} alignItems={'center'}>
 											<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
-											<Box className={classes.commentListItemWriterNickname} component={'span'} ml={1}>
+											<Box className={classes.replyBoxItemWriterNickname} component={'span'}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 											<Box component={'span'} ml={1}>
 												<Skeleton animation={'wave'} width={35} />
 											</Box>
 										</Box>
-										<Box>
-											<Skeleton animation={'wave'} width={100} />
-										</Box>
-									</Box>
-									<Box pt={1}>
-										<Skeleton animation={'wave'} />
-										<Skeleton animation={'wave'} />
-										<Skeleton animation={'wave'} />
-									</Box>
-								</Box>
-								<Box className={classes.replyBox} p={2}>
-									<Box className={classes.replyBoxItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
-										<Box display={'flex'} alignItems={'center'}>
-											<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
-											<Box className={classes.replyBoxItemWriterNickname} component={'span'} ml={1}>
-												<Skeleton animation={'wave'} width={35} />
+										<Hidden mdDown>
+											<Box>
+												<Skeleton animation={'wave'} width={100} />
 											</Box>
-											<Box component={'span'} ml={1}>
-												<Skeleton animation={'wave'} width={35} />
-											</Box>
-										</Box>
-										<Box>
-											<Skeleton animation={'wave'} width={100} />
-										</Box>
+										</Hidden>
 									</Box>
 									<Box pt={1} pl={3}>
 										<Skeleton animation={'wave'} />
 										<Skeleton animation={'wave'} />
 										<Skeleton animation={'wave'} />
 									</Box>
+									<Hidden lgUp>
+										<Box className={classes.replyBoxItemWriterDateSkeleton}>
+											<Skeleton animation={'wave'} width={100} />
+										</Box>
+									</Hidden>
+								</Box>
+								<Box className={classes.commentListBox}>
+									<Box className={classes.commentListItemWriterBox}>
+										<Box display={'flex'} alignItems={'center'}>
+											<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
+											<Box className={classes.commentListItemWriterNickname} component={'span'}>
+												<Skeleton animation={'wave'} width={35} />
+											</Box>
+											<Box component={'span'} ml={1}>
+												<Skeleton animation={'wave'} width={35} />
+											</Box>
+										</Box>
+										<Hidden mdDown>
+											<Box>
+												<Skeleton animation={'wave'} width={100} />
+											</Box>
+										</Hidden>
+									</Box>
+									<Box className={classes.commentListItemContent}>
+										<Skeleton animation={'wave'} />
+										<Skeleton animation={'wave'} />
+										<Skeleton animation={'wave'} />
+									</Box>
+									<Hidden lgUp>
+										<Box className={classes.commentListItemDateSkeleton}>
+											<Skeleton animation={'wave'} width={100} />
+										</Box>
+									</Hidden>
 								</Box>
 							</Box>
 						</Grow>
@@ -326,48 +442,62 @@ function Comment() {
 						data.map((item: BoardDetailComment) => (
 							<Grow key={`board-comment-${item.id}`} in>
 								<Box>
-									<Box pt={2} pb={2}>
-										<Box className={classes.commentListItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
+									<Box className={classes.commentListBox}>
+										<Box className={classes.commentListItemWriterBox} display={'flex'} alignItems={'center'}>
 											<Box display={'flex'} alignItems={'center'}>
 												<Avatar className={classes.commentListItemWriterAvatar}>
 													<PersonIcon />
 												</Avatar>
-												<Box className={classes.commentListItemWriterNickname} component={'span'} ml={1}>
+												<Box className={classes.commentListItemWriterNickname} component={'span'}>
 													{item.nickname}
 												</Box>
 												<Box component={'span'} ml={0.5}>
 													{`${item.ip && `(${item.ip})`}`}
 												</Box>
 											</Box>
-											<Box>
-												{moment(item.register_date).format('YYYY. MM. DD hh:mm:ss')}
-											</Box>
+											<Hidden mdDown>
+												<Box>
+													{moment(item.register_date).format('YYYY. MM. DD hh:mm:ss')}
+												</Box>
+											</Hidden>
 										</Box>
-										<Box pt={1}>
+										<Box className={classes.commentListItemContent}>
 											{item.content}
 										</Box>
+										<Hidden lgUp>
+											<Box className={classes.commentListItemDate}>
+												{moment(item.register_date).format('YYYY. MM. DD hh:mm:ss')}
+											</Box>
+										</Hidden>
 									</Box>
 									{item.commentReplyList.map((child) => (
-										<Box key={`board-comment-reply-${child.id}`} className={classes.replyBox} p={2}>
-											<Box className={classes.replyBoxItemWriterBox} display={'flex'} alignItems={'center'} pb={1}>
+										<Box key={`board-comment-reply-${child.id}`} className={classes.replyBox}>
+											<Box className={classes.replyBoxItemWriterBox} display={'flex'} alignItems={'center'}>
 												<Box display={'flex'} alignItems={'center'}>
 													<Avatar className={classes.replyBoxItemWriterAvatar}>
 														<PersonIcon />
 													</Avatar>
-													<Box className={classes.replyBoxItemWriterNickname} component={'span'} ml={1}>
+													<Box className={classes.replyBoxItemWriterNickname} component={'span'}>
 														{child.nickname}
 													</Box>
 													<Box component={'span'} ml={0.5}>
 														{`${child.ip && `(${item.ip})`}`}
 													</Box>
 												</Box>
-												<Box>
-													{moment(child.register_date).format('YYYY. MM. DD hh:mm:ss')}
-												</Box>
+												<Hidden mdDown>
+													<Box>
+														{moment(child.register_date).format('YYYY. MM. DD hh:mm:ss')}
+													</Box>
+												</Hidden>
 											</Box>
-											<Box pt={1} pl={3}>
+											<Box className={classes.replyBoxItemContent}>
 												{child.content}
 											</Box>
+											<Hidden lgUp>
+												<Box className={classes.replyBoxItemWriterDate}>
+													{moment(child.register_date).format('YYYY. MM. DD hh:mm:ss')}
+												</Box>
+											</Hidden>
 										</Box>
 									))}
 								</Box>
@@ -386,7 +516,7 @@ function Comment() {
 					{'더 보기'}
 				</Button>
 			)}
-		</>
+		</Box>
 	);
 }
 

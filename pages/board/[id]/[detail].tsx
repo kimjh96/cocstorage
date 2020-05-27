@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
 
@@ -19,11 +20,29 @@ import { RootState } from '../../../src/modules';
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
 
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			[theme.breakpoints.down('md')]: {
+				padding: 0
+			}
+		},
+		adBox: {
+			border: '1px solid',
+			margin: theme.spacing(1, 0, 0, 1),
+			[theme.breakpoints.down('md')]: {
+				margin: 0
+			}
+		}
+	})
+);
+
 function getMetaTagTitle(data: any, id: any) {
 	return data ? `${data.subject} : ${getCategoryNameByCategoryId(id)} 저장소` : `${getCategoryNameByCategoryId(id)} 저장소`;
 }
 
 function Detail({ query }: NextPageContext) {
+	const classes = useStyles();
 	const { board: { data } } = useSelector((state: RootState) => state.boardDetail);
 
 	return (
@@ -55,7 +74,7 @@ function Detail({ query }: NextPageContext) {
 				<link rel={'canonical'} href={''} />
 				<link rel={'manifest'} href={''} />
 			</Head>
-			<Container>
+			<Container className={classes.root}>
 				<Grid container>
 					<Grid item xs={12} md={9}>
 						<BoardDetail />
@@ -64,7 +83,7 @@ function Detail({ query }: NextPageContext) {
 					<Grid item xs={12} md={3}>
 						<Box position={'relative'}>
 							<Box width={'100%'} maxWidth={308} position={'fixed'}>
-								<Box mt={1} ml={1} border={1}>
+								<Box className={classes.adBox}>
 									{'AD'}
 								</Box>
 							</Box>

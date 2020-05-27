@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 // Material UI
 import Box from '@material-ui/core/Box';
@@ -14,9 +14,13 @@ type LayoutProps = {
 	children: JSX.Element | JSX.Element[];
 };
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		root: { }
+		root: {
+			[theme.breakpoints.down('md')]: {
+				backgroundColor: '#eff1f5'
+			}
+		}
 	})
 );
 

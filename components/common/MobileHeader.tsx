@@ -26,12 +26,19 @@ import InfoIcon from '@material-ui/icons/Info';
 import MenuIcon from '@material-ui/icons/Menu';
 
 // Logo Image
-import Logo from '../../public/logo_m.png';
+import Logo from '../../public/logo.png';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			background: 'linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4)'
+			// background: 'linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4)'
+			borderTop: 0,
+			borderLeft: 0,
+			borderRight: 0,
+			backgroundColor: 'white'
+		},
+		toolbar: {
+			padding: theme.spacing(0, 2)
 		},
 		appBarLogoBox: {
 			flexGrow: 1
@@ -100,8 +107,8 @@ function MobileHeader(): JSX.Element {
 
 	return (
 		<>
-			<AppBar position={'static'} className={classes.root}>
-				<Toolbar>
+			<AppBar className={classes.root} position={'fixed'} variant={'outlined'}>
+				<Toolbar className={classes.toolbar}>
 					<Box className={classes.appBarLogoBox}>
 						<img className={classes.appBarLogo} src={Logo} alt={'Logo'} />
 					</Box>
@@ -110,6 +117,7 @@ function MobileHeader(): JSX.Element {
 					</IconButton>
 				</Toolbar>
 			</AppBar>
+			<Toolbar className={classes.toolbar} />
 			<SwipeableDrawer anchor={'right'} onClose={handleMenuList} onOpen={handleMenuList} open={menuListState}>
 				<div className={classes.list} role={'presentation'}>
 					<List>
