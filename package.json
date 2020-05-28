@@ -52,12 +52,11 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "next start -p 8081",
+    "start": "next build && next start -p $PORT",
     "build": "next build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "next",
-    "server": "next start",
     "lint": "eslint \"./**/*.{ts, tsx, js, jsx}\"",
     "lint:fix": "eslint --fix \"'./**/*.{ts, tsx,js,jsx}\"",
     "prettier": "prettier --write --config ./.prettierrc \"./**/*.{ts,tsx}\""
