@@ -13,7 +13,6 @@ import BoardList from '../../../components/board/BoardList';
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
 
 function Board({ query }: NextPageContext) {
-
 	return (
 		<>
 			<Head>

@@ -8,7 +8,7 @@ import { fetchMainContents } from '../src/modules/home';
 import DailyPopularPost from '../components/index/DailyPopularBoard';
 import NewPost from '../components/index/NewBoard';
 
-function Index({ isServer, store }: NextPageContext) {
+function Index() {
 	return (
 		<>
 			<DailyPopularPost />
