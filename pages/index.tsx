@@ -17,11 +17,10 @@ function Index() {
 	);
 }
 
-Index.getInitialProps = ({ isServer, store }: NextPageContext) => {
+Index.getInitialProps = ({ store }: NextPageContext) => {
 	store.dispatch(fetchMainContents());
 
 	return {
-		isServer,
 		store
 	};
 };
