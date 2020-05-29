@@ -30,6 +30,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import SchoolIcon from '@material-ui/icons/School';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
+import HomeIcon from '@material-ui/icons/Home';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../src/snippet/board';
@@ -222,7 +223,7 @@ function Header() {
 								onChange={handleTabChange}
 								className={classes.indicator}
 							>
-								<Tab label={'홈'} value={'/'} />
+								<Tab icon={<HomeIcon />} value={'/'} />
 								<Tab label={'일간 개념글'} value={'/board/daily_popular'} />
 								<Tab label={'인터넷방송'} value={'/board/ib_new1'} />
 								<Tab label={'스트리머'} value={'/board/stream'} />

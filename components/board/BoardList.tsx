@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
 import {
 	createStyles, fade, makeStyles, Theme, useTheme
@@ -102,6 +102,15 @@ const useStyles = makeStyles((theme: Theme) =>
 			padding: theme.spacing(1, 0, 0, 0),
 			[theme.breakpoints.down('md')]: {
 				padding: theme.spacing(0, 0, 0.5, 0)
+			}
+		},
+		gridItemWriterInfoBoxSkeleton: {
+			display: 'flex',
+			paddingBottom: theme.spacing(0.5),
+			[theme.breakpoints.down('md')]: {
+				'& > div:first-child': {
+					marginLeft: 0
+				}
 			}
 		},
 		gridBox: {
@@ -226,6 +235,7 @@ function BoardList() {
 		onHandlePagination,
 		searchState,
 		dialogState,
+		dummyBoardArray,
 		onHandleSearchTypeSelect,
 		onHandleSearchValueInput,
 		onHandleSearchValueInputKey,
@@ -238,626 +248,39 @@ function BoardList() {
 				{pending ? (
 					<Grow in>
 						<Grid item xs={12} md={9}>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
+							{dummyBoardArray.map((index) => (
+								<Grid key={`dummy-board-${index}`} container alignItems={'center'}>
+									<Grid item xs={12} md={7}>
+										<Box display={'flex'} alignItems={'center'} pb={0.5}>
+											<Box flexGrow={1}>
+												<Skeleton height={35} animation={'wave'} />
+											</Box>
+											<Box minWidth={20} ml={1}>
+												<Skeleton height={35} animation={'wave'} />
+											</Box>
+											<Box minWidth={20} ml={1}>
+												<Skeleton height={35} animation={'wave'} />
+											</Box>
 										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
+									</Grid>
+									<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
+										<Box className={classes.gridItemWriterInfoBoxSkeleton}>
+											<Box flexGrow={1} ml={1}>
+												<Skeleton height={35} animation={'wave'} />
+											</Box>
+											<Box flexGrow={1} ml={1}>
+												<Skeleton height={35} animation={'wave'} />
+											</Box>
+											<Box flexGrow={1} ml={1}>
+												<Skeleton height={35} animation={'wave'} />
+											</Box>
+											<Box flexGrow={1} ml={1}>
+												<Skeleton height={35} animation={'wave'} />
+											</Box>
 										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
+									</Grid>
 								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-							<Grid container alignItems={'center'}>
-								<Grid item xs={12} md={7}>
-									<Box display={'flex'} alignItems={'center'} pb={0.5}>
-										<Box flexGrow={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box minWidth={20} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-									<Box display={'flex'} pb={0.5}>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-										<Box flexGrow={1} ml={1}>
-											<Skeleton height={30} animation={'wave'} />
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
+							))}
 							<Box display={'flex'} justifyContent={'center'} p={2} pt={0}>
 								<Box ml={1}>
 									<Skeleton width={30} height={40} animation={'wave'} />

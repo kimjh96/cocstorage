@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
+import Hidden from '@material-ui/core/Hidden';
 import InputBase from '@material-ui/core/InputBase';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -35,7 +36,6 @@ import useBoard from '../../hooks/useBoard';
 
 // Snippets
 import { getSearchTypeLabelByType, getCategoryNameByCategoryId } from '../../src/snippet/board';
-import { Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -56,7 +56,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			alignItems: 'center',
 			color: 'white',
-			fontWeight: 700
+			fontWeight: 700,
+			[theme.breakpoints.down('md')]: {
+				fontSize: 22
+			}
 		},
 		icon: {
 			verticalAlign: 'middle'
@@ -123,7 +126,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getCategoryIconByCategoryId(categoryId: string | string[]) {
-	let categoryIcon = <CastIcon />;
+	let categoryIcon = <CastIcon fontSize={'large'} />;
 
 	switch (categoryId) {
 	case 'daily_popular':

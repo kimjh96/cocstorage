@@ -22,6 +22,7 @@ export default function useBoard() {
 	const boardState = useSelector((state: RootState) => state.board);
 
 	const [dialogState, setDialogState] = useState<boolean>(false);
+	const [dummyBoardArray] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
 
 	const { id: categoryId } = useMemo(() => (
 		router.query
@@ -73,6 +74,7 @@ export default function useBoard() {
 		categoryId,
 		...boardState,
 		dialogState,
+		dummyBoardArray,
 		onHandleSearchTypeSelect,
 		onHandleSearchValueInput,
 		onHandleSearchValueInputKey,

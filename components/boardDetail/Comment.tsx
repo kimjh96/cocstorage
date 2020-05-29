@@ -10,18 +10,21 @@ import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
 import Grow from '@material-ui/core/Grow';
 
 // Material UI Icons
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import PersonIcon from '@material-ui/icons/Person';
 
+// Svgs
+import NoCommentSvg from '../../styles/svgs/no_comment.svg';
+
 // Modules
 import { BoardDetailComment } from '../../src/modules/boardDetail';
 
 // Custom Hooks
 import useBoardDetailComment from '../../hooks/useBoardDetailComment';
-import { Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -83,6 +86,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		commentListBox: {
 			padding: theme.spacing(2, 0),
+			wordBreak: 'break-all',
 			[theme.breakpoints.down('md')]: {
 				borderBottom: `1px solid ${theme.palette.grey.A100}`
 			}
@@ -195,6 +199,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		replyBoxItemContent: {
 			padding: theme.spacing(1, 0, 0, 3),
+			wordBreak: 'break-all',
 			[theme.breakpoints.down('md')]: {
 				padding: theme.spacing(1, 0, 0, 3)
 			}
@@ -202,13 +207,23 @@ const useStyles = makeStyles((theme: Theme) =>
 		replyBoxItemWriterDate: {
 			color: theme.palette.grey.A200,
 			[theme.breakpoints.down('md')]: {
-				padding: theme.spacing(1, 0, 0,3)
+				padding: theme.spacing(1, 0, 0, 3)
 			}
 		},
 		replyBoxItemWriterDateSkeleton: {
 			color: theme.palette.grey.A200,
 			[theme.breakpoints.down('md')]: {
-				padding: theme.spacing(0, 0, 0,3)
+				padding: theme.spacing(0, 0, 0, 3)
+			}
+		},
+		emptyCommentBox: {
+			padding: theme.spacing(5),
+			textAlign: 'center',
+			'& img': {
+				maxWidth: 50
+			},
+			[theme.breakpoints.down('md')]: {
+				borderBottom: `1px solid ${theme.palette.grey.A100}`
 			}
 		}
 	})
@@ -503,6 +518,18 @@ function Comment() {
 								</Box>
 							</Grow>
 						))
+					)}
+					{!pending && data.length === 0 && (
+						<Grow in>
+							<Box className={classes.emptyCommentBox}>
+								<Box>
+									<img src={NoCommentSvg} alt={'NoCommentSvg'} />
+								</Box>
+								<Box>
+									{'댓글이 존재하지 않습니다!'}
+								</Box>
+							</Box>
+						</Grow>
 					)}
 				</ListItem>
 			</List>

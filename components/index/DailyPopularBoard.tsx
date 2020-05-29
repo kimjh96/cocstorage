@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
+import Link from 'next/link';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import Swiper from 'react-id-swiper';
 
 // Material UI
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import Grow from '@material-ui/core/Grow';
@@ -17,9 +18,8 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
-// Swiper
-import Swiper from 'react-id-swiper';
-import Image from '../../public/test.jpg';
+// Svgs
+import DefaultImageSvg from '../../styles/svgs/default_image.svg';
 
 // Modules
 import { Board } from '../../src/modules/boardDetail';
@@ -30,16 +30,27 @@ import useHome from '../../hooks/useHome';
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			marginTop: 20,
-			marginBottom: 10
+			marginTop: theme.spacing(2),
+			marginBottom: theme.spacing(1),
+			backgroundColor: 'white',
+			[theme.breakpoints.down('md')]: {
+				margin: theme.spacing(1, 0, 0, 0),
+				paddingTop: theme.spacing(1),
+				paddingBottom: theme.spacing(1)
+			}
 		},
 		title: {
 			fontWeight: 700,
-			color: '#3d3d3d'
+			color: '#3d3d3d',
+			cursor: 'default'
 		},
 		box: {
 			padding: theme.spacing(2, 0),
-			backgroundColor: '#eff1f5'
+			backgroundColor: '#eff1f5',
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(0, 0, 0.5, 0),
+				backgroundColor: 'white'
+			}
 		},
 		cardWrapper: {
 			position: 'relative',
@@ -71,6 +82,9 @@ const useStyles = makeStyles((theme: Theme) =>
 				transition: 'all .5s'
 			}
 		},
+		cardCenteredDefaultImage: {
+			maxWidth: '100px !important'
+		},
 		cardBackground: {
 			position: 'absolute',
 			padding: theme.spacing(1.5),
@@ -93,10 +107,16 @@ const useStyles = makeStyles((theme: Theme) =>
 			flexDirection: 'column',
 			justifyContent: 'flex-end',
 			backgroundColor: '#eff1f5',
-			cursor: 'default'
+			cursor: 'default',
+			[theme.breakpoints.down('md')]: {
+				backgroundColor: 'white'
+			}
 		},
 		cardTitle: {
-			color: 'white'
+			color: 'white',
+			[theme.breakpoints.down('md')]: {
+				fontSize: 16
+			}
 		},
 		cardDescription: {
 			textOverflow: 'ellipsis',
@@ -149,7 +169,7 @@ const config = {
 
 function DailyPopularBoard() {
 	const classes = useStyles();
-	const { dailyPopularList, pending } = useHome();
+	const { dailyPopularList, pending, dummyDailyPopularBoardArray } = useHome();
 
 	return (
 		<>
@@ -160,139 +180,47 @@ function DailyPopularBoard() {
 			</Container>
 			<Box className={classes.box}>
 				{pending ? (
-					<Swiper {...config}>
-						<Card square elevation={0}>
-							<Link href={'/test'}>
-								<Box className={classes.cardWrapper}>
-									<Box className={classes.cardWrapperInner} />
-									<Box className={classes.cardBackgroundSkeleton}>
-										<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Grid container justify={'center'} className={classes.cardInfo}>
-											<Grid item xs={6}>
-												<Skeleton width={50} animation={'wave'} />
-											</Grid>
-											<Grid item xs={6} className={classes.cardInfoViewCount}>
-												<Skeleton className={classes.cardInfoViewCountSkeleton} width={50} animation={'wave'} />
-											</Grid>
-										</Grid>
-									</Box>
-								</Box>
-							</Link>
-						</Card>
-						<Card square elevation={0}>
-							<Link href={'/test'}>
-								<Box className={classes.cardWrapper}>
-									<Box className={classes.cardWrapperInner} />
-									<Box className={classes.cardBackgroundSkeleton}>
-										<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Grid container justify={'center'} className={classes.cardInfo}>
-											<Grid item xs={6}>
-												<Skeleton width={50} animation={'wave'} />
-											</Grid>
-											<Grid item xs={6} className={classes.cardInfoViewCount}>
-												<Skeleton className={classes.cardInfoViewCountSkeleton} width={50} animation={'wave'} />
-											</Grid>
-										</Grid>
-									</Box>
-								</Box>
-							</Link>
-						</Card>
-						<Card square elevation={0}>
-							<Link href={'/test'}>
-								<Box className={classes.cardWrapper}>
-									<Box className={classes.cardWrapperInner} />
-									<Box className={classes.cardBackgroundSkeleton}>
-										<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Grid container justify={'center'} className={classes.cardInfo}>
-											<Grid item xs={6}>
-												<Skeleton width={50} animation={'wave'} />
-											</Grid>
-											<Grid item xs={6} className={classes.cardInfoViewCount}>
-												<Skeleton className={classes.cardInfoViewCountSkeleton} width={50} animation={'wave'} />
-											</Grid>
-										</Grid>
-									</Box>
-								</Box>
-							</Link>
-						</Card>
-						<Card square elevation={0}>
-							<Link href={'/test'}>
-								<Box className={classes.cardWrapper}>
-									<Box className={classes.cardWrapperInner} />
-									<Box className={classes.cardBackgroundSkeleton}>
-										<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Grid container justify={'center'} className={classes.cardInfo}>
-											<Grid item xs={6}>
-												<Skeleton width={50} animation={'wave'} />
-											</Grid>
-											<Grid item xs={6} className={classes.cardInfoViewCount}>
-												<Skeleton className={classes.cardInfoViewCountSkeleton} width={50} animation={'wave'} />
-											</Grid>
-										</Grid>
-									</Box>
-								</Box>
-							</Link>
-						</Card>
-						<Card square elevation={0}>
-							<Link href={'/test'}>
-								<Box className={classes.cardWrapper}>
-									<Box className={classes.cardWrapperInner} />
-									<Box className={classes.cardBackgroundSkeleton}>
-										<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
-											<Skeleton animation={'wave'} />
-										</Typography>
-										<Grid container justify={'center'} className={classes.cardInfo}>
-											<Grid item xs={6}>
-												<Skeleton width={50} animation={'wave'} />
-											</Grid>
-											<Grid item xs={6} className={classes.cardInfoViewCount}>
-												<Skeleton className={classes.cardInfoViewCountSkeleton} width={50} animation={'wave'} />
-											</Grid>
-										</Grid>
-									</Box>
-								</Box>
-							</Link>
-						</Card>
-					</Swiper>
-				) : (
 					<Grow in>
 						<Box>
 							<Swiper {...config}>
-								{dailyPopularList.map((item: Board) => (
-									<Card key={`daily-popular-board-${item.id}`} square>
-										<Link href={'/test'}>
+								{dummyDailyPopularBoardArray.map((index) => (
+									<Card key={`dummy-daily-popular-board-${index}`} square elevation={0}>
+										<Box className={classes.cardWrapper}>
+											<Box className={classes.cardWrapperInner} />
+											<Box className={classes.cardBackgroundSkeleton}>
+												<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
+												<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
+													<Skeleton animation={'wave'} />
+												</Typography>
+												<Typography noWrap className={classes.cardTitle} variant={'h6'} component={'h6'}>
+													<Skeleton animation={'wave'} />
+												</Typography>
+												<Grid container justify={'center'} className={classes.cardInfo}>
+													<Grid item xs={6}>
+														<Skeleton width={50} animation={'wave'} />
+													</Grid>
+													<Grid item xs={6} className={classes.cardInfoViewCount}>
+														<Skeleton className={classes.cardInfoViewCountSkeleton} width={50} animation={'wave'} />
+													</Grid>
+												</Grid>
+											</Box>
+										</Box>
+									</Card>
+								))}
+							</Swiper>
+						</Box>
+					</Grow>
+				) : (
+					<Swiper {...config}>
+						{dailyPopularList.map((item: Board) => (
+							<Grow key={`daily-popular-board-${item.id}`} in>
+								<Card square>
+									<Link href={'/board/[id]/[detail]'} as={`/board/${item.category_id}/${item.id}`}>
+										<a>
 											<Box className={classes.cardWrapper}>
 												<Box className={classes.cardWrapperInner}>
-													<Box className={classes.cardCentered}>
-														{item.image ? <img src={item.image} alt={'Dummy Thumbnail'} /> : <img src={Image} alt={'Thumbnail'} />}
+													<Box className={classes.cardCentered}>{item.image ? <img src={item.image} alt={'Thumbnail'} /> : <img className={classes.cardCenteredDefaultImage} src={DefaultImageSvg} alt={'Default Thumbnail'} />}
+														{item.image ? <img src={item.image} alt={'Thumbnail'} /> : <img className={classes.cardCenteredDefaultImage} src={DefaultImageSvg} alt={'Default Thumbnail'} />}
 													</Box>
 												</Box>
 												<Box className={classes.cardBackground}>
@@ -321,12 +249,12 @@ function DailyPopularBoard() {
 													</Grid>
 												</Box>
 											</Box>
-										</Link>
-									</Card>
-								))}
-							</Swiper>
-						</Box>
-					</Grow>
+										</a>
+									</Link>
+								</Card>
+							</Grow>
+						))}
+					</Swiper>
 				)}
 			</Box>
 		</>

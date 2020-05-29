@@ -81,12 +81,22 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		contentBox: {
 			padding: theme.spacing(2, 0),
+			'& img': {
+				width: '100%'
+			},
+			'& video': {
+				width: '100%'
+			},
+			'& iframe': {
+				width: '100%'
+			},
 			[theme.breakpoints.down('md')]: {
 				paddingLeft: theme.spacing(2),
 				paddingRight: theme.spacing(2)
 			}
 		},
 		recommendButtonGroup: {
+			marginTop: theme.spacing(1),
 			'& > button': {
 				padding: theme.spacing(2),
 				borderRadius: '0',

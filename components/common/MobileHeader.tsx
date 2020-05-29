@@ -1,4 +1,5 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useCallback, useMemo } from 'react';
+import { useRouter } from 'next/router';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 // Material UI
@@ -9,6 +10,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
+import Chip from '@material-ui/core/Chip';
 import AppBar from '@material-ui/core/AppBar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -28,6 +30,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 // Logo Image
 import Logo from '../../public/logo.png';
 
+// Snippets
+import { getCategoryNameByCategoryId } from '../../src/snippet/board';
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
@@ -40,10 +45,15 @@ const useStyles = makeStyles((theme: Theme) =>
 		toolbar: {
 			padding: theme.spacing(0, 2)
 		},
+		chip: {
+			marginLeft: theme.spacing(1),
+			color: 'white'
+		},
 		appBarLogoBox: {
 			flexGrow: 1
 		},
 		appBarLogo: {
+			maxWidth: 130,
 			verticalAlign: 'middle'
 		},
 		list: {
@@ -61,56 +71,146 @@ const useStyles = makeStyles((theme: Theme) =>
 type ListItemType = {
 	label: string;
 	icon: JSX.Element;
+	categoryId: string;
 };
+
+function getCategoryIconByCategoryId(categoryId: string | string[]) {
+	let categoryIcon = <CastIcon />;
+
+	switch (categoryId) {
+	case 'daily_popular':
+		categoryIcon = <WhatshotIcon />;
+		break;
+	case 'ib_new1':
+		categoryIcon = <CastIcon />;
+		break;
+	case 'stream':
+		categoryIcon = <PlayArrowIcon />;
+		break;
+	case 'football_new6':
+		categoryIcon = <SportsSoccerIcon />;
+		break;
+	case 'issuezoom':
+		categoryIcon = <CalendarTodayIcon />;
+		break;
+	case 'exam_new':
+		categoryIcon = <SchoolIcon />;
+		break;
+	case 'extra':
+		categoryIcon = <FitnessCenterIcon />;
+		break;
+	case 'baseball_new8':
+		categoryIcon = <SportsBaseballIcon />;
+		break;
+	default:
+		categoryIcon = <CastIcon />;
+		break;
+	}
+
+	return categoryIcon;
+}
 
 function MobileHeader(): JSX.Element {
 	const classes = useStyles();
+	const router = useRouter();
+	const { route, query: { id } } = router;
 	const [menuListState, setMenuListState] = useState<boolean>(false);
 	const [listItems] = useState<ListItemType[]>([
 		{
 			label: '일간 개념글',
-			icon: <WhatshotIcon className={classes.listItemIcon} />
+			icon: <WhatshotIcon className={classes.listItemIcon} />,
+			categoryId: 'daily_popular'
 		},
 		{
 			label: '인터넷방송',
-			icon: <CastIcon className={classes.listItemIcon} />
+			icon: <CastIcon className={classes.listItemIcon} />,
+			categoryId: 'ib_new1'
 		},
 		{
 			label: '스트리머',
-			icon: <PlayArrowIcon className={classes.listItemIcon} />
+			icon: <PlayArrowIcon className={classes.listItemIcon} />,
+			categoryId: 'stream'
 		},
 		{
 			label: '축구',
-			icon: <SportsSoccerIcon className={classes.listItemIcon} />
+			icon: <SportsSoccerIcon className={classes.listItemIcon} />,
+			categoryId: 'football_new6'
 		},
 		{
 			label: '이슈',
-			icon: <CalendarTodayIcon className={classes.listItemIcon} />
+			icon: <CalendarTodayIcon className={classes.listItemIcon} />,
+			categoryId: 'issuezoom'
 		},
 		{
 			label: '헬스',
-			icon: <FitnessCenterIcon className={classes.listItemIcon} />
+			icon: <FitnessCenterIcon className={classes.listItemIcon} />,
+			categoryId: 'extra'
 		},
 		{
 			label: '수능',
-			icon: <SchoolIcon className={classes.listItemIcon} />
+			icon: <SchoolIcon className={classes.listItemIcon} />,
+			categoryId: 'exam_new'
 		},
 		{
 			label: '야구',
-			icon: <SportsBaseballIcon className={classes.listItemIcon} />
+			icon: <SportsBaseballIcon className={classes.listItemIcon} />,
+			categoryId: 'baseball_new8'
 		}
 	]);
+	const isBoardDetail = useMemo(() => (route === '/board/[id]/[detail]'), [route]);
 
 	const handleMenuList = (): void => {
 		setMenuListState(!menuListState);
 	};
+
+	const handleChip = useCallback(() => {
+		const categoryId = typeof id === 'string' ? id : '';
+
+		router.push({
+			pathname: '/board/[id]',
+			query: {
+				id: categoryId
+			}
+		}, `/board/${categoryId}`).then();
+	}, [router, id]);
+
+	const handleLogo = useCallback(() => (
+		router.push({
+			pathname: '/'
+		})
+	), [router]);
+
+	const handleDrawer = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+		const categoryId: string = event.currentTarget.getAttribute('data-category-id') || '';
+
+		router.push({
+			pathname: '/board/[id]',
+			query: {
+				id: categoryId
+			}
+		}, `/board/${categoryId}`).then();
+	}, [router]);
 
 	return (
 		<>
 			<AppBar className={classes.root} position={'fixed'} variant={'outlined'}>
 				<Toolbar className={classes.toolbar}>
 					<Box className={classes.appBarLogoBox}>
-						<img className={classes.appBarLogo} src={Logo} alt={'Logo'} />
+						<Box>
+							<Box component={'span'} onClick={handleLogo}>
+								<img className={classes.appBarLogo} src={Logo} alt={'Logo'} />
+							</Box>
+							{isBoardDetail && (
+								<Chip
+									className={classes.chip}
+									color={'primary'}
+									label={getCategoryNameByCategoryId(id)}
+									icon={getCategoryIconByCategoryId(id)}
+									onClick={handleChip}
+									size={'small'}
+								/>
+							)}
+						</Box>
 					</Box>
 					<IconButton edge={'end'} color={'inherit'} aria-label={'open drawer'} onClick={handleMenuList}>
 						<MenuIcon />
@@ -122,7 +222,7 @@ function MobileHeader(): JSX.Element {
 				<div className={classes.list} role={'presentation'}>
 					<List>
 						{listItems.map((item) => (
-							<ListItem button key={item.label}>
+							<ListItem button key={item.label} data-category-id={item.categoryId} onClick={handleDrawer}>
 								<ListItemIcon>{item.icon}</ListItemIcon>
 								<ListItemText primary={item.label} />
 							</ListItem>

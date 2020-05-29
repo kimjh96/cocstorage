@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
 			padding: theme.spacing(2, 0),
-			borderTop: '1px solid rgba(0, 0, 0, 0.12)',
+			borderTop: `1px solid ${theme.palette.grey.A100}`,
 			[theme.breakpoints.down('md')]: {
 				marginTop: -1
 			}
