@@ -4,23 +4,31 @@ import axios from '.';
 // Modules
 import { FetchBoardDetailPayload, FetchBoardDetailCommentPayload } from '../modules/boardDetail';
 
+// Snippets
+import { getOrderTypeByCategoryId, getBoardDataNoByCategoryId } from '../snippet/boardDetail';
+
 export function fetchBoardDetail({ id, categoryId }: FetchBoardDetailPayload) {
 	const config: AxiosRequestConfig = {
 		url: `/board/${categoryId}/${id}`,
 		params: {
-			orderType: 'collect-new'
+			orderType: getOrderTypeByCategoryId(categoryId)
 		}
 	};
 
 	return axios()(config);
 }
 
-export function fetchBoardDetailComments({ id, categoryId, row }: FetchBoardDetailCommentPayload) {
+export function fetchBoardDetailComments({
+	id,
+	boardDataNo,
+	categoryId,
+	row
+}: FetchBoardDetailCommentPayload) {
 	const config: AxiosRequestConfig = {
 		url: `/board/${categoryId}/comment`,
 		params: {
-			orderType: 'collect-new',
-			boardDataNo: id,
+			orderType: getOrderTypeByCategoryId(categoryId),
+			boardDataNo: getBoardDataNoByCategoryId(id, boardDataNo, categoryId),
 			row
 		}
 	};
@@ -33,7 +41,7 @@ export function postBoardDetailRecommend({ id, categoryId, recommendType }: any)
 		url: `/storage/${categoryId}/${id}/recommend`,
 		method: 'post',
 		params: {
-			orderType: 'collect-new',
+			orderType: getOrderTypeByCategoryId(categoryId),
 			recommendType
 		}
 	};

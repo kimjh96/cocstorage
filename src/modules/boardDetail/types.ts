@@ -33,7 +33,8 @@ export type FetchBoardDetailPayload = {
 };
 
 export type FetchBoardDetailCommentPayload = {
-	id: number;
+	id?: number;
+	boardDataNo?: number;
 	categoryId: string | string[];
 	row: number;
 };

@@ -4,11 +4,14 @@ import axios from '.';
 // Modules
 import { FetchBoardPayload } from '../modules/board';
 
+// Snippets
+import { getOrderTypeByCategoryId } from '../snippet/boardDetail';
+
 export function fetchBoards({ categoryId, page }: FetchBoardPayload) {
 	const config: AxiosRequestConfig = {
 		url: `/board/${categoryId}`,
 		params: {
-			orderType: 'collect-new',
+			orderType: getOrderTypeByCategoryId(categoryId),
 			page
 		}
 	};
@@ -24,7 +27,7 @@ export function fetchSearchBoards({
 	const config: AxiosRequestConfig = {
 		url: `/board/${categoryId}`,
 		params: {
-			orderType: 'collect-new',
+			orderType: getOrderTypeByCategoryId(categoryId),
 			searchType: searchState?.type,
 			searchValue: searchState?.value,
 			page
