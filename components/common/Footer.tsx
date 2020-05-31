@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		rightBox: {
 			textAlign: 'right',
-			[theme.breakpoints.down('md')]: {
+			[theme.breakpoints.down('xs')]: {
 				paddingTop: theme.spacing(1)
 			}
 		}

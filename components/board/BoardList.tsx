@@ -33,6 +33,9 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import SearchIcon from '@material-ui/icons/Search';
 
+// Components
+import GoogleAdSense from '../common/GoogleAdSense';
+
 // Custom Hooks
 import useBoard from '../../hooks/useBoard';
 
@@ -74,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			}
 		},
 		gridItem: {
-			padding: theme.spacing(3, 0)
+			padding: theme.spacing(3, 0, 0, 0)
 		},
 		gridItemBoardInfo: {
 			'& > a': {
@@ -111,7 +114,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		gridBox: {
 			display: 'flex',
-			justifyContent: 'flex-end'
+			justifyContent: 'center'
 		},
 		commentCountBox: {
 			color: theme.palette.grey.A200
@@ -153,7 +156,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderRadius: theme.shape.borderRadius,
 			backgroundColor: fade(theme.palette.primary.main, 0.7),
 			'&:hover': {
-				backgroundColor: fade(theme.palette.primary.main, 0.5)
+				backgroundColor: fade(theme.palette.primary.main, 1)
 			},
 			marginLeft: theme.spacing(1),
 			width: '100%',
@@ -176,10 +179,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			backgroundColor: fade(theme.palette.primary.main, 0.7),
 			color: 'white',
 			'&:hover': {
-				backgroundColor: fade(theme.palette.primary.main, 0.5)
+				backgroundColor: fade(theme.palette.primary.main, 1)
 			}
 		},
 		inputRoot: {
+			width: '100%',
 			color: 'inherit'
 		},
 		inputInput: {
@@ -188,9 +192,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			transition: theme.transitions.create('width'),
 			width: '100%',
 			[theme.breakpoints.up('sm')]: {
-				width: '12ch',
+				width: '20ch',
 				'&:focus': {
-					width: '20ch'
+					width: '28ch'
 				}
 			}
 		},
@@ -228,14 +232,16 @@ function BoardList() {
 		boardList,
 		pagination,
 		pending,
-		onHandlePagination,
+		count,
 		searchState,
 		dialogState,
 		dummyBoardArray,
 		onHandleSearchTypeSelect,
 		onHandleSearchValueInput,
 		onHandleSearchValueInputKey,
-		onHandleDialog
+		onHandleDialog,
+		onHandlePagination,
+		onHandleBoardClickCount
 	} = useBoard();
 
 	return (
@@ -276,6 +282,16 @@ function BoardList() {
 								</Grid>
 							</Grid>
 						))}
+						{isMobile && (
+							<Box display={'flex'}>
+								<Box width={40}>
+									<Skeleton height={40} animation={'wave'} />
+								</Box>
+								<Box flexGrow={1} ml={1}>
+									<Skeleton height={40} animation={'wave'} />
+								</Box>
+							</Box>
+						)}
 						<Box display={'flex'} justifyContent={'center'} p={2} pt={0}>
 							<Box ml={1}>
 								<Skeleton width={30} height={40} animation={'wave'} />
@@ -299,50 +315,123 @@ function BoardList() {
 				<>
 					<Grow in>
 						<Box>
-							{boardList.map((item: Board) => (
-								<Grid key={`board-${item.id}`} container alignItems={'center'}>
-									<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
-										<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
-											<a>
-												<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
+							{boardList.map((item: Board, index) => {
+								if ((index) === 5 && isMobile) {
+									return (
+										<Box key={`board-${item.id}`}>
+											<Grid container alignItems={'center'}>
+												<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
+													<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
+														<a>
+															<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
+																<Typography noWrap variant={'subtitle2'}>
+																	{item.subject}
+																</Typography>
+																<Typography variant={'subtitle2'}>
+																	{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
+																</Typography>
+																<Typography variant={'subtitle2'}>
+																	<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
+																</Typography>
+															</Box>
+														</a>
+													</Link>
+												</Grid>
+												<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
+													<Box className={classes.gridItemWriterInfoBox}>
+														<Box className={classes.nickname}>
+															<Typography noWrap variant={'subtitle2'}>
+																{item.nickname}
+															</Typography>
+														</Box>
+														<Box className={classes.registerDate}>
+															{getRegisterDate(item.register_date)}
+														</Box>
+														<Box className={classes.thumbs}>
+															<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
+														</Box>
+														<Box className={classes.view}>
+															<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
+														</Box>
+													</Box>
+												</Grid>
+											</Grid>
+											<Grid key={`board-ad-${item.id}`} container alignItems={'center'}>
+												<Box width={'100%'} pt={0.7} textAlign={'center'}>
+													<GoogleAdSense
+														html={'<ins class="adsbygoogle"'
+														+ 'style="display:inline-block;width:320px;height:250px"'
+														+ 'data-ad-client="ca-pub-5809905264951057"'
+														+ 'data-ad-slot="2449792225"></ins>'}
+													/>
+												</Box>
+											</Grid>
+										</Box>
+									);
+								}
+								return (
+									<Grid key={`board-${item.id}`} container alignItems={'center'} onClick={onHandleBoardClickCount}>
+										<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
+											{count >= 7 ? (
+												<Link href={`/board/${categoryId}/${item.id}`}>
+													<a>
+														<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
+															<Typography noWrap variant={'subtitle2'}>
+																{item.subject}
+															</Typography>
+															<Typography variant={'subtitle2'}>
+																{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
+															</Typography>
+															<Typography variant={'subtitle2'}>
+																<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
+															</Typography>
+														</Box>
+													</a>
+												</Link>
+											) : (
+												<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
+													<a>
+														<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
+															<Typography noWrap variant={'subtitle2'}>
+																{item.subject}
+															</Typography>
+															<Typography variant={'subtitle2'}>
+																{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
+															</Typography>
+															<Typography variant={'subtitle2'}>
+																<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
+															</Typography>
+														</Box>
+													</a>
+												</Link>
+											)}
+										</Grid>
+										<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
+											<Box className={classes.gridItemWriterInfoBox}>
+												<Box className={classes.nickname}>
 													<Typography noWrap variant={'subtitle2'}>
-														{item.subject}
-													</Typography>
-													<Typography variant={'subtitle2'}>
-														{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
-													</Typography>
-													<Typography variant={'subtitle2'}>
-														<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
+														{item.nickname}
 													</Typography>
 												</Box>
-											</a>
-										</Link>
+												<Box className={classes.registerDate}>
+													{getRegisterDate(item.register_date)}
+												</Box>
+												<Box className={classes.thumbs}>
+													<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
+												</Box>
+												<Box className={classes.view}>
+													<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
+												</Box>
+											</Box>
+										</Grid>
 									</Grid>
-									<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-										<Box className={classes.gridItemWriterInfoBox}>
-											<Box className={classes.nickname}>
-												<Typography noWrap variant={'subtitle2'}>
-													{item.nickname}
-												</Typography>
-											</Box>
-											<Box className={classes.registerDate}>
-												{getRegisterDate(item.register_date)}
-											</Box>
-											<Box className={classes.thumbs}>
-												<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
-											</Box>
-											<Box className={classes.view}>
-												<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
-											</Box>
-										</Box>
-									</Grid>
-								</Grid>
-							))}
+								);
+							})}
 						</Box>
 					</Grow>
-					<Hidden xsUp>
+					<Hidden lgUp>
 						<Box>
-							<Grid container justify={'center'}>
+							<Grid container>
 								<Grid className={classes.gridItem} item xs={12}>
 									<Box className={classes.gridBox}>
 										<Box>
@@ -386,7 +475,7 @@ function BoardList() {
 					/>
 				</>
 			)}
-			<Hidden xsUp>
+			<Hidden lgUp>
 				<Dialog disableBackdropClick disableEscapeKeyDown open={dialogState} onClose={onHandleDialog}>
 					<DialogTitle>{'검색 조건'}</DialogTitle>
 					<DialogContent>

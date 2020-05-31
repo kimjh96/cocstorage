@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-	createStyles, fade, makeStyles, Theme, useTheme
-} from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
 
@@ -9,6 +7,7 @@ import Head from 'next/head';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Hidden from '@material-ui/core/Hidden';
 
 // Modules
 import { fetchBoards } from '../../../src/modules/board';
@@ -16,7 +15,7 @@ import { fetchBoards } from '../../../src/modules/board';
 // Components
 import BackgroundSearch from '../../../components/board/BackgroundSearch';
 import BoardList from '../../../components/board/BoardList';
-import GoogleAD from '../../../components/common/GoogleAD';
+import GoogleAdSense from '../../../components/common/GoogleAdSense';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
@@ -27,8 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			backgroundColor: 'white'
 		},
 		box: {
-			margin: theme.spacing(1, 0, 0, 1),
-			border: `1px solid ${theme.palette.grey.A100}`
+			margin: theme.spacing(1, 0, 0, 1)
 		}
 	})
 );
@@ -64,17 +62,28 @@ function Board({ query }: NextPageContext) {
 				<link rel={'apple-touch-icon'} href={''} />
 				<link rel={'canonical'} href={''} />
 				<link rel={'manifest'} href={''} />
+				<script async src={'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'} />
 			</Head>
 			<BackgroundSearch />
 			<Container className={classes.root}>
 				<Grid container>
-					<Grid item xs={12} md={9}>
+					<Grid item xs={12} lg={9}>
 						<BoardList />
 					</Grid>
-					<Grid item xs={12} md={3}>
-						<Box className={classes.box}>
-							<GoogleAD />
-						</Box>
+					<Grid item xs={12} lg={3}>
+						<Hidden mdDown>
+							<Box className={classes.box}>
+								<GoogleAdSense
+									html={'<ins class="adsbygoogle"'
+									+ 'style="display:block"'
+									+ 'data-ad-client="ca-pub-5809905264951057"'
+									+ 'data-ad-slot="3880285784"'
+									+ 'data-ad-format="auto"'
+									+ 'data-full-width-responsive="true">'
+									+ '</ins>'}
+								/>
+							</Box>
+						</Hidden>
 					</Grid>
 				</Grid>
 			</Container>

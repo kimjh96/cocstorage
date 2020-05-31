@@ -59,6 +59,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			fontWeight: 700,
 			[theme.breakpoints.down('md')]: {
 				fontSize: 22
+			},
+			[theme.breakpoints.down('xs')]: {
+				fontSize: 20
 			}
 		},
 		icon: {

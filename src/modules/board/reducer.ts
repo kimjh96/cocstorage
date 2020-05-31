@@ -4,7 +4,8 @@ import {
 	FETCH_BOARDS_SUCCEEDED,
 	FETCH_BOARDS_FAILED,
 	HANDLE_BOARDS_SEARCH_STATE,
-	CLEAR_BOARDS_SEARCH_STATE
+	CLEAR_BOARDS_SEARCH_STATE,
+	HANDLE_BOARDS_CLICK_COUNT_STATE
 } from './actions';
 import { BoardAction, BoardState } from './types';
 
@@ -32,7 +33,8 @@ const initialState: BoardState = {
 	},
 	pending: true,
 	error: false,
-	errorMessage: null
+	errorMessage: null,
+	count: 0
 };
 
 const board = createReducer<BoardState, BoardAction>(initialState, {
@@ -62,6 +64,10 @@ const board = createReducer<BoardState, BoardAction>(initialState, {
 			type: 'all',
 			value: ''
 		}
+	}),
+	[HANDLE_BOARDS_CLICK_COUNT_STATE]: (state) => ({
+		...state,
+		count: state.count + 1
 	})
 });
 

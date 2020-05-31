@@ -4,7 +4,8 @@ import {
 	fetchBoardsSucceeded,
 	fetchBoardsFailed,
 	handleBoardsSearchState,
-	clearBoardsSearchState
+	clearBoardsSearchState,
+	handleBoardClickCountState
 } from './actions';
 import { Board } from '../boardDetail';
 
@@ -13,7 +14,8 @@ const actions = {
 	fetchBoardsSucceeded,
 	fetchBoardsFailed,
 	handleBoardsSearchState,
-	clearBoardsSearchState
+	clearBoardsSearchState,
+	handleBoardClickCountState
 };
 
 export type BoardAction = ActionType<typeof actions>;
@@ -53,4 +55,5 @@ export type BoardState = {
 	pending: boolean;
 	error: boolean;
 	errorMessage: string | null;
+	count: number;
 };

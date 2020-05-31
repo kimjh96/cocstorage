@@ -16,6 +16,15 @@ export default class CustomDocument extends Document {
 					<meta name={'viewport'} content={'minimum-scale=1, initial-scale=1, width=device-width'} />
 				</Head>
 				<body style={{ backgroundColor: theme.palette.background.default }}>
+					<script async src={'https://www.googletagmanager.com/gtag/js?id=UA-147959622-1'} />
+					<script
+						dangerouslySetInnerHTML={{
+							__html: 'window.dataLayer = window.dataLayer || [];'
+								+ 'function gtag(){dataLayer.push(arguments);}'
+								+ 'gtag(\'js\', new Date());'
+								+ 'gtag(\'config\', \'UA-147959622-1\');'
+						}}
+					/>
 					<Main />
 					<NextScript />
 				</body>

@@ -212,7 +212,9 @@ function MobileHeader() {
 				id: categoryId
 			}
 		}, `/board/${categoryId}`).then();
-	}, [router]);
+
+		setMenuListState(!menuListState);
+	}, [router, menuListState]);
 
 	return (
 		<>

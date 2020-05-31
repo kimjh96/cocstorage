@@ -28,6 +28,7 @@ import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 
 // Custom Hooks
 import useBoardDetail from '../../hooks/useBoardDetail';
+import GoogleAdSense from '../common/GoogleAdSense';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -246,6 +247,16 @@ function BoardDetail() {
 							<Button startIcon={<ThumbDownAltSharpIcon />} disabled>
 								{Number(data.down).toLocaleString()}
 							</Button>
+						</Box>
+						<Box mt={1} mb={1}>
+							<GoogleAdSense
+								html={'<ins class="adsbygoogle"'
+								+ 'style="display:block"'
+								+ 'data-ad-client="ca-pub-5809905264951057"'
+								+ 'data-ad-slot="3990104603"'
+								+ 'data-ad-format="auto"'
+								+ 'data-full-width-responsive="true"></ins>'}
+							/>
 						</Box>
 						<Box className={classes.contentBox}>
 							<RootRef rootRef={contentRef}>

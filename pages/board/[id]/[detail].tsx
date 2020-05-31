@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
@@ -7,16 +6,14 @@ import Head from 'next/head';
 // Material UI
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 
 // Modules
 import { fetchBoardDetail } from '../../../src/modules/boardDetail';
-import { RootState } from '../../../src/modules';
 
 // Components
 import BoardDetail from '../../../components/boardDetail/BoardDetail';
-import Comment from '../../../components/boardDetail/Comment';
 import SideBox from '../../../components/boardDetail/SideBox';
+import Comment from '../../../components/boardDetail/Comment';
 
 // Custom Hooks
 import useBoardDetail from '../../../hooks/useBoardDetail';
@@ -30,26 +27,12 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.down('md')]: {
 				padding: 0
 			}
-		},
-		adBox: {
-			border: '1px solid',
-			margin: theme.spacing(1, 0, 0, 1),
-			[theme.breakpoints.down('md')]: {
-				margin: 0
-			}
-		},
-		otherBox: {
-			border: '1px solid',
-			margin: theme.spacing(1, 0, 0, 1),
-			[theme.breakpoints.down('md')]: {
-				margin: 0
-			}
 		}
 	})
 );
 
 function getMetaTagTitle(data: any, id: any) {
-	return data ? `${data.subject} : ${getCategoryNameByCategoryId(id)} 저장소` : `${getCategoryNameByCategoryId(id)} 저장소`;
+	return data.subject ? `${data.subject} : ${getCategoryNameByCategoryId(id)} 저장소` : `${getCategoryNameByCategoryId(id)} 저장소`;
 }
 
 function Detail({ query }: NextPageContext) {
@@ -84,6 +67,7 @@ function Detail({ query }: NextPageContext) {
 				<link rel={'apple-touch-icon'} href={''} />
 				<link rel={'canonical'} href={''} />
 				<link rel={'manifest'} href={''} />
+				<script async src={'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'} />
 			</Head>
 			<Container className={classes.root}>
 				<Grid container>

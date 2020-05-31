@@ -15,7 +15,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import LinkIcon from '@material-ui/icons/Link';
 
 // Components
-import GoogleAD from '../common/GoogleAD';
+import GoogleAdSense from '../common/GoogleAdSense';
 
 // Custom Hooks
 import useBoardDetail from '../../hooks/useBoardDetail';
@@ -26,6 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
 			margin: theme.spacing(1, 0, 0, 1),
 			border: `1px solid ${theme.palette.grey.A100}`,
 			backgroundColor: 'white',
+			[theme.breakpoints.down('md')]: {
+				margin: 0
+			}
+		},
+		adBox: {
+			margin: theme.spacing(1, 0, 0, 1),
 			[theme.breakpoints.down('md')]: {
 				margin: 0
 			}
@@ -73,8 +79,15 @@ function SideBox() {
 						</ListItem>
 					</List>
 				</Box>
-				<Box className={classes.box}>
-					<GoogleAD />
+				<Box className={classes.adBox}>
+					<GoogleAdSense
+						html={'<ins class="adsbygoogle"'
+						+ 'style="display:block"'
+						+ 'data-ad-client="ca-pub-5809905264951057"'
+						+ 'data-ad-slot="7258431621"'
+						+ 'data-ad-format="auto"'
+						+ 'data-full-width-responsive="true"></ins>'}
+					/>
 				</Box>
 			</Box>
 		</Box>
