@@ -5,6 +5,6 @@ module.exports = withImages({
 		return config;
 	},
 	env: {
-		API_BASE_URL: 'https://www.cocstorage.com/api'
+		API_BASE_URL: 'https://api.cocstorage.com/api'
 	}
 });
