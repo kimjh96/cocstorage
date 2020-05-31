@@ -30,9 +30,6 @@ import useHome from '../../hooks/useHome';
 // Modules
 import { Board } from '../../src/modules/boardDetail';
 
-// Image
-import Image from '../../public/test.jpg';
-
 moment.locale('ko');
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,8 +57,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			}
 		},
 		containerPaper: {
+			borderColor: theme.palette.grey.A100,
 			[theme.breakpoints.down('md')]: {
-				boxShadow: 'none'
+				border: 'none'
 			}
 		},
 		gridItem: {
@@ -189,7 +187,7 @@ function NewBoard() {
 				</Typography>
 			</Container>
 			<Container className={classes.container}>
-				<Paper className={classes.containerPaper} square>
+				<Paper className={classes.containerPaper} square variant={'outlined'}>
 					{pending ? (
 						<Grid container>
 							{dummyBoardArray.map((index) => (

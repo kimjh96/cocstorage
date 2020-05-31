@@ -5,14 +5,14 @@ import { NextPageContext } from 'next';
 import { fetchMainContents } from '../src/modules/home';
 
 // Components
-import DailyPopularPost from '../components/index/DailyPopularBoard';
-import NewPost from '../components/index/NewBoard';
+import DailyPopularBoard from '../components/index/DailyPopularBoard';
+import NewBoard from '../components/index/NewBoard';
 
 function Index() {
 	return (
 		<>
-			<DailyPopularPost />
-			<NewPost />
+			<DailyPopularBoard />
+			<NewBoard />
 		</>
 	);
 }

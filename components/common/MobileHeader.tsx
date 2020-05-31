@@ -133,7 +133,7 @@ function getCategoryIconByCategoryId(categoryId: string | string[]) {
 	return categoryIcon;
 }
 
-function MobileHeader(): JSX.Element {
+function MobileHeader() {
 	const classes = useStyles();
 	const router = useRouter();
 	const { route, query: { id } } = router;

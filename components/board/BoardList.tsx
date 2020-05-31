@@ -10,7 +10,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -47,9 +46,6 @@ moment.locale('ko');
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		root: {
-			backgroundColor: 'white'
-		},
 		container: {
 			display: 'flex',
 			height: '100%',
@@ -243,160 +239,153 @@ function BoardList() {
 	} = useBoard();
 
 	return (
-		<Container className={classes.root}>
-			<Grid container>
-				{pending ? (
-					<Grow in>
-						<Grid item xs={12} md={9}>
-							{dummyBoardArray.map((index) => (
-								<Grid key={`dummy-board-${index}`} container alignItems={'center'}>
-									<Grid item xs={12} md={7}>
-										<Box display={'flex'} alignItems={'center'} pb={0.5}>
-											<Box flexGrow={1}>
-												<Skeleton height={35} animation={'wave'} />
-											</Box>
-											<Box minWidth={20} ml={1}>
-												<Skeleton height={35} animation={'wave'} />
-											</Box>
-											<Box minWidth={20} ml={1}>
-												<Skeleton height={35} animation={'wave'} />
-											</Box>
+		<>
+			{pending ? (
+				<Grow in>
+					<Box>
+						{dummyBoardArray.map((index) => (
+							<Grid key={`dummy-board-${index}`} container alignItems={'center'}>
+								<Grid item xs={12} md={7}>
+									<Box display={'flex'} alignItems={'center'} pb={0.5}>
+										<Box flexGrow={1}>
+											<Skeleton height={35} animation={'wave'} />
 										</Box>
+										<Box minWidth={20} ml={1}>
+											<Skeleton height={35} animation={'wave'} />
+										</Box>
+										<Box minWidth={20} ml={1}>
+											<Skeleton height={35} animation={'wave'} />
+										</Box>
+									</Box>
+								</Grid>
+								<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
+									<Box className={classes.gridItemWriterInfoBoxSkeleton}>
+										<Box flexGrow={1} ml={1}>
+											<Skeleton height={35} animation={'wave'} />
+										</Box>
+										<Box flexGrow={1} ml={1}>
+											<Skeleton height={35} animation={'wave'} />
+										</Box>
+										<Box flexGrow={1} ml={1}>
+											<Skeleton height={35} animation={'wave'} />
+										</Box>
+										<Box flexGrow={1} ml={1}>
+											<Skeleton height={35} animation={'wave'} />
+										</Box>
+									</Box>
+								</Grid>
+							</Grid>
+						))}
+						<Box display={'flex'} justifyContent={'center'} p={2} pt={0}>
+							<Box ml={1}>
+								<Skeleton width={30} height={40} animation={'wave'} />
+							</Box>
+							<Box ml={1}>
+								<Skeleton width={30} height={40} animation={'wave'} />
+							</Box>
+							<Box ml={1}>
+								<Skeleton width={30} height={40} animation={'wave'} />
+							</Box>
+							<Box ml={1}>
+								<Skeleton width={30} height={40} animation={'wave'} />
+							</Box>
+							<Box ml={1}>
+								<Skeleton width={30} height={40} animation={'wave'} />
+							</Box>
+						</Box>
+					</Box>
+				</Grow>
+			) : (
+				<>
+					<Grow in>
+						<Box>
+							{boardList.map((item: Board) => (
+								<Grid key={`board-${item.id}`} container alignItems={'center'}>
+									<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
+										<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
+											<a>
+												<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
+													<Typography noWrap variant={'subtitle2'}>
+														{item.subject}
+													</Typography>
+													<Typography variant={'subtitle2'}>
+														{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
+													</Typography>
+													<Typography variant={'subtitle2'}>
+														<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
+													</Typography>
+												</Box>
+											</a>
+										</Link>
 									</Grid>
 									<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-										<Box className={classes.gridItemWriterInfoBoxSkeleton}>
-											<Box flexGrow={1} ml={1}>
-												<Skeleton height={35} animation={'wave'} />
+										<Box className={classes.gridItemWriterInfoBox}>
+											<Box className={classes.nickname}>
+												<Typography noWrap variant={'subtitle2'}>
+													{item.nickname}
+												</Typography>
 											</Box>
-											<Box flexGrow={1} ml={1}>
-												<Skeleton height={35} animation={'wave'} />
+											<Box className={classes.registerDate}>
+												{getRegisterDate(item.register_date)}
 											</Box>
-											<Box flexGrow={1} ml={1}>
-												<Skeleton height={35} animation={'wave'} />
+											<Box className={classes.thumbs}>
+												<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
 											</Box>
-											<Box flexGrow={1} ml={1}>
-												<Skeleton height={35} animation={'wave'} />
+											<Box className={classes.view}>
+												<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
 											</Box>
 										</Box>
 									</Grid>
 								</Grid>
 							))}
-							<Box display={'flex'} justifyContent={'center'} p={2} pt={0}>
-								<Box ml={1}>
-									<Skeleton width={30} height={40} animation={'wave'} />
-								</Box>
-								<Box ml={1}>
-									<Skeleton width={30} height={40} animation={'wave'} />
-								</Box>
-								<Box ml={1}>
-									<Skeleton width={30} height={40} animation={'wave'} />
-								</Box>
-								<Box ml={1}>
-									<Skeleton width={30} height={40} animation={'wave'} />
-								</Box>
-								<Box ml={1}>
-									<Skeleton width={30} height={40} animation={'wave'} />
-								</Box>
-							</Box>
-						</Grid>
+						</Box>
 					</Grow>
-				) : (
-					<Grid item xs={12} md={9}>
-						<Grow in>
-							<Box>
-								{boardList.map((item: Board) => (
-									<Grid key={`board-${item.id}`} container alignItems={'center'}>
-										<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
-											<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
-												<a>
-													<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
-														<Typography noWrap variant={'subtitle2'}>
-															{item.subject}
-														</Typography>
-														<Typography variant={'subtitle2'}>
-															{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
-														</Typography>
-														<Typography variant={'subtitle2'}>
-															<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
-														</Typography>
-													</Box>
-												</a>
-											</Link>
-										</Grid>
-										<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-											<Box className={classes.gridItemWriterInfoBox}>
-												<Box className={classes.nickname}>
-													<Typography noWrap variant={'subtitle2'}>
-														{item.nickname}
-													</Typography>
-												</Box>
-												<Box className={classes.registerDate}>
-													{getRegisterDate(item.register_date)}
-												</Box>
-												<Box className={classes.thumbs}>
-													<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
-												</Box>
-												<Box className={classes.view}>
-													<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
-												</Box>
-											</Box>
-										</Grid>
-									</Grid>
-								))}
-							</Box>
-						</Grow>
-						<Hidden xsUp>
-							<Box>
-								<Grid container justify={'center'}>
-									<Grid className={classes.gridItem} item xs={12}>
-										<Box className={classes.gridBox}>
-											<Box>
-												<Button
-													className={classes.searchButton}
-													color={'inherit'}
-													onClick={onHandleDialog}
-												>
-													{getSearchTypeLabelByType(searchState.type)}
-												</Button>
-											</Box>
-											<Box className={classes.search}>
-												<Box className={classes.searchIcon}>
-													<SearchIcon />
-												</Box>
-												<InputBase
-													classes={{
-														root: classes.inputRoot,
-														input: classes.inputInput
-													}}
-													onChange={onHandleSearchValueInput}
-													onKeyUp={onHandleSearchValueInputKey}
-													value={searchState.value}
-													placeholder={'검색'}
-												/>
-											</Box>
+					<Hidden xsUp>
+						<Box>
+							<Grid container justify={'center'}>
+								<Grid className={classes.gridItem} item xs={12}>
+									<Box className={classes.gridBox}>
+										<Box>
+											<Button
+												className={classes.searchButton}
+												color={'inherit'}
+												onClick={onHandleDialog}
+											>
+												{getSearchTypeLabelByType(searchState.type)}
+											</Button>
 										</Box>
-									</Grid>
+										<Box className={classes.search}>
+											<Box className={classes.searchIcon}>
+												<SearchIcon />
+											</Box>
+											<InputBase
+												classes={{
+													root: classes.inputRoot,
+													input: classes.inputInput
+												}}
+												onChange={onHandleSearchValueInput}
+												onKeyUp={onHandleSearchValueInputKey}
+												value={searchState.value}
+												placeholder={'검색'}
+											/>
+										</Box>
+									</Box>
 								</Grid>
-							</Box>
-						</Hidden>
-						<Pagination
-							className={classes.pagination}
-							page={pagination.page}
-							count={pagination.pageCount}
-							color={'primary'}
-							shape={'rounded'}
-							onChange={onHandlePagination}
-							size={isMobile ? 'small' : 'medium'}
-							siblingCount={isMobile ? 0 : 2}
-						/>
-					</Grid>
-				)}
-				<Grid item xs={12} md={3}>
-					<Box mt={1} ml={1} border={1}>
-						{'AD'}
-					</Box>
-				</Grid>
-			</Grid>
+							</Grid>
+						</Box>
+					</Hidden>
+					<Pagination
+						className={classes.pagination}
+						page={pagination.page}
+						count={pagination.pageCount}
+						color={'primary'}
+						shape={'rounded'}
+						onChange={onHandlePagination}
+						size={isMobile ? 'small' : 'medium'}
+						siblingCount={isMobile ? 0 : 2}
+					/>
+				</>
+			)}
 			<Hidden xsUp>
 				<Dialog disableBackdropClick disableEscapeKeyDown open={dialogState} onClose={onHandleDialog}>
 					<DialogTitle>{'검색 조건'}</DialogTitle>
@@ -425,7 +414,7 @@ function BoardList() {
 					</DialogActions>
 				</Dialog>
 			</Hidden>
-		</Container>
+		</>
 	);
 }
 

@@ -11,11 +11,15 @@ import Box from '@material-ui/core/Box';
 
 // Modules
 import { fetchBoardDetail } from '../../../src/modules/boardDetail';
+import { RootState } from '../../../src/modules';
 
 // Components
 import BoardDetail from '../../../components/boardDetail/BoardDetail';
 import Comment from '../../../components/boardDetail/Comment';
-import { RootState } from '../../../src/modules';
+import SideBox from '../../../components/boardDetail/SideBox';
+
+// Custom Hooks
+import useBoardDetail from '../../../hooks/useBoardDetail';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
@@ -33,6 +37,13 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.down('md')]: {
 				margin: 0
 			}
+		},
+		otherBox: {
+			border: '1px solid',
+			margin: theme.spacing(1, 0, 0, 1),
+			[theme.breakpoints.down('md')]: {
+				margin: 0
+			}
 		}
 	})
 );
@@ -43,7 +54,7 @@ function getMetaTagTitle(data: any, id: any) {
 
 function Detail({ query }: NextPageContext) {
 	const classes = useStyles();
-	const { board: { data } } = useSelector((state: RootState) => state.boardDetail);
+	const { board: { data } } = useBoardDetail();
 
 	return (
 		<>
@@ -81,13 +92,7 @@ function Detail({ query }: NextPageContext) {
 						<Comment />
 					</Grid>
 					<Grid item xs={12} md={3}>
-						<Box position={'relative'}>
-							<Box width={'100%'} maxWidth={308} position={'fixed'}>
-								<Box className={classes.adBox}>
-									{'AD'}
-								</Box>
-							</Box>
-						</Box>
+						<SideBox />
 					</Grid>
 				</Grid>
 			</Container>

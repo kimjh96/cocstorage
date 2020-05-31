@@ -1,6 +1,14 @@
 import React from 'react';
+import {
+	createStyles, fade, makeStyles, Theme, useTheme
+} from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
+
+// Material UI
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 // Modules
 import { fetchBoards } from '../../../src/modules/board';
@@ -8,11 +16,26 @@ import { fetchBoards } from '../../../src/modules/board';
 // Components
 import BackgroundSearch from '../../../components/board/BackgroundSearch';
 import BoardList from '../../../components/board/BoardList';
+import GoogleAD from '../../../components/common/GoogleAD';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
 
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			backgroundColor: 'white'
+		},
+		box: {
+			margin: theme.spacing(1, 0, 0, 1),
+			border: `1px solid ${theme.palette.grey.A100}`
+		}
+	})
+);
+
 function Board({ query }: NextPageContext) {
+	const classes = useStyles();
+
 	return (
 		<>
 			<Head>
@@ -43,7 +66,18 @@ function Board({ query }: NextPageContext) {
 				<link rel={'manifest'} href={''} />
 			</Head>
 			<BackgroundSearch />
-			<BoardList />
+			<Container className={classes.root}>
+				<Grid container>
+					<Grid item xs={12} md={9}>
+						<BoardList />
+					</Grid>
+					<Grid item xs={12} md={3}>
+						<Box className={classes.box}>
+							<GoogleAD />
+						</Box>
+					</Grid>
+				</Grid>
+			</Container>
 		</>
 	);
 }
