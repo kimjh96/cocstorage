@@ -37,6 +37,9 @@ function Board({ query }: NextPageContext) {
 	return (
 		<>
 			<Head>
+				<meta charSet={'utf-8'} />
+				<meta httpEquiv={'content-language'} content={'ko'} />
+				<meta httpEquiv={'X-UA-Compatible'} content={'IE=edge'} />
 				<meta name={'author'} content={'개념글 저장소'} />
 				<meta name={'title'} content={`${getCategoryNameByCategoryId(query.id)} : 개념글 저장소`} />
 				<meta name={'description'} content={`${getCategoryNameByCategoryId(query.id)} 인기 게시글들을 한 눈에 확인해보세요!`} />
@@ -52,9 +55,13 @@ function Board({ query }: NextPageContext) {
 				<meta property={'twitter:image'} content={'https://www.cocstorage.com/logo.png'} />
 				<meta property={'twitter:url'} content={`https://www.cocstorage.com/board/${query.id}`} />
 				<meta property={'twitter:card'} content={'summary'} />
+				<meta name={'theme-color'} content={'#2F436E'} />
 				<meta name={'apple-mobile-web-app-title'} content={`${getCategoryNameByCategoryId(query.id)} : 개념글 저장소`} />
 				<title>{`${getCategoryNameByCategoryId(query.id)} : 개념글 저장소`}</title>
 				<link rel={'canonical'} href={`https://www.cocstorage.com/board/${query.id}`} />
+				<link rel={'shortcut icon'} href={'/favicon.ico'} />
+				<link rel={'apple-touch-icon'} href={'/logo_prev.png'} />
+				<link rel={'manifest'} href={'/manifest.json'} />
 				<script async src={'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'} />
 			</Head>
 			<BackgroundSearch />
