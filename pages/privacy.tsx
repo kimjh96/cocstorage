@@ -186,7 +186,7 @@ function Privacy() {
 						<Box>
 							<Box>{'개념글 저장소는 회원의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 개인정보 보호책임자를 지정하고 있습니다.'}</Box>
 							<Box mt={1} ml={2}>{'- 직위: 관리자'}</Box>
-							<Box mt={1} ml={2}>{'- 이메일: apshelp200@gmail.com'}</Box>
+							<Box mt={1} ml={2}>{'- 이메일: cocstoragehelp@gmail.com'}</Box>
 							<Box mt={1}>{'기타 개인정보침해에 대한 신고나 상담이 필요한 경우에는 아래 기관에 문의하시기 바랍니다.'}</Box>
 							<Box mt={1} ml={2}>{'- 개인정보침해신고센터 (국번없이 118 / '}<a href={'https://privacy.kisa.or.kr'}>{'https://privacy.kisa.or.kr'}</a></Box>
 							<Box mt={1} ml={2}>{'- 대검찰청 사이버수사과 (국번없이 1301 / '}<a href={'https://www.spo.go.kr'}>{'https://www.spo.go.kr'}</a></Box>
