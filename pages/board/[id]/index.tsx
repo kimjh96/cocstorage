@@ -17,6 +17,9 @@ import BackgroundSearch from '../../../components/board/BackgroundSearch';
 import BoardList from '../../../components/board/BoardList';
 import GoogleAdSense from '../../../components/common/GoogleAdSense';
 
+// Custom Hooks
+import useBoard from '../../../hooks/useBoard';
+
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
 
@@ -33,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Board({ query }: NextPageContext) {
 	const classes = useStyles();
+	const { pending } = useBoard();
 
 	return (
 		<>
@@ -72,17 +76,19 @@ function Board({ query }: NextPageContext) {
 					</Grid>
 					<Grid item xs={12} lg={3}>
 						<Hidden mdDown>
-							<Box className={classes.box}>
-								<GoogleAdSense
-									html={'<ins class="adsbygoogle"'
-									+ 'style="display:block"'
-									+ 'data-ad-client="ca-pub-5809905264951057"'
-									+ 'data-ad-slot="3880285784"'
-									+ 'data-ad-format="auto"'
-									+ 'data-full-width-responsive="true">'
-									+ '</ins>'}
-								/>
-							</Box>
+							{!pending && (
+								<Box className={classes.box}>
+									<GoogleAdSense
+										html={'<ins class="adsbygoogle"'
+										+ 'style="display:block"'
+										+ 'data-ad-client="ca-pub-5809905264951057"'
+										+ 'data-ad-slot="3880285784"'
+										+ 'data-ad-format="auto"'
+										+ 'data-full-width-responsive="true">'
+										+ '</ins>'}
+									/>
+								</Box>
+							)}
 						</Hidden>
 					</Grid>
 				</Grid>
