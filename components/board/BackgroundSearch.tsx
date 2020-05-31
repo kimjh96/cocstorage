@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import {
 	createStyles, fade, makeStyles, Theme
 } from '@material-ui/core/styles';
@@ -174,70 +174,68 @@ function BackgroundSearch() {
 	} = useBoard();
 
 	return (
-		<>
-			<Box className={classes.root}>
-				<Container className={classes.container}>
-					<Grid container justify={'space-between'}>
-						<Grid className={classes.gridItem} item xs={6}>
-							<Typography className={classes.typography} variant={'h5'} component={'h5'}>
-								{getCategoryIconByCategoryId(categoryId)}
-								<Box component={'span'} ml={1}>{getCategoryNameByCategoryId(categoryId)}</Box>
-							</Typography>
-						</Grid>
-						<Grid className={classes.gridItem} item xs={6}>
-							<Hidden mdDown>
-								<Box className={classes.gridBox}>
-									<Box>
-										<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>{getSearchTypeLabelByType(searchState.type)}</Button>
-									</Box>
-									<Box className={classes.search}>
-										<Box className={classes.searchIcon}>
-											<SearchIcon />
-										</Box>
-										<InputBase
-											classes={{
-												root: classes.inputRoot,
-												input: classes.inputInput
-											}}
-											onChange={onHandleSearchValueInput}
-											onKeyUp={onHandleSearchValueInputKey}
-											value={searchState.value}
-											placeholder={'검색'}
-										/>
-									</Box>
-								</Box>
-							</Hidden>
-						</Grid>
+		<Box className={classes.root}>
+			<Container className={classes.container}>
+				<Grid container justify={'space-between'}>
+					<Grid className={classes.gridItem} item xs={6}>
+						<Typography className={classes.typography} variant={'h5'} component={'h5'}>
+							{getCategoryIconByCategoryId(categoryId)}
+							<Box component={'span'} ml={1}>{getCategoryNameByCategoryId(categoryId)}</Box>
+						</Typography>
 					</Grid>
-				</Container>
-				<Dialog disableBackdropClick disableEscapeKeyDown open={dialogState} onClose={onHandleDialog}>
-					<DialogTitle>{'검색 조건'}</DialogTitle>
-					<DialogContent>
-						<form className={classes.dialogContainer}>
-							<FormControl className={classes.formControl}>
-								<Select
-									labelId={'demo-dialog-select-label'}
-									id={'demo-dialog-select'}
-									value={searchState.type}
-									onChange={onHandleSearchTypeSelect}
-									input={<Input />}
-								>
-									<MenuItem value={'all'}>{'전체'}</MenuItem>
-									<MenuItem value={'subject'}>{'제목'}</MenuItem>
-									<MenuItem value={'nickname'}>{'닉네임'}</MenuItem>
-									<MenuItem value={'content'}>{'내용'}</MenuItem>
-								</Select>
-							</FormControl>
-						</form>
-					</DialogContent>
-					<DialogActions>
-						<Button onClick={onHandleDialog} color={'primary'}>
-							{'닫기'}
-						</Button>
-					</DialogActions>
-				</Dialog>
-			</Box>
-		</>
+					<Grid className={classes.gridItem} item xs={6}>
+						<Hidden mdDown>
+							<Box className={classes.gridBox}>
+								<Box>
+									<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>{getSearchTypeLabelByType(searchState.type)}</Button>
+								</Box>
+								<Box className={classes.search}>
+									<Box className={classes.searchIcon}>
+										<SearchIcon />
+									</Box>
+									<InputBase
+										classes={{
+											root: classes.inputRoot,
+											input: classes.inputInput
+										}}
+										onChange={onHandleSearchValueInput}
+										onKeyUp={onHandleSearchValueInputKey}
+										value={searchState.value}
+										placeholder={'검색'}
+									/>
+								</Box>
+							</Box>
+						</Hidden>
+					</Grid>
+				</Grid>
+			</Container>
+			<Dialog disableBackdropClick disableEscapeKeyDown open={dialogState} onClose={onHandleDialog}>
+				<DialogTitle>{'검색 조건'}</DialogTitle>
+				<DialogContent>
+					<form className={classes.dialogContainer}>
+						<FormControl className={classes.formControl}>
+							<Select
+								labelId={'demo-dialog-select-label'}
+								id={'demo-dialog-select'}
+								value={searchState.type}
+								onChange={onHandleSearchTypeSelect}
+								input={<Input />}
+							>
+								<MenuItem value={'all'}>{'전체'}</MenuItem>
+								<MenuItem value={'subject'}>{'제목'}</MenuItem>
+								<MenuItem value={'nickname'}>{'닉네임'}</MenuItem>
+								<MenuItem value={'content'}>{'내용'}</MenuItem>
+							</Select>
+						</FormControl>
+					</form>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={onHandleDialog} color={'primary'}>
+						{'닫기'}
+					</Button>
+				</DialogActions>
+			</Dialog>
+		</Box>
 	);
 }
 

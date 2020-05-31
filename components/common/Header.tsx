@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		appBar: {
 			boxShadow: 'none',
-			borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
+			borderBottom: `1px solid ${theme.palette.grey.A100}`
 		},
 		toolbar: {
 			height: 80
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type ScrollProps = {
 	window?: () => Window;
 	children: React.ReactElement;
-}
+};
 
 function HideOnScroll(props: ScrollProps) {
 	const { children, window } = props;
@@ -138,6 +138,7 @@ function Header() {
 	const { route, query: { id } } = router;
 	const [activatedTab, setActivatedTab] = useState<string>(window.location.pathname);
 	const isBoardDetail = useMemo(() => (route === '/board/[id]/[detail]'), [route]);
+	const isPolicy = useMemo(() => (route === '/policy' || route === '/privacy'), [route]);
 
 	const handleTabChange = useCallback((event: React.ChangeEvent<{}>, newValue: string) => {
 		const isIndexRoute: boolean = newValue === '/' && true;
@@ -212,7 +213,7 @@ function Header() {
 					<Toolbar className={classes.toolbar} />
 				</>
 			)}
-			{!isBoardDetail && (
+			{!isBoardDetail && !isPolicy && (
 				<Box>
 					<Paper className={classes.paper} variant={'outlined'} square>
 						<Container>
@@ -227,7 +228,6 @@ function Header() {
 								<Tab label={'일간 개념글'} value={'/board/daily_popular'} />
 								<Tab label={'인터넷방송'} value={'/board/ib_new1'} />
 								<Tab label={'스트리머'} value={'/board/stream'} />
-								<Tab label={'해외축구'} value={'/board/football_new6'} />
 								<Tab label={'이슈'} value={'/board/issuezoom'} />
 								<Tab label={'수능'} value={'/board/exam_new'} />
 								<Tab label={'헬스'} value={'/board/extra'} />

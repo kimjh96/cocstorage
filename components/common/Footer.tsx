@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+import React, { useCallback, memo } from 'react';
+import { useRouter } from 'next/router';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 // Material UI
@@ -30,6 +31,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Footer() {
 	const classes = useStyles();
+	const router = useRouter();
+
+	const handleChip = useCallback((event: React.MouseEvent<HTMLSpanElement>) => {
+		const path: string = event.currentTarget.getAttribute('data-path') || '';
+
+		router.push(path).then();
+	}, [router]);
 
 	return (
 		<Box className={classes.root}>
@@ -42,8 +50,20 @@ function Footer() {
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<Box className={classes.rightBox}>
-							<Chip label={'이용약관'} size={'small'} variant={'outlined'} />
-							<Chip label={'개인정보처리방침'} size={'small'} variant={'outlined'} />
+							<Chip
+								label={'이용약관'}
+								size={'small'}
+								variant={'outlined'}
+								data-path={'/policy'}
+								onClick={handleChip}
+							/>
+							<Chip
+								label={'개인정보처리방침'}
+								size={'small'}
+								variant={'outlined'}
+								data-path={'/privacy'}
+								onClick={handleChip}
+							/>
 						</Box>
 					</Grid>
 				</Grid>

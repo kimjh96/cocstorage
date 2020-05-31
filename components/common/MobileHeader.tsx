@@ -1,4 +1,9 @@
-import React, { useState, memo, useCallback, useMemo } from 'react';
+import React, {
+	useState,
+	memo,
+	useCallback,
+	useMemo
+} from 'react';
 import { useRouter } from 'next/router';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
@@ -14,6 +19,8 @@ import Chip from '@material-ui/core/Chip';
 import AppBar from '@material-ui/core/AppBar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Slide from '@material-ui/core/Slide';
 
 // Material UI Icons
 import WhatshotIcon from '@material-ui/icons/Whatshot';
@@ -24,7 +31,6 @@ import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import SchoolIcon from '@material-ui/icons/School';
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
-import InfoIcon from '@material-ui/icons/Info';
 import MenuIcon from '@material-ui/icons/Menu';
 
 // Logo Image
@@ -40,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderTop: 0,
 			borderLeft: 0,
 			borderRight: 0,
+			borderColor: `1px solid ${theme.palette.grey.A100}`,
 			backgroundColor: 'white'
 		},
 		toolbar: {
@@ -68,11 +75,27 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
+type ScrollProps = {
+	window?: () => Window;
+	children: React.ReactElement;
+};
+
 type ListItemType = {
 	label: string;
 	icon: JSX.Element;
 	categoryId: string;
 };
+
+function HideOnScroll(props: ScrollProps) {
+	const { children, window } = props;
+	const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+	return (
+		<Slide appear={false} direction={'down'} in={!trigger}>
+			{children}
+		</Slide>
+	);
+}
 
 function getCategoryIconByCategoryId(categoryId: string | string[]) {
 	let categoryIcon = <CastIcon />;
@@ -193,30 +216,32 @@ function MobileHeader(): JSX.Element {
 
 	return (
 		<>
-			<AppBar className={classes.root} position={'fixed'} variant={'outlined'}>
-				<Toolbar className={classes.toolbar}>
-					<Box className={classes.appBarLogoBox}>
-						<Box>
-							<Box component={'span'} onClick={handleLogo}>
-								<img className={classes.appBarLogo} src={Logo} alt={'Logo'} />
+			<HideOnScroll>
+				<AppBar className={classes.root} position={'fixed'} variant={'outlined'}>
+					<Toolbar className={classes.toolbar}>
+						<Box className={classes.appBarLogoBox}>
+							<Box>
+								<Box component={'span'} onClick={handleLogo}>
+									<img className={classes.appBarLogo} src={Logo} alt={'Logo'} />
+								</Box>
+								{isBoardDetail && (
+									<Chip
+										className={classes.chip}
+										color={'primary'}
+										label={getCategoryNameByCategoryId(id)}
+										icon={getCategoryIconByCategoryId(id)}
+										onClick={handleChip}
+										size={'small'}
+									/>
+								)}
 							</Box>
-							{isBoardDetail && (
-								<Chip
-									className={classes.chip}
-									color={'primary'}
-									label={getCategoryNameByCategoryId(id)}
-									icon={getCategoryIconByCategoryId(id)}
-									onClick={handleChip}
-									size={'small'}
-								/>
-							)}
 						</Box>
-					</Box>
-					<IconButton edge={'end'} color={'inherit'} aria-label={'open drawer'} onClick={handleMenuList}>
-						<MenuIcon />
-					</IconButton>
-				</Toolbar>
-			</AppBar>
+						<IconButton edge={'end'} color={'inherit'} aria-label={'open drawer'} onClick={handleMenuList}>
+							<MenuIcon color={'action'} />
+						</IconButton>
+					</Toolbar>
+				</AppBar>
+			</HideOnScroll>
 			<Toolbar className={classes.toolbar} />
 			<SwipeableDrawer anchor={'right'} onClose={handleMenuList} onOpen={handleMenuList} open={menuListState}>
 				<div className={classes.list} role={'presentation'}>
@@ -229,14 +254,6 @@ function MobileHeader(): JSX.Element {
 						))}
 					</List>
 					<Divider />
-					<List>
-						<ListItem button key={'새로운 소식'}>
-							<ListItemIcon>
-								<InfoIcon className={classes.listItemIcon} />
-							</ListItemIcon>
-							<ListItemText primary={'새로운 소식'} />
-						</ListItem>
-					</List>
 				</div>
 			</SwipeableDrawer>
 		</>
