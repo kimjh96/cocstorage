@@ -42,31 +42,24 @@ function Detail({ query }: NextPageContext) {
 	return (
 		<>
 			<Head>
-				<meta charSet={'utf-8'} />
-				<meta httpEquiv={'content-language'} content={'ko'} />
-				<meta httpEquiv={'X-UA-Compatible'} content={'IE=edge'} />
 				<meta name={'author'} content={`${data.nickname}`} />
 				<meta name={'title'} content={getMetaTagTitle(data, query.id)} />
 				<meta name={'description'} content={`${data.description}`} />
 				<meta property={'og:title'} content={getMetaTagTitle(data, query.id)} />
 				<meta property={'og:description'} content={`${data.description}`} />
 				<meta property={'og:type'} content={'website'} />
-				<meta property={'og:image'} content={(data && data.image) ? data.image : ''} />
+				<meta property={'og:image'} content={(data && data.image) ? data.image : '/logo.png'} />
 				<meta property={'og:url'} content={`https://www.cocstorage.com/board/${query.id}/${query.detail}`} />
 				<meta property={'og:site_name'} content={getMetaTagTitle(data, query.id)} />
 				<meta property={'og:locale'} content={'ko_KR'} />
 				<meta property={'twitter:title'} content={getMetaTagTitle(data, query.id)} />
 				<meta property={'twitter:description'} content={`${data.description}`} />
-				<meta property={'twitter:image'} content={(data && data.image) ? data.image : ''} />
+				<meta property={'twitter:image'} content={(data && data.image) ? data.image : '/logo.png'} />
 				<meta property={'twitter:url'} content={`https://www.cocstorage.com/board/${query.id}/${query.detail}`} />
 				<meta property={'twitter:card'} content={'summary'} />
-				<meta name={'theme-color'} content={'#2F436E'} />
 				<meta name={'apple-mobile-web-app-title'} content={getMetaTagTitle(data, query.id)} />
 				<title>{getMetaTagTitle(data, query.id)}</title>
-				<link rel={'shortcut icon'} href={''} />
-				<link rel={'apple-touch-icon'} href={''} />
-				<link rel={'canonical'} href={''} />
-				<link rel={'manifest'} href={''} />
+				<link rel={'canonical'} href={`https://www.cocstorage.com/board/${query.id}/${query.detail}`} />
 				<script async src={'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'} />
 			</Head>
 			<Container className={classes.root}>

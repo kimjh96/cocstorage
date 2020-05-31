@@ -21,11 +21,11 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import MessageIcon from '@material-ui/icons/Message';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
-// Svgs
-import DefaultImageSvg from '../../styles/svgs/default_image.svg';
-
 // Custom Hooks
 import useHome from '../../hooks/useHome';
+
+// Svgs
+import DefaultImageSvg from '../../styles/svgs/default_image.svg';
 
 // Modules
 import { Board } from '../../src/modules/boardDetail';

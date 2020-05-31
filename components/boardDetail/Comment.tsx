@@ -117,8 +117,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			width: theme.spacing(4),
 			height: theme.spacing(4),
 			[theme.breakpoints.down('md')]: {
-				width: theme.spacing(3),
-				height: theme.spacing(3),
 				fontSize: 14
 			}
 		},
@@ -186,8 +184,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			width: theme.spacing(4),
 			height: theme.spacing(4),
 			[theme.breakpoints.down('md')]: {
-				width: theme.spacing(3),
-				height: theme.spacing(3),
 				fontSize: 14
 			}
 		},

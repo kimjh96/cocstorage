@@ -33,7 +33,7 @@ import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
 import MenuIcon from '@material-ui/icons/Menu';
 
-// Logo Image
+// Images
 import Logo from '../../public/logo.png';
 
 // Snippets

@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, memo } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+	createStyles,
+	makeStyles,
+	Theme,
+	useTheme
+} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import moment from 'moment';
 
 // Material UI
@@ -26,9 +32,11 @@ import ThumbUpAltSharpIcon from '@material-ui/icons/ThumbUpAltSharp';
 import ThumbDownAltSharpIcon from '@material-ui/icons/ThumbDownAltSharp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 
+// Components
+import GoogleAdSense from '../common/GoogleAdSense';
+
 // Custom Hooks
 import useBoardDetail from '../../hooks/useBoardDetail';
-import GoogleAdSense from '../common/GoogleAdSense';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -154,6 +162,8 @@ function getAlterMessageByResponseBody(data: string | null): string | null {
 
 function BoardDetail() {
 	const classes = useStyles();
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const contentRef = useRef<HTMLElement | null>(null);
 	const {
 		board: { data, pending },
@@ -275,6 +285,18 @@ function BoardDetail() {
 								</Box>
 							</Box>
 						</Box>
+						{isMobile && (
+							<Box>
+								<GoogleAdSense
+									html={'<ins class="adsbygoogle"'
+									+ 'style="display:block"'
+									+ 'data-ad-client="ca-pub-5809905264951057"'
+									+ 'data-ad-slot="8033291397"'
+									+ 'data-ad-format="auto"'
+									+ 'data-full-width-responsive="true"></ins>'}
+								/>
+							</Box>
+						)}
 					</Box>
 				</Grow>
 			)}
