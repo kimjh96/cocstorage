@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginBottom: theme.spacing(1),
 			backgroundColor: 'white',
 			[theme.breakpoints.down('md')]: {
-				margin: theme.spacing(1, 0, 0, 0),
+				margin: 0,
 				paddingTop: theme.spacing(1),
 				paddingBottom: theme.spacing(1)
 			}
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) =>
 				left: 0,
 				width: '100%',
 				maxWidth: '100%',
-				height: 'auto',
+				height: '100%',
 				backgroundSize: 'cover',
 				transform: 'translate(-50%, -50%)',
 				transition: 'all .5s'

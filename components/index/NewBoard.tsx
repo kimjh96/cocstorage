@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginBottom: theme.spacing(1),
 			backgroundColor: 'white',
 			[theme.breakpoints.down('md')]: {
-				margin: theme.spacing(1, 0, 0, 0),
+				margin: 0,
 				paddingTop: theme.spacing(1),
 				paddingBottom: theme.spacing(1)
 			}
@@ -59,7 +59,11 @@ const useStyles = makeStyles((theme: Theme) =>
 		containerPaper: {
 			borderColor: theme.palette.grey.A100,
 			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(0, 1),
 				border: 'none'
+			},
+			[theme.breakpoints.down('xs')]: {
+				padding: theme.spacing(0)
 			}
 		},
 		gridItem: {
@@ -73,6 +77,18 @@ const useStyles = makeStyles((theme: Theme) =>
 				width: '100%',
 				textDecoration: 'none',
 				color: 'inherit'
+			},
+			[theme.breakpoints.down('md')]: {
+				'& ul': {
+					padding: 0
+				}
+			}
+		},
+		gridItemSkeleton: {
+			[theme.breakpoints.down('md')]: {
+				'& ul': {
+					padding: 0
+				}
 			}
 		},
 		statTypography: {
@@ -94,6 +110,12 @@ const useStyles = makeStyles((theme: Theme) =>
 		thumbnailBoxWrapperInner: {
 			position: 'relative',
 			paddingTop: '75%',
+			border: `1px solid ${theme.palette.grey.A100}`,
+			overflow: 'hidden'
+		},
+		thumbnailBoxWrapperInnerSkeleton: {
+			position: 'relative',
+			paddingTop: '75%',
 			overflow: 'hidden'
 		},
 		thumbnailBoxCentered: {
@@ -109,14 +131,12 @@ const useStyles = makeStyles((theme: Theme) =>
 				left: 0,
 				width: '100%',
 				maxWidth: '100%',
-				height: 'auto',
-				border: '1px solid rgba(0, 0, 0, 0.12)',
+				height: '100%',
 				transform: 'translate(-50%, -50%)'
 			}
 		},
 		thumbnailBoxCenteredDefaultImage: {
-			maxWidth: '50px !important',
-			border: 'none !important'
+			maxWidth: '50px !important'
 		},
 		thumbnailBoxCenteredSkeleton: {
 			position: 'absolute',
@@ -191,12 +211,12 @@ function NewBoard() {
 					{pending ? (
 						<Grid container>
 							{dummyBoardArray.map((index) => (
-								<Grid key={`dummy-new-board-${index}`} item xs={12} md={6}>
+								<Grid key={`dummy-new-board-${index}`} className={classes.gridItemSkeleton} item xs={12} md={6}>
 									<Grow in>
 										<List>
 											<ListItem>
 												<Box className={classes.thumbnailBoxWrapper} marginRight={1}>
-													<Box className={classes.thumbnailBoxWrapperInner}>
+													<Box className={classes.thumbnailBoxWrapperInnerSkeleton}>
 														<Box className={classes.thumbnailBoxCenteredSkeleton}>
 															<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
 														</Box>

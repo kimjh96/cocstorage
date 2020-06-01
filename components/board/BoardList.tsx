@@ -76,6 +76,35 @@ const useStyles = makeStyles((theme: Theme) =>
 				}
 			}
 		},
+		grid: {
+			alignItems: 'center',
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(0, 3),
+				borderBottom: `1px solid ${theme.palette.grey.A100}`
+			},
+			[theme.breakpoints.down('xs')]: {
+				padding: theme.spacing(0, 2)
+			}
+		},
+		gridSkeleton: {
+			alignItems: 'center',
+			[theme.breakpoints.down('md')]: {
+				padding: theme.spacing(0, 3)
+			},
+			[theme.breakpoints.down('xs')]: {
+				padding: theme.spacing(0, 2)
+			}
+		},
+		gridAd: {
+			width: '100%',
+			paddingTop: theme.spacing(0.7),
+			textAlign: 'center',
+			borderBottom: `1px solid ${theme.palette.grey.A100}`,
+			backgroundColor: theme.palette.grey['50'],
+			'& ins': {
+				marginLeft: '0 !important'
+			}
+		},
 		gridItem: {
 			padding: theme.spacing(3, 0, 0, 0)
 		},
@@ -250,7 +279,7 @@ function BoardList() {
 				<Grow in>
 					<Box>
 						{dummyBoardArray.map((index) => (
-							<Grid key={`dummy-board-${index}`} container alignItems={'center'}>
+							<Grid key={`dummy-board-${index}`} className={classes.gridSkeleton} container>
 								<Grid item xs={12} md={7}>
 									<Box display={'flex'} alignItems={'center'} pb={0.5}>
 										<Box flexGrow={1}>
@@ -282,16 +311,6 @@ function BoardList() {
 								</Grid>
 							</Grid>
 						))}
-						{isMobile && (
-							<Box display={'flex'}>
-								<Box width={40}>
-									<Skeleton height={40} animation={'wave'} />
-								</Box>
-								<Box flexGrow={1} ml={1}>
-									<Skeleton height={40} animation={'wave'} />
-								</Box>
-							</Box>
-						)}
 						<Box display={'flex'} justifyContent={'center'} p={2} pt={0}>
 							<Box ml={1}>
 								<Skeleton width={30} height={40} animation={'wave'} />
@@ -319,7 +338,7 @@ function BoardList() {
 								if ((index) === 5 && isMobile) {
 									return (
 										<Box key={`board-${item.id}`}>
-											<Grid container alignItems={'center'}>
+											<Grid className={classes.grid} container alignItems={'center'}>
 												<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
 													<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
 														<a>
@@ -356,21 +375,19 @@ function BoardList() {
 													</Box>
 												</Grid>
 											</Grid>
-											<Grid key={`board-ad-${item.id}`} container alignItems={'center'}>
-												<Box width={'100%'} pt={0.7} textAlign={'center'}>
-													<GoogleAdSense
-														html={'<ins class="adsbygoogle"'
-														+ 'style="display:inline-block;width:320px;height:250px"'
-														+ 'data-ad-client="ca-pub-5809905264951057"'
-														+ 'data-ad-slot="2449792225"></ins>'}
-													/>
-												</Box>
+											<Grid key={`board-ad-${item.id}`} className={classes.gridAd} container justify={'center'}>
+												<GoogleAdSense
+													html={'<ins class="adsbygoogle"'
+													+ 'style="display:inline-block;width:320px;height:100px"'
+													+ 'data-ad-client="ca-pub-5809905264951057"'
+													+ 'data-ad-slot="2449792225"></ins>'}
+												/>
 											</Grid>
 										</Box>
 									);
 								}
 								return (
-									<Grid key={`board-${item.id}`} container alignItems={'center'} onClick={onHandleBoardClickCount}>
+									<Grid key={`board-${item.id}`} className={classes.grid} container onClick={onHandleBoardClickCount}>
 										<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
 											{count >= 7 ? (
 												<Link href={`/board/${categoryId}/${item.id}`}>
@@ -429,7 +446,7 @@ function BoardList() {
 							})}
 						</Box>
 					</Grow>
-					<Hidden lgUp>
+					<Hidden xsUp>
 						<Box>
 							<Grid container>
 								<Grid className={classes.gridItem} item xs={12}>
@@ -475,7 +492,7 @@ function BoardList() {
 					/>
 				</>
 			)}
-			<Hidden lgUp>
+			<Hidden xsUp>
 				<Dialog disableBackdropClick disableEscapeKeyDown open={dialogState} onClose={onHandleDialog}>
 					<DialogTitle>{'검색 조건'}</DialogTitle>
 					<DialogContent>

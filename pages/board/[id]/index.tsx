@@ -1,5 +1,10 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+	createStyles,
+	makeStyles,
+	Theme,
+	useTheme
+} from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
 
@@ -22,6 +27,7 @@ import useBoard from '../../../hooks/useBoard';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -36,6 +42,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Board({ query }: NextPageContext) {
 	const classes = useStyles();
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const { pending } = useBoard();
 
 	return (
@@ -69,7 +77,7 @@ function Board({ query }: NextPageContext) {
 				<script async src={'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'} />
 			</Head>
 			<BackgroundSearch />
-			<Container className={classes.root}>
+			<Container className={classes.root} disableGutters={isMobile}>
 				<Grid container>
 					<Grid item xs={12} lg={9}>
 						<BoardList />

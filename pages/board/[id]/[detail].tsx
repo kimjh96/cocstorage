@@ -1,11 +1,18 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+	createStyles,
+	makeStyles,
+	Theme,
+	useTheme
+} from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
 
 // Material UI
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 // Modules
 import { fetchBoardDetail } from '../../../src/modules/boardDetail';
@@ -14,6 +21,7 @@ import { fetchBoardDetail } from '../../../src/modules/boardDetail';
 import BoardDetail from '../../../components/boardDetail/BoardDetail';
 import SideBox from '../../../components/boardDetail/SideBox';
 import Comment from '../../../components/boardDetail/Comment';
+import GoogleAdSense from '../../../components/common/GoogleAdSense';
 
 // Custom Hooks
 import useBoardDetail from '../../../hooks/useBoardDetail';
@@ -27,6 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.down('md')]: {
 				padding: 0
 			}
+		},
+		adBox: {
+			textAlign: 'center',
+			borderTop: `1px solid ${theme.palette.grey.A100}`,
+			borderBottom: `1px solid ${theme.palette.grey.A100}`
 		}
 	})
 );
@@ -37,6 +50,8 @@ function getMetaTagTitle(data: any, id: any) {
 
 function Detail({ query }: NextPageContext) {
 	const classes = useStyles();
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const { board: { data } } = useBoardDetail();
 
 	return (
@@ -73,6 +88,18 @@ function Detail({ query }: NextPageContext) {
 				<Grid container>
 					<Grid item xs={12} md={9}>
 						<BoardDetail />
+						{isMobile && (
+							<Box className={classes.adBox}>
+								<GoogleAdSense
+									html={'<ins class="adsbygoogle"'
+									+ 'style="display:block"'
+									+ 'data-ad-client="ca-pub-5809905264951057"'
+									+ 'data-ad-slot="8033291397"'
+									+ 'data-ad-format="auto"'
+									+ 'data-full-width-responsive="true"></ins>'}
+								/>
+							</Box>
+						)}
 						<Comment />
 					</Grid>
 					<Grid item xs={12} md={3}>

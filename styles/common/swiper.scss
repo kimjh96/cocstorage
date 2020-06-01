@@ -5,3 +5,15 @@
 .customized-daily-swiper-wrapper {
   display: flex;
 }
+
+@media (max-width: 1280px) {
+  .customized-daily-swiper-container {
+    padding-left: 24px;
+  }
+}
+
+@media (max-width: 599px) {
+  .customized-daily-swiper-container {
+    padding-left: 16px;
+  }
+}

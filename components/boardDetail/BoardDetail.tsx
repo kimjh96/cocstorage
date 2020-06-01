@@ -2,10 +2,8 @@ import React, { useEffect, useRef, memo } from 'react';
 import {
 	createStyles,
 	makeStyles,
-	Theme,
-	useTheme
+	Theme
 } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import moment from 'moment';
 
 // Material UI
@@ -162,8 +160,6 @@ function getAlterMessageByResponseBody(data: string | null): string | null {
 
 function BoardDetail() {
 	const classes = useStyles();
-	const theme = useTheme();
-	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const contentRef = useRef<HTMLElement | null>(null);
 	const {
 		board: { data, pending },
@@ -258,7 +254,7 @@ function BoardDetail() {
 								{Number(data.down).toLocaleString()}
 							</Button>
 						</Box>
-						<Box mt={1} mb={1}>
+						<Box mb={1} textAlign={'center'}>
 							<GoogleAdSense
 								html={'<ins class="adsbygoogle"'
 								+ 'style="display:block"'
@@ -285,18 +281,6 @@ function BoardDetail() {
 								</Box>
 							</Box>
 						</Box>
-						{isMobile && (
-							<Box>
-								<GoogleAdSense
-									html={'<ins class="adsbygoogle"'
-									+ 'style="display:block"'
-									+ 'data-ad-client="ca-pub-5809905264951057"'
-									+ 'data-ad-slot="8033291397"'
-									+ 'data-ad-format="auto"'
-									+ 'data-full-width-responsive="true"></ins>'}
-								/>
-							</Box>
-						)}
 					</Box>
 				</Grow>
 			)}

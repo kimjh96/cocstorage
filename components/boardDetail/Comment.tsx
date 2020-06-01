@@ -87,6 +87,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		commentListBox: {
 			padding: theme.spacing(2, 0),
 			wordBreak: 'break-all',
+			wordWrap: 'break-word',
 			[theme.breakpoints.down('md')]: {
 				borderBottom: `1px solid ${theme.palette.grey.A100}`
 			}
@@ -196,6 +197,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		replyBoxItemContent: {
 			padding: theme.spacing(1, 0, 0, 3),
 			wordBreak: 'break-all',
+			wordWrap: 'break-word',
 			[theme.breakpoints.down('md')]: {
 				padding: theme.spacing(1, 0, 0, 3)
 			}

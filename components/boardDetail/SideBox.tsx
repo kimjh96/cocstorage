@@ -75,7 +75,7 @@ function SideBox() {
 									<EmailIcon />
 								</Avatar>
 							</ListItemAvatar>
-							<ListItemText primary={'문의'} secondary={'cocstoragehelp@gmail.com'} />
+							<ListItemText primary={'문의'} secondary={'cocstoragehelps@gmail.com'} />
 						</ListItem>
 					</List>
 				</Box>

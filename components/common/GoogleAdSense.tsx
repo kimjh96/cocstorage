@@ -42,9 +42,7 @@ function GoogleAdSense({ html }: GoogleAdSenseProps) {
 
 	return (
 		<RootRef rootRef={adRef}>
-			<Box className={classes.root}>
-				<img src={AdWords} alt={'Advertisement'} />
-			</Box>
+			<Box className={classes.root} />
 		</RootRef>
 	);
 }

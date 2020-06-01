@@ -42,7 +42,6 @@ import { getCategoryNameByCategoryId } from '../../src/snippet/board';
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			// background: 'linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4)'
 			borderTop: 0,
 			borderLeft: 0,
 			borderRight: 0,
@@ -50,7 +49,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			backgroundColor: 'white'
 		},
 		toolbar: {
-			padding: theme.spacing(0, 2)
+			padding: theme.spacing(0, 3),
+			[theme.breakpoints.down('xs')]: {
+				padding: theme.spacing(0, 2)
+			}
 		},
 		chip: {
 			marginLeft: theme.spacing(1),
@@ -155,11 +157,6 @@ function MobileHeader() {
 			categoryId: 'stream'
 		},
 		{
-			label: '축구',
-			icon: <SportsSoccerIcon className={classes.listItemIcon} />,
-			categoryId: 'football_new6'
-		},
-		{
 			label: '이슈',
 			icon: <CalendarTodayIcon className={classes.listItemIcon} />,
 			categoryId: 'issuezoom'
@@ -175,7 +172,7 @@ function MobileHeader() {
 			categoryId: 'exam_new'
 		},
 		{
-			label: '야구',
+			label: '국내야구',
 			icon: <SportsBaseballIcon className={classes.listItemIcon} />,
 			categoryId: 'baseball_new8'
 		}
