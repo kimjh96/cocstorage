@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.down('md')]: {
 				margin: 0,
 				paddingTop: theme.spacing(1),
-				paddingBottom: theme.spacing(1)
+				paddingBottom: theme.spacing(0)
 			}
 		},
 		title: {
@@ -52,12 +52,12 @@ const useStyles = makeStyles((theme: Theme) =>
 		container: {
 			marginBottom: theme.spacing(2),
 			[theme.breakpoints.down('md')]: {
-				padding: theme.spacing(0),
-				marginBottom: theme.spacing(0)
+				padding: theme.spacing(0)
 			}
 		},
-		containerPaper: {
-			borderColor: theme.palette.grey.A100,
+		containerBox: {
+			border: `1px solid ${theme.palette.grey.A100}`,
+			backgroundColor: 'white',
 			[theme.breakpoints.down('md')]: {
 				padding: theme.spacing(0, 1),
 				border: 'none'
@@ -207,45 +207,43 @@ function NewBoard() {
 				</Typography>
 			</Container>
 			<Container className={classes.container}>
-				<Paper className={classes.containerPaper} square variant={'outlined'}>
+				<Box className={classes.containerBox}>
 					{pending ? (
 						<Grid container>
 							{dummyBoardArray.map((index) => (
 								<Grid key={`dummy-new-board-${index}`} className={classes.gridItemSkeleton} item xs={12} md={6}>
-									<Grow in>
-										<List>
-											<ListItem>
-												<Box className={classes.thumbnailBoxWrapper} marginRight={1}>
-													<Box className={classes.thumbnailBoxWrapperInnerSkeleton}>
-														<Box className={classes.thumbnailBoxCenteredSkeleton}>
-															<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
-														</Box>
+									<List>
+										<ListItem>
+											<Box className={classes.thumbnailBoxWrapper} marginRight={1}>
+												<Box className={classes.thumbnailBoxWrapperInnerSkeleton}>
+													<Box className={classes.thumbnailBoxCenteredSkeleton}>
+														<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
 													</Box>
 												</Box>
-												<ListItemText>
-													<Typography variant={'subtitle2'} gutterBottom>
-														<Skeleton width={'100%'} animation={'wave'} />
-													</Typography>
-													<Typography className={classes.writerTypographySkeleton} variant={'body2'} color={'textSecondary'} gutterBottom>
-														<Box component={'span'} marginRight={1}>
-															<Skeleton width={50} animation={'wave'} />
-														</Box>
-														<Box component={'span'}>
-															<Skeleton width={50} animation={'wave'} />
-														</Box>
-													</Typography>
-													<Typography className={classes.statTypographySkeleton} variant={'body2'} color={'textSecondary'}>
-														<Box component={'span'} marginRight={1}>
-															<Skeleton width={50} animation={'wave'} />
-														</Box>
-														<Box component={'span'}>
-															<Skeleton width={50} animation={'wave'} />
-														</Box>
-													</Typography>
-												</ListItemText>
-											</ListItem>
-										</List>
-									</Grow>
+											</Box>
+											<ListItemText>
+												<Typography variant={'subtitle2'} gutterBottom>
+													<Skeleton width={'100%'} animation={'wave'} />
+												</Typography>
+												<Typography className={classes.writerTypographySkeleton} variant={'body2'} color={'textSecondary'} gutterBottom>
+													<Box component={'span'} marginRight={1}>
+														<Skeleton width={50} animation={'wave'} />
+													</Box>
+													<Box component={'span'}>
+														<Skeleton width={50} animation={'wave'} />
+													</Box>
+												</Typography>
+												<Typography className={classes.statTypographySkeleton} variant={'body2'} color={'textSecondary'}>
+													<Box component={'span'} marginRight={1}>
+														<Skeleton width={50} animation={'wave'} />
+													</Box>
+													<Box component={'span'}>
+														<Skeleton width={50} animation={'wave'} />
+													</Box>
+												</Typography>
+											</ListItemText>
+										</ListItem>
+									</List>
 								</Grid>
 							))}
 						</Grid>
@@ -297,7 +295,7 @@ function NewBoard() {
 							))}
 						</Grid>
 					)}
-				</Paper>
+				</Box>
 			</Container>
 		</>
 	);

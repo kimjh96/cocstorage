@@ -23,6 +23,7 @@ import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import InputBase from '@material-ui/core/InputBase';
 import DialogActions from '@material-ui/core/DialogActions';
+import SSRLink from '@material-ui/core/Link';
 
 // Material UI Labs
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -49,11 +50,17 @@ moment.locale('ko');
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
-		container: {
-			display: 'flex',
-			height: '100%',
-			flexDirection: 'column',
-			justifyContent: 'flex-end'
+		root: {
+			'& a': {
+				textDecoration: 'none',
+				color: 'inherit'
+			},
+			'& a:visited': {
+				color: theme.palette.grey.A200,
+				'& *': {
+					color: theme.palette.grey.A200
+				}
+			}
 		},
 		typography: {
 			display: 'flex',
@@ -107,18 +114,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		gridItem: {
 			padding: theme.spacing(3, 0, 0, 0)
-		},
-		gridItemBoardInfo: {
-			'& > a': {
-				textDecoration: 'none',
-				color: 'inherit'
-			},
-			'& > a:visited': {
-				color: theme.palette.grey.A200,
-				'& *': {
-					color: theme.palette.grey.A200
-				}
-			}
 		},
 		gridItemWriterInfo: {
 			textAlign: 'center',
@@ -274,7 +269,7 @@ function BoardList() {
 	} = useBoard();
 
 	return (
-		<>
+		<Box className={classes.root}>
 			{pending ? (
 				<Grow in>
 					<Box>
@@ -338,10 +333,10 @@ function BoardList() {
 								if ((index) === 5 && isMobile) {
 									return (
 										<Box key={`board-${item.id}`}>
-											<Grid className={classes.grid} container alignItems={'center'}>
-												<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
-													<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
-														<a>
+											<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
+												<a>
+													<Grid className={classes.grid} container alignItems={'center'}>
+														<Grid item xs={12} md={7}>
 															<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
 																<Typography noWrap variant={'subtitle2'}>
 																	{item.subject}
@@ -353,28 +348,28 @@ function BoardList() {
 																	<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
 																</Typography>
 															</Box>
-														</a>
-													</Link>
-												</Grid>
-												<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-													<Box className={classes.gridItemWriterInfoBox}>
-														<Box className={classes.nickname}>
-															<Typography noWrap variant={'subtitle2'}>
-																{item.nickname}
-															</Typography>
-														</Box>
-														<Box className={classes.registerDate}>
-															{getRegisterDate(item.register_date)}
-														</Box>
-														<Box className={classes.thumbs}>
-															<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
-														</Box>
-														<Box className={classes.view}>
-															<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
-														</Box>
-													</Box>
-												</Grid>
-											</Grid>
+														</Grid>
+														<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
+															<Box className={classes.gridItemWriterInfoBox}>
+																<Box className={classes.nickname}>
+																	<Typography noWrap variant={'subtitle2'}>
+																		{item.nickname}
+																	</Typography>
+																</Box>
+																<Box className={classes.registerDate}>
+																	{getRegisterDate(item.register_date)}
+																</Box>
+																<Box className={classes.thumbs}>
+																	<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
+																</Box>
+																<Box className={classes.view}>
+																	<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
+																</Box>
+															</Box>
+														</Grid>
+													</Grid>
+												</a>
+											</Link>
 											<Grid key={`board-ad-${item.id}`} className={classes.gridAd} container justify={'center'}>
 												<GoogleAdSense
 													html={'<ins class="adsbygoogle"'
@@ -387,11 +382,11 @@ function BoardList() {
 									);
 								}
 								return (
-									<Grid key={`board-${item.id}`} className={classes.grid} container onClick={onHandleBoardClickCount}>
-										<Grid className={classes.gridItemBoardInfo} item xs={12} md={7}>
-											{count >= 7 ? (
-												<Link href={`/board/${categoryId}/${item.id}`}>
-													<a>
+									count >= 7 ? (
+										<SSRLink key={`board-${item.id}`} href={`/board/${categoryId}/${item.id}`}>
+											<a>
+												<Grid className={classes.grid} container onClick={onHandleBoardClickCount}>
+													<Grid item xs={12} md={7}>
 														<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
 															<Typography noWrap variant={'subtitle2'}>
 																{item.subject}
@@ -403,11 +398,33 @@ function BoardList() {
 																<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
 															</Typography>
 														</Box>
-													</a>
-												</Link>
-											) : (
-												<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
-													<a>
+													</Grid>
+													<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
+														<Box className={classes.gridItemWriterInfoBox}>
+															<Box className={classes.nickname}>
+																<Typography noWrap variant={'subtitle2'}>
+																	{item.nickname}
+																</Typography>
+															</Box>
+															<Box className={classes.registerDate}>
+																{getRegisterDate(item.register_date)}
+															</Box>
+															<Box className={classes.thumbs}>
+																<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
+															</Box>
+															<Box className={classes.view}>
+																<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
+															</Box>
+														</Box>
+													</Grid>
+												</Grid>
+											</a>
+										</SSRLink>
+									) : (
+										<Link key={`board-${item.id}`} href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
+											<a>
+												<Grid className={classes.grid} container onClick={onHandleBoardClickCount}>
+													<Grid item xs={12} md={7}>
 														<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
 															<Typography noWrap variant={'subtitle2'}>
 																{item.subject}
@@ -419,29 +436,29 @@ function BoardList() {
 																<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
 															</Typography>
 														</Box>
-													</a>
-												</Link>
-											)}
-										</Grid>
-										<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-											<Box className={classes.gridItemWriterInfoBox}>
-												<Box className={classes.nickname}>
-													<Typography noWrap variant={'subtitle2'}>
-														{item.nickname}
-													</Typography>
-												</Box>
-												<Box className={classes.registerDate}>
-													{getRegisterDate(item.register_date)}
-												</Box>
-												<Box className={classes.thumbs}>
-													<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
-												</Box>
-												<Box className={classes.view}>
-													<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
-												</Box>
-											</Box>
-										</Grid>
-									</Grid>
+													</Grid>
+													<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
+														<Box className={classes.gridItemWriterInfoBox}>
+															<Box className={classes.nickname}>
+																<Typography noWrap variant={'subtitle2'}>
+																	{item.nickname}
+																</Typography>
+															</Box>
+															<Box className={classes.registerDate}>
+																{getRegisterDate(item.register_date)}
+															</Box>
+															<Box className={classes.thumbs}>
+																<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
+															</Box>
+															<Box className={classes.view}>
+																<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
+															</Box>
+														</Box>
+													</Grid>
+												</Grid>
+											</a>
+										</Link>
+									)
 								);
 							})}
 						</Box>
@@ -520,7 +537,7 @@ function BoardList() {
 					</DialogActions>
 				</Dialog>
 			</Hidden>
-		</>
+		</Box>
 	);
 }
 

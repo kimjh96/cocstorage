@@ -1,12 +1,8 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 // Material UI
 import Box from '@material-ui/core/Box';
-import RootRef from '@material-ui/core/RootRef';
-
-// Svgs
-import AdWords from '../../styles/svgs/adwords.svg';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -20,31 +16,19 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type GoogleAdSenseProps = {
-	html?: string;
-}
-
-function setAdHTML(element: HTMLElement | null, content: string | null) {
-	if (element && content) {
-		element.innerHTML = content;
-	}
+	html: string;
 }
 
 function GoogleAdSense({ html }: GoogleAdSenseProps) {
 	const classes = useStyles();
-	const adRef = useRef<HTMLElement | null>(null);
 
 	useEffect(() => {
 		if (html) {
-			setAdHTML(adRef.current, html);
 			((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
 		}
-	}, [adRef, html]);
+	}, [html]);
 
-	return (
-		<RootRef rootRef={adRef}>
-			<Box className={classes.root} />
-		</RootRef>
-	);
+	return <Box className={classes.root} dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 export default memo(GoogleAdSense);

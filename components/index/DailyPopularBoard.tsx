@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			padding: theme.spacing(2, 0),
 			backgroundColor: '#eff1f5',
 			[theme.breakpoints.down('md')]: {
-				padding: theme.spacing(0, 0, 0.5, 0),
+				padding: theme.spacing(0),
 				backgroundColor: 'white'
 			}
 		},
@@ -162,6 +162,10 @@ const config = {
 		320: {
 			slidesPerView: 2
 		}
+	},
+	autoplay: {
+		delay: 2000,
+		disableOnInteraction: false
 	},
 	containerClass: 'customized-daily-swiper-container',
 	wrapperClass: 'customized-daily-swiper-wrapper'

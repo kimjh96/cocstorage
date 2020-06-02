@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
 	createStyles,
 	makeStyles,
@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 // Modules
 import { fetchBoards } from '../../../src/modules/board';
@@ -27,7 +28,9 @@ import useBoard from '../../../hooks/useBoard';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+// Svgs
+import AdWords from '../../../styles/svgs/adwords.svg';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -36,6 +39,17 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		box: {
 			margin: theme.spacing(1, 0, 0, 1)
+		},
+		adPendingBox: {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			height: 600,
+			margin: theme.spacing(1, 0, 0, 1),
+			border: `1px solid ${theme.palette.grey.A100}`,
+			'& > img': {
+				maxWidth: 50
+			}
 		}
 	})
 );
@@ -84,8 +98,8 @@ function Board({ query }: NextPageContext) {
 					</Grid>
 					<Grid item xs={12} lg={3}>
 						<Hidden mdDown>
-							{!pending && (
-								<Box className={classes.box}>
+							<Box className={classes.box}>
+								{!pending && (
 									<GoogleAdSense
 										html={'<ins class="adsbygoogle"'
 										+ 'style="display:block"'
@@ -95,8 +109,13 @@ function Board({ query }: NextPageContext) {
 										+ 'data-full-width-responsive="true">'
 										+ '</ins>'}
 									/>
-								</Box>
-							)}
+								)}
+								{pending && (
+									<Box className={classes.adPendingBox}>
+										<img src={AdWords} alt={'Advertisement Pending Img'} />
+									</Box>
+								)}
+							</Box>
 						</Hidden>
 					</Grid>
 				</Grid>

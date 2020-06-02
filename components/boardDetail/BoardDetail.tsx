@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import {
 	createStyles,
 	makeStyles,
@@ -86,6 +86,13 @@ const useStyles = makeStyles((theme: Theme) =>
 				paddingRight: theme.spacing(2)
 			}
 		},
+		adBox: {
+			'& ins': {
+				margin: theme.spacing(1, 0),
+				marginLeft: '0 !important',
+				textAlign: 'center'
+			}
+		},
 		contentBox: {
 			padding: theme.spacing(2, 0),
 			'& img': {
@@ -122,12 +129,6 @@ function SlideTransition(props: TransitionProps) {
 	return <Slide {...props} direction={'up'} />;
 }
 
-function setContentHTML(element: HTMLElement | null, content: string | null) {
-	if (element && content) {
-		element.innerHTML = content;
-	}
-}
-
 function getAlterMessageByResponseBody(data: string | null): string | null {
 	let alertMessage: string | null = null;
 
@@ -160,7 +161,6 @@ function getAlterMessageByResponseBody(data: string | null): string | null {
 
 function BoardDetail() {
 	const classes = useStyles();
-	const contentRef = useRef<HTMLElement | null>(null);
 	const {
 		board: { data, pending },
 		comment: { count: commentCount },
@@ -173,15 +173,17 @@ function BoardDetail() {
 		onHandleExitedSnackBar
 	} = useBoardDetail();
 
+	const [boardDetailState, setBoardDetailState] = useState<boolean>(false);
+
 	useEffect(() => {
 		if (!pending && data.content) {
-			setContentHTML(contentRef.current, data.content);
+			setBoardDetailState(true);
 		}
-	}, [pending, data.content, contentRef]);
+	}, [pending, data.content]);
 
 	return (
 		<>
-			{pending ? (
+			{pending && (
 				<Grow in>
 					<Box className={classes.root}>
 						<Box className={classes.subjectBox}>
@@ -223,7 +225,8 @@ function BoardDetail() {
 						</Box>
 					</Box>
 				</Grow>
-			) : (
+			)}
+			{boardDetailState && (
 				<Grow in>
 					<Box className={classes.root}>
 						<Box className={classes.subjectBox}>
@@ -254,7 +257,7 @@ function BoardDetail() {
 								{Number(data.down).toLocaleString()}
 							</Button>
 						</Box>
-						<Box mb={1} textAlign={'center'}>
+						<Box className={classes.adBox}>
 							<GoogleAdSense
 								html={'<ins class="adsbygoogle"'
 								+ 'style="display:block"'
@@ -265,9 +268,7 @@ function BoardDetail() {
 							/>
 						</Box>
 						<Box className={classes.contentBox}>
-							<RootRef rootRef={contentRef}>
-								<Box />
-							</RootRef>
+							<Box dangerouslySetInnerHTML={{ __html: data.content || '' }} />
 							<Box textAlign={'center'}>
 								<Box>
 									<ButtonGroup className={classes.recommendButtonGroup}>
