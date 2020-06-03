@@ -8,6 +8,8 @@ export const FETCH_BOARDS_FAILED = 'board/FETCH_BOARDS_FAILED';
 export const HANDLE_BOARDS_SEARCH_STATE = 'board/HANDLE_BOARDS_SEARCH_STATE';
 export const CLEAR_BOARDS_SEARCH_STATE = 'board/CLEAR_BOARDS_SEARCH_STATE';
 
+export const CLEAR_BOARDS_PAGINATION_STATE = 'board/CLEAR_BOARDS_PAGINATION_STATE';
+
 export const HANDLE_BOARDS_CLICK_COUNT_STATE = 'board/HANDLE_BOARDS_CLICK_COUNT_STATE';
 
 export const fetchBoards = createAction(FETCH_BOARDS)<FetchBoardPayload>();
@@ -18,3 +20,5 @@ export const handleBoardsSearchState = createAction(HANDLE_BOARDS_SEARCH_STATE)<
 export const clearBoardsSearchState = createAction(CLEAR_BOARDS_SEARCH_STATE)();
 
 export const handleBoardClickCountState = createAction(HANDLE_BOARDS_CLICK_COUNT_STATE)();
+
+export const clearBoardsPaginationState = createAction(CLEAR_BOARDS_PAGINATION_STATE)();

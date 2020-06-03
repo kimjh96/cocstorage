@@ -1,5 +1,4 @@
 import React, {
-	useEffect,
 	useState,
 	useMemo,
 	useCallback
@@ -9,7 +8,6 @@ import { useRouter } from 'next/router';
 
 // Modules
 import {
-	clearBoardsSearchState,
 	fetchBoards,
 	handleBoardsSearchState,
 	handleBoardClickCountState,
@@ -70,10 +68,6 @@ export default function useBoard() {
 	const onHandleDialog = useCallback(() => {
 		setDialogState(!dialogState);
 	}, [dialogState]);
-
-	useEffect(() => {
-		dispatch(clearBoardsSearchState());
-	}, [dispatch, categoryId]);
 
 	return {
 		categoryId,

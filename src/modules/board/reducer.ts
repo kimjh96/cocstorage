@@ -5,7 +5,8 @@ import {
 	FETCH_BOARDS_FAILED,
 	HANDLE_BOARDS_SEARCH_STATE,
 	CLEAR_BOARDS_SEARCH_STATE,
-	HANDLE_BOARDS_CLICK_COUNT_STATE
+	HANDLE_BOARDS_CLICK_COUNT_STATE,
+	CLEAR_BOARDS_PAGINATION_STATE
 } from './actions';
 import { BoardAction, BoardState } from './types';
 
@@ -68,6 +69,13 @@ const board = createReducer<BoardState, BoardAction>(initialState, {
 	[HANDLE_BOARDS_CLICK_COUNT_STATE]: (state) => ({
 		...state,
 		count: state.count + 1
+	}),
+	[CLEAR_BOARDS_PAGINATION_STATE]: (state) => ({
+		...state,
+		pagination: {
+			...state.pagination,
+			page: 1
+		}
 	})
 });
 

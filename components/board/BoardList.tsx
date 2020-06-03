@@ -55,6 +55,10 @@ const useStyles = makeStyles((theme: Theme) =>
 				textDecoration: 'none',
 				color: 'inherit'
 			},
+			'& a:hover': {
+				textDecoration: 'none',
+				color: 'inherit'
+			},
 			'& a:visited': {
 				color: theme.palette.grey.A200,
 				'& *': {
@@ -270,7 +274,7 @@ function BoardList() {
 
 	return (
 		<Box className={classes.root}>
-			{pending ? (
+			{pending && (
 				<Grow in>
 					<Box>
 						{dummyBoardArray.map((index) => (
@@ -325,7 +329,8 @@ function BoardList() {
 						</Box>
 					</Box>
 				</Grow>
-			) : (
+			)}
+			{!pending && (
 				<>
 					<Grow in>
 						<Box>
@@ -384,41 +389,39 @@ function BoardList() {
 								return (
 									count >= 7 ? (
 										<SSRLink key={`board-${item.id}`} href={`/board/${categoryId}/${item.id}`}>
-											<a>
-												<Grid className={classes.grid} container onClick={onHandleBoardClickCount}>
-													<Grid item xs={12} md={7}>
-														<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
-															<Typography noWrap variant={'subtitle2'}>
-																{item.subject}
-															</Typography>
-															<Typography variant={'subtitle2'}>
-																{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
-															</Typography>
-															<Typography variant={'subtitle2'}>
-																<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
-															</Typography>
-														</Box>
-													</Grid>
-													<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-														<Box className={classes.gridItemWriterInfoBox}>
-															<Box className={classes.nickname}>
-																<Typography noWrap variant={'subtitle2'}>
-																	{item.nickname}
-																</Typography>
-															</Box>
-															<Box className={classes.registerDate}>
-																{getRegisterDate(item.register_date)}
-															</Box>
-															<Box className={classes.thumbs}>
-																<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
-															</Box>
-															<Box className={classes.view}>
-																<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
-															</Box>
-														</Box>
-													</Grid>
+											<Grid className={classes.grid} container onClick={onHandleBoardClickCount}>
+												<Grid item xs={12} md={7}>
+													<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
+														<Typography noWrap variant={'subtitle2'}>
+															{item.subject}
+														</Typography>
+														<Typography variant={'subtitle2'}>
+															{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
+														</Typography>
+														<Typography variant={'subtitle2'}>
+															<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
+														</Typography>
+													</Box>
 												</Grid>
-											</a>
+												<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
+													<Box className={classes.gridItemWriterInfoBox}>
+														<Box className={classes.nickname}>
+															<Typography noWrap variant={'subtitle2'}>
+																{item.nickname}
+															</Typography>
+														</Box>
+														<Box className={classes.registerDate}>
+															{getRegisterDate(item.register_date)}
+														</Box>
+														<Box className={classes.thumbs}>
+															<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
+														</Box>
+														<Box className={classes.view}>
+															<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
+														</Box>
+													</Box>
+												</Grid>
+											</Grid>
 										</SSRLink>
 									) : (
 										<Link key={`board-${item.id}`} href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>

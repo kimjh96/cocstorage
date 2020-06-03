@@ -125,7 +125,13 @@ function Board({ query }: NextPageContext) {
 }
 
 Board.getInitialProps = ({ store, query }: NextPageContext) => {
-	store.dispatch(fetchBoards({ categoryId: query.id, page: 1 }));
+	const { board: { searchState, pagination: { page } } } = store.getState();
+
+	store.dispatch(fetchBoards({
+		categoryId: query.id,
+		searchState,
+		page
+	}));
 
 	return {
 		query

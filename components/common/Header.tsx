@@ -1,9 +1,9 @@
 import React, {
-	useState,
 	useCallback,
 	useMemo,
 	memo
 } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import {
 	makeStyles, createStyles, Theme
@@ -31,6 +31,9 @@ import SchoolIcon from '@material-ui/icons/School';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
 import HomeIcon from '@material-ui/icons/Home';
+
+// Modules
+import { clearBoardsPaginationState, clearBoardsSearchState } from '../../src/modules/board';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../src/snippet/board';
@@ -134,19 +137,22 @@ function getCategoryIconByCategoryId(categoryId: string | string[]) {
 
 function Header() {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 	const router = useRouter();
-	const { route, query: { id } } = router;
-	const [activatedTab, setActivatedTab] = useState<string>(window.location.pathname);
+	const { route, asPath, query: { id } } = router;
+	const activatedTab = useMemo(() => ((route === '/board/[id]') ? asPath : '/'), [route, asPath]);
 	const isBoardDetail = useMemo(() => (route === '/board/[id]/[detail]'), [route]);
 	const isPolicy = useMemo(() => (route === '/policy' || route === '/privacy'), [route]);
 
 	const handleTabChange = useCallback((event: React.ChangeEvent<{}>, newValue: string) => {
 		const isIndexRoute: boolean = newValue === '/' && true;
+		dispatch(clearBoardsSearchState());
+		dispatch(clearBoardsPaginationState());
 
 		if (isIndexRoute) {
 			router.push({
 				pathname: '/'
-			}).then(() => setActivatedTab(newValue));
+			}).then();
 		} else {
 			const boardId: string = newValue.split('/')[2];
 
@@ -155,9 +161,9 @@ function Header() {
 				query: {
 					id: boardId
 				}
-			}, newValue).then(() => setActivatedTab(newValue));
+			}, newValue).then();
 		}
-	}, [router]);
+	}, [dispatch, router]);
 
 	const handleChip = useCallback(() => {
 		const categoryId = typeof id === 'string' ? id : '';
@@ -167,13 +173,13 @@ function Header() {
 			query: {
 				id: categoryId
 			}
-		}, `/board/${categoryId}`).then(() => setActivatedTab(`/board/${categoryId}`));
+		}, `/board/${categoryId}`).then();
 	}, [router, id]);
 
 	const handleLogo = useCallback(() => (
 		router.push({
 			pathname: '/'
-		}).then(() => setActivatedTab('/'))
+		}).then()
 	), [router]);
 
 	return (
