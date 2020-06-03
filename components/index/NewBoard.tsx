@@ -208,7 +208,7 @@ function NewBoard() {
 			</Container>
 			<Container className={classes.container}>
 				<Box className={classes.containerBox}>
-					{pending ? (
+					{pending && (
 						<Grid container>
 							{dummyBoardArray.map((index) => (
 								<Grid key={`dummy-new-board-${index}`} className={classes.gridItemSkeleton} item xs={12} md={6}>
@@ -247,7 +247,8 @@ function NewBoard() {
 								</Grid>
 							))}
 						</Grid>
-					) : (
+					)}
+					{!pending && (
 						<Grid container>
 							{boardList.map((item: Board) => (
 								<Grid key={`board-${item.id}`} className={classes.gridItem} item xs={12} md={6}>

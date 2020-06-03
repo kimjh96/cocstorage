@@ -250,7 +250,7 @@ function Comment() {
 			</List>
 			<List disablePadding>
 				<ListItem className={classes.commentListItem}>
-					{pending ? (
+					{pending && (
 						<Grow in>
 							<Box>
 								<Box className={classes.commentListBox}>
@@ -451,7 +451,8 @@ function Comment() {
 								</Box>
 							</Box>
 						</Grow>
-					) : (
+					)}
+					{!pending && (
 						data.map((item: BoardDetailComment) => (
 							<Grow key={`board-comment-${item.id}`} in>
 								<Box>

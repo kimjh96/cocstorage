@@ -188,7 +188,7 @@ function BoardDetail() {
 					<Box className={classes.root}>
 						<Box className={classes.subjectBox}>
 							<Typography component={'h5'} variant={'h5'}>
-								<Skeleton animation={'wave'} />
+								<Skeleton animation={'wave'} height={50} />
 							</Typography>
 						</Box>
 						<Box className={classes.writerInfoBox} display={'flex'} alignItems={'center'} justifyContent={'space-between'} mb={2} pt={1} pb={1}>

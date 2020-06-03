@@ -183,7 +183,7 @@ function DailyPopularBoard() {
 				</Typography>
 			</Container>
 			<Box className={classes.box}>
-				{pending ? (
+				{pending && (
 					<Grow in>
 						<Box>
 							<Swiper {...config}>
@@ -214,7 +214,8 @@ function DailyPopularBoard() {
 							</Swiper>
 						</Box>
 					</Grow>
-				) : (
+				)}
+				{!pending && (
 					<Swiper {...config}>
 						{dailyPopularList.map((item: Board) => (
 							<Grow key={`daily-popular-board-${item.id}`} in>
