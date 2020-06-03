@@ -4,6 +4,7 @@ import React, {
 	useCallback,
 	useMemo
 } from 'react';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
@@ -38,6 +39,7 @@ import Logo from '../../public/logo.png';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../src/snippet/board';
+import { clearBoardsPaginationState, clearBoardsSearchState } from '../../src/modules/board';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -137,6 +139,7 @@ function getCategoryIconByCategoryId(categoryId: string | string[]) {
 
 function MobileHeader() {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 	const router = useRouter();
 	const { route, query: { id } } = router;
 	const [menuListState, setMenuListState] = useState<boolean>(false);
@@ -202,6 +205,8 @@ function MobileHeader() {
 
 	const handleDrawer = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
 		const categoryId: string = event.currentTarget.getAttribute('data-category-id') || '';
+		dispatch(clearBoardsSearchState());
+		dispatch(clearBoardsPaginationState());
 
 		router.push({
 			pathname: '/board/[id]',
@@ -211,7 +216,7 @@ function MobileHeader() {
 		}, `/board/${categoryId}`).then();
 
 		setMenuListState(!menuListState);
-	}, [router, menuListState]);
+	}, [dispatch, router, menuListState]);
 
 	return (
 		<>
