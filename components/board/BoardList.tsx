@@ -23,7 +23,6 @@ import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import InputBase from '@material-ui/core/InputBase';
 import DialogActions from '@material-ui/core/DialogActions';
-import SSRLink from '@material-ui/core/Link';
 
 // Material UI Labs
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -260,7 +259,6 @@ function BoardList() {
 		boardList,
 		pagination,
 		pending,
-		count,
 		searchState,
 		dialogState,
 		dummyBoardArray,
@@ -268,8 +266,7 @@ function BoardList() {
 		onHandleSearchValueInput,
 		onHandleSearchValueInputKey,
 		onHandleDialog,
-		onHandlePagination,
-		onHandleBoardClickCount
+		onHandlePagination
 	} = useBoard();
 
 	return (
@@ -387,9 +384,9 @@ function BoardList() {
 									);
 								}
 								return (
-									count >= 7 ? (
-										<SSRLink key={`board-${item.id}`} href={`/board/${categoryId}/${item.id}`}>
-											<Grid className={classes.grid} container onClick={onHandleBoardClickCount}>
+									<Link key={`board-${item.id}`} href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
+										<a>
+											<Grid className={classes.grid} container>
 												<Grid item xs={12} md={7}>
 													<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
 														<Typography noWrap variant={'subtitle2'}>
@@ -422,46 +419,8 @@ function BoardList() {
 													</Box>
 												</Grid>
 											</Grid>
-										</SSRLink>
-									) : (
-										<Link key={`board-${item.id}`} href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
-											<a>
-												<Grid className={classes.grid} container onClick={onHandleBoardClickCount}>
-													<Grid item xs={12} md={7}>
-														<Box display={'flex'} alignItems={'center'} p={1} pl={0}>
-															<Typography noWrap variant={'subtitle2'}>
-																{item.subject}
-															</Typography>
-															<Typography variant={'subtitle2'}>
-																{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
-															</Typography>
-															<Typography variant={'subtitle2'}>
-																<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
-															</Typography>
-														</Box>
-													</Grid>
-													<Grid className={classes.gridItemWriterInfo} item xs={12} md={5}>
-														<Box className={classes.gridItemWriterInfoBox}>
-															<Box className={classes.nickname}>
-																<Typography noWrap variant={'subtitle2'}>
-																	{item.nickname}
-																</Typography>
-															</Box>
-															<Box className={classes.registerDate}>
-																{getRegisterDate(item.register_date)}
-															</Box>
-															<Box className={classes.thumbs}>
-																<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
-															</Box>
-															<Box className={classes.view}>
-																<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
-															</Box>
-														</Box>
-													</Grid>
-												</Grid>
-											</a>
-										</Link>
-									)
+										</a>
+									</Link>
 								);
 							})}
 						</Box>

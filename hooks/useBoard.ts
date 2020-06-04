@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 import {
 	fetchBoards,
 	handleBoardsSearchState,
-	handleBoardClickCountState,
 	SearchState
 } from '../src/modules/board';
 import { RootState } from '../src/modules';
@@ -26,10 +25,6 @@ export default function useBoard() {
 	const { id: categoryId } = useMemo(() => (
 		router.query
 	), [router.query]);
-
-	const onHandleBoardClickCount = useCallback(() => {
-		dispatch(handleBoardClickCountState());
-	}, [dispatch]);
 
 	const onHandlePagination = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
 		dispatch(fetchBoards({ categoryId, page: value, searchState: boardState.searchState }));
@@ -78,7 +73,6 @@ export default function useBoard() {
 		onHandleSearchValueInput,
 		onHandleSearchValueInputKey,
 		onHandleDialog,
-		onHandlePagination,
-		onHandleBoardClickCount
+		onHandlePagination
 	};
 }

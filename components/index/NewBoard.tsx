@@ -212,38 +212,40 @@ function NewBoard() {
 						<Grid container>
 							{dummyBoardArray.map((index) => (
 								<Grid key={`dummy-new-board-${index}`} className={classes.gridItemSkeleton} item xs={12} md={6}>
-									<List>
-										<ListItem>
-											<Box className={classes.thumbnailBoxWrapper} marginRight={1}>
-												<Box className={classes.thumbnailBoxWrapperInnerSkeleton}>
-													<Box className={classes.thumbnailBoxCenteredSkeleton}>
-														<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
+									<Grow in>
+										<List>
+											<ListItem>
+												<Box className={classes.thumbnailBoxWrapper} marginRight={1}>
+													<Box className={classes.thumbnailBoxWrapperInnerSkeleton}>
+														<Box className={classes.thumbnailBoxCenteredSkeleton}>
+															<Skeleton variant={'rect'} width={'100%'} height={'100%'} animation={'wave'} />
+														</Box>
 													</Box>
 												</Box>
-											</Box>
-											<ListItemText>
-												<Typography variant={'subtitle2'} gutterBottom>
-													<Skeleton width={'100%'} animation={'wave'} />
-												</Typography>
-												<Typography className={classes.writerTypographySkeleton} variant={'body2'} color={'textSecondary'} gutterBottom>
-													<Box component={'span'} marginRight={1}>
-														<Skeleton width={50} animation={'wave'} />
-													</Box>
-													<Box component={'span'}>
-														<Skeleton width={50} animation={'wave'} />
-													</Box>
-												</Typography>
-												<Typography className={classes.statTypographySkeleton} variant={'body2'} color={'textSecondary'}>
-													<Box component={'span'} marginRight={1}>
-														<Skeleton width={50} animation={'wave'} />
-													</Box>
-													<Box component={'span'}>
-														<Skeleton width={50} animation={'wave'} />
-													</Box>
-												</Typography>
-											</ListItemText>
-										</ListItem>
-									</List>
+												<ListItemText>
+													<Typography variant={'subtitle2'} gutterBottom>
+														<Skeleton width={'100%'} animation={'wave'} />
+													</Typography>
+													<Typography className={classes.writerTypographySkeleton} variant={'body2'} color={'textSecondary'} gutterBottom>
+														<Box component={'span'} marginRight={1}>
+															<Skeleton width={50} animation={'wave'} />
+														</Box>
+														<Box component={'span'}>
+															<Skeleton width={50} animation={'wave'} />
+														</Box>
+													</Typography>
+													<Typography className={classes.statTypographySkeleton} variant={'body2'} color={'textSecondary'}>
+														<Box component={'span'} marginRight={1}>
+															<Skeleton width={50} animation={'wave'} />
+														</Box>
+														<Box component={'span'}>
+															<Skeleton width={50} animation={'wave'} />
+														</Box>
+													</Typography>
+												</ListItemText>
+											</ListItem>
+										</List>
+									</Grow>
 								</Grid>
 							))}
 						</Grid>

@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Hidden from '@material-ui/core/Hidden';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Fade from '@material-ui/core/Fade';
 
 // Modules
 import { fetchBoards } from '../../../src/modules/board';
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			backgroundColor: 'white'
 		},
 		box: {
-			margin: theme.spacing(1, 0, 0, 1)
+			margin: theme.spacing(1, 0, 1, 1)
 		},
 		adPendingBox: {
 			display: 'flex',
@@ -100,20 +101,24 @@ function Board({ query }: NextPageContext) {
 						<Hidden mdDown>
 							<Box className={classes.box}>
 								{!pending && (
-									<GoogleAdSense
-										html={'<ins class="adsbygoogle"'
-										+ 'style="display:block"'
-										+ 'data-ad-client="ca-pub-5809905264951057"'
-										+ 'data-ad-slot="3880285784"'
-										+ 'data-ad-format="auto"'
-										+ 'data-full-width-responsive="true">'
-										+ '</ins>'}
-									/>
+									<Fade in>
+										<GoogleAdSense
+											html={'<ins class="adsbygoogle"'
+											+ 'style="display:block"'
+											+ 'data-ad-client="ca-pub-5809905264951057"'
+											+ 'data-ad-slot="3880285784"'
+											+ 'data-ad-format="auto"'
+											+ 'data-full-width-responsive="true">'
+											+ '</ins>'}
+										/>
+									</Fade>
 								)}
 								{pending && (
-									<Box className={classes.adPendingBox}>
-										<img src={AdWords} alt={'Advertisement Pending Img'} />
-									</Box>
+									<Fade in>
+										<Box className={classes.adPendingBox}>
+											<img src={AdWords} alt={'Advertisement Pending Img'} />
+										</Box>
+									</Fade>
 								)}
 							</Box>
 						</Hidden>
