@@ -218,6 +218,14 @@ const useStyles = makeStyles((theme: Theme) =>
 				backgroundColor: theme.palette.primary.main
 			}
 		},
+		searchSkeletonBox: {
+			display: 'flex',
+			alignItems: 'center',
+			padding: theme.spacing(0, 3),
+			[theme.breakpoints.down('sm')]: {
+				padding: theme.spacing(0, 2)
+			}
+		},
 		inputRoot: {
 			width: '100%',
 			color: 'inherit'
@@ -342,9 +350,9 @@ function BoardList() {
 							</Grid>
 						))}
 						<Hidden lgUp>
-							<Box display={'flex'} justifyContent={'center'} pl={2} pr={2}>
-								<Box flexGrow={1} ml={1} mr={1}>
-									<Skeleton height={40} animation={'wave'} />
+							<Box className={classes.searchSkeletonBox}>
+								<Box flexGrow={1}>
+									<Skeleton height={50} animation={'wave'} />
 								</Box>
 							</Box>
 						</Hidden>
