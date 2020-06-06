@@ -222,7 +222,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			alignItems: 'center',
 			padding: theme.spacing(0, 3),
-			[theme.breakpoints.down('sm')]: {
+			[theme.breakpoints.down('xs')]: {
 				padding: theme.spacing(0, 2)
 			}
 		},
