@@ -6,8 +6,8 @@ import Head from 'next/head';
 import { fetchMainContents } from '../src/modules/home';
 
 // Components
-import DailyPopularBoard from '../components/index/DailyPopularBoard';
-import NewBoard from '../components/index/NewBoard';
+import DailyPopularBoard from '../src/components/index/DailyPopularBoard';
+import NewBoard from '../src/components/index/NewBoard';
 
 function Index() {
 	return (

@@ -19,10 +19,10 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 // Svgs
-import DefaultImageSvg from '../../styles/svgs/default_image.svg';
+import DefaultImageSvg from '../../../styles/svgs/default_image.svg';
 
 // Modules
-import { Board } from '../../src/modules/boardDetail';
+import { Board } from '../../modules/boardDetail';
 
 // Custom Hooks
 import useHome from '../../hooks/useHome';

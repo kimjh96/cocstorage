@@ -42,10 +42,10 @@ import GoogleAdSense from '../common/GoogleAdSense';
 import useBoard from '../../hooks/useBoard';
 
 // Modules
-import { Board } from '../../src/modules/boardDetail';
+import { Board } from '../../modules/boardDetail';
 
 // Snippets
-import { getSearchTypeLabelByType } from '../../src/snippet/board';
+import { getSearchTypeLabelByType } from '../../snippet/board';
 
 moment.locale('ko');
 

@@ -35,7 +35,7 @@ import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
 import useBoard from '../../hooks/useBoard';
 
 // Snippets
-import { getSearchTypeLabelByType, getCategoryNameByCategoryId } from '../../src/snippet/board';
+import { getSearchTypeLabelByType, getCategoryNameByCategoryId } from '../../snippet/board';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

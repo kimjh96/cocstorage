@@ -8,8 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
 // Modules
-import { postBoardDetailRecommend, clearBoardDetailRecommendState } from '../src/modules/boardDetail';
-import { RootState } from '../src/modules';
+import { postBoardDetailRecommend, clearBoardDetailRecommendState } from '../modules/boardDetail';
+import { RootState } from '../modules';
 
 export default function useBoardDetail() {
 	const dispatch = useDispatch();

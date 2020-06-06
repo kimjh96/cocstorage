@@ -18,10 +18,10 @@ import AddCommentIcon from '@material-ui/icons/AddComment';
 import PersonIcon from '@material-ui/icons/Person';
 
 // Svgs
-import NoCommentSvg from '../../styles/svgs/no_comment.svg';
+import NoCommentSvg from '../../../styles/svgs/no_comment.svg';
 
 // Modules
-import { BoardDetailComment } from '../../src/modules/boardDetail';
+import { BoardDetailComment } from '../../modules/boardDetail';
 
 // Custom Hooks
 import useBoardDetailComment from '../../hooks/useBoardDetailComment';
@@ -147,10 +147,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		replyBox: {
 			padding: theme.spacing(2),
-			borderTop: `1px solid ${theme.palette.grey['50']}`,
 			backgroundColor: '#fafafa',
 			[theme.breakpoints.down('md')]: {
-				borderTop: 'none',
 				borderBottom: `1px solid ${theme.palette.grey['50']}`
 			}
 		},

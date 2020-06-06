@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 // Modules
-import { fetchBoardDetailComments } from '../src/modules/boardDetail';
-import { RootState } from '../src/modules';
+import { fetchBoardDetailComments } from '../modules/boardDetail';
+import { RootState } from '../modules';
 
 export default function useBoardDetailComment() {
 	const router = useRouter();

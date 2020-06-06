@@ -35,13 +35,13 @@ import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
 import MenuIcon from '@material-ui/icons/Menu';
 
 // Modules
-import { clearBoardsPaginationState, clearBoardsSearchState } from '../../src/modules/board';
+import { clearBoardsPaginationState, clearBoardsSearchState } from '../../modules/board';
 
 // Images
-import Logo from '../../public/logo.png';
+import Logo from '../../../public/logo.png';
 
 // Snippets
-import { getCategoryNameByCategoryId } from '../../src/snippet/board';
+import { getCategoryNameByCategoryId } from '../../snippet/board';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

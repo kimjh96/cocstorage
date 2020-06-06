@@ -25,10 +25,10 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import useHome from '../../hooks/useHome';
 
 // Svgs
-import DefaultImageSvg from '../../styles/svgs/default_image.svg';
+import DefaultImageSvg from '../../../styles/svgs/default_image.svg';
 
 // Modules
-import { Board } from '../../src/modules/boardDetail';
+import { Board } from '../../modules/boardDetail';
 
 moment.locale('ko');
 

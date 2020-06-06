@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 // Modules
-import { RootState } from '../src/modules';
+import { RootState } from '../modules';
 
 export default function useHome() {
 	const homeState = useSelector((state: RootState) => state.home);

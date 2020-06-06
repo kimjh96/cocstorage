@@ -20,12 +20,12 @@ import Fade from '@material-ui/core/Fade';
 import { fetchBoards, handleBoardsSearchState } from '../../../src/modules/board';
 
 // Components
-import BackgroundSearch from '../../../components/board/BackgroundSearch';
-import BoardList from '../../../components/board/BoardList';
-import GoogleAdSense from '../../../components/common/GoogleAdSense';
+import BackgroundSearch from '../../../src/components/board/BackgroundSearch';
+import BoardList from '../../../src/components/board/BoardList';
+import GoogleAdSense from '../../../src/components/common/GoogleAdSense';
 
 // Custom Hooks
-import useBoard from '../../../hooks/useBoard';
+import useBoard from '../../../src/hooks/useBoard';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';

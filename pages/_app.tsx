@@ -28,7 +28,7 @@ import 'swiper/swiper.scss';
 import '../styles/common/swiper.scss';
 
 // Components
-import Layout from '../components/common/Layout';
+import Layout from '../src/components/common/Layout';
 
 function App({ Component, pageProps, store }: AppProps | any) {
 	return (

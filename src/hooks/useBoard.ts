@@ -11,8 +11,8 @@ import {
 	fetchBoards,
 	handleBoardsSearchState,
 	SearchState
-} from '../src/modules/board';
-import { RootState } from '../src/modules';
+} from '../modules/board';
+import { RootState } from '../modules';
 
 export default function useBoard() {
 	const router = useRouter();

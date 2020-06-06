@@ -7,7 +7,6 @@ import {
 } from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 // Material UI
 import Container from '@material-ui/core/Container';
@@ -19,13 +18,13 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { fetchBoardDetail } from '../../../src/modules/boardDetail';
 
 // Components
-import BoardDetail from '../../../components/boardDetail/BoardDetail';
-import SideBox from '../../../components/boardDetail/SideBox';
-import Comment from '../../../components/boardDetail/Comment';
-import GoogleAdSense from '../../../components/common/GoogleAdSense';
+import BoardDetail from '../../../src/components/boardDetail/BoardDetail';
+import SideBox from '../../../src/components/boardDetail/SideBox';
+import Comment from '../../../src/components/boardDetail/Comment';
+import GoogleAdSense from '../../../src/components/common/GoogleAdSense';
 
 // Custom Hooks
-import useBoardDetail from '../../../hooks/useBoardDetail';
+import useBoardDetail from '../../../src/hooks/useBoardDetail';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../../src/snippet/board';
