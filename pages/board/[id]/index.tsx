@@ -17,7 +17,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Fade from '@material-ui/core/Fade';
 
 // Modules
-import { fetchBoards } from '../../../src/modules/board';
+import { fetchBoards, handleBoardsSearchState } from '../../../src/modules/board';
 
 // Components
 import BackgroundSearch from '../../../components/board/BackgroundSearch';
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'center',
 			height: 600,
 			margin: theme.spacing(1, 0, 0, 1),
-			border: `1px solid ${theme.palette.grey.A100}`,
+			border: `1px solid ${theme.palette.grey['50']}`,
 			'& > img': {
 				maxWidth: 50
 			}
@@ -82,7 +82,6 @@ function Board({ query }: NextPageContext) {
 				<meta property={'twitter:image'} content={'https://www.cocstorage.com/logo.png'} />
 				<meta property={'twitter:url'} content={`https://www.cocstorage.com/board/${query.id}`} />
 				<meta property={'twitter:card'} content={'summary'} />
-				<meta name={'theme-color'} content={'#2F436E'} />
 				<meta name={'apple-mobile-web-app-title'} content={`${getCategoryNameByCategoryId(query.id)} : 개념글 저장소`} />
 				<title>{`${getCategoryNameByCategoryId(query.id)} : 개념글 저장소`}</title>
 				<link rel={'canonical'} href={`https://www.cocstorage.com/board/${query.id}`} />
@@ -92,7 +91,7 @@ function Board({ query }: NextPageContext) {
 				<script async src={'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'} />
 			</Head>
 			<BackgroundSearch />
-			<Container className={classes.root} disableGutters={isMobile}>
+			<Container className={classes.root} disableGutters={isMobile} maxWidth={isMobile ? 'md' : 'lg'}>
 				<Grid container>
 					<Grid item xs={12} lg={9}>
 						<BoardList />
@@ -129,8 +128,19 @@ function Board({ query }: NextPageContext) {
 	);
 }
 
-Board.getInitialProps = ({ store, query }: NextPageContext) => {
-	const { board: { searchState, pagination: { page } } } = store.getState();
+Board.getInitialProps = async ({ store, query }: NextPageContext) => {
+	let { board: { searchState } } = store.getState();
+	let page = 1;
+
+	if (typeof window !== 'undefined') {
+		page = Number(window.localStorage.getItem('coc-page') || 1);
+
+		const searchStateHistory = window.localStorage.getItem('coc-searchState');
+		if (searchStateHistory) {
+			searchState = JSON.parse(searchStateHistory);
+			store.dispatch(handleBoardsSearchState(searchState));
+		}
+	}
 
 	store.dispatch(fetchBoards({
 		categoryId: query.id,

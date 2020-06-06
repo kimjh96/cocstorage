@@ -50,6 +50,11 @@ const useStyles = makeStyles((theme: Theme) =>
 				padding: theme.spacing(2, 2, 0, 2)
 			}
 		},
+		subjectBoxTypography: {
+			[theme.breakpoints.down('md')]: {
+				fontSize: '1.2rem'
+			}
+		},
 		writerInfoBox: {
 			color: theme.palette.grey.A200,
 			[theme.breakpoints.down('md')]: {
@@ -65,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		otherInfoBox: {
 			padding: theme.spacing(2, 0),
 			border: '1px solid',
-			borderColor: theme.palette.grey.A100,
+			borderColor: theme.palette.grey['50'],
 			borderLeft: 'none',
 			borderRight: 'none',
 			[theme.breakpoints.down('md')]: {
@@ -78,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignItems: 'center',
 			padding: theme.spacing(2, 0),
 			border: '1px solid',
-			borderColor: theme.palette.grey.A100,
+			borderColor: theme.palette.grey['50'],
 			borderLeft: 'none',
 			borderRight: 'none',
 			[theme.breakpoints.down('md')]: {
@@ -114,7 +119,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			'& > button': {
 				padding: theme.spacing(2),
 				borderRadius: '0',
-				borderColor: theme.palette.grey.A100,
+				borderColor: theme.palette.grey['50'],
 				color: theme.palette.grey.A200
 			}
 		},
@@ -230,7 +235,7 @@ function BoardDetail() {
 				<Grow in>
 					<Box className={classes.root}>
 						<Box className={classes.subjectBox}>
-							<Typography component={'h5'} variant={'h5'}>
+							<Typography className={classes.subjectBoxTypography} component={'h5'} variant={'h5'}>
 								{data.subject}
 							</Typography>
 						</Box>

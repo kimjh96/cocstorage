@@ -30,7 +30,7 @@ export default function useBoardDetailComment() {
 				row
 			}));
 		}
-	}, [dispatch, router.query, boardDetailState.pending, boardDetailState.data.data_no, row]);
+	}, [dispatch, router.query, boardDetailState.pending, boardDetailState.data.id, boardDetailState.data.data_no, row]);
 
 	return {
 		onHandleCommentRow,

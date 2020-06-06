@@ -2,6 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { ActionType } from 'typesafe-actions';
 
 // Modules
+import { handleBoardClickCountState } from '../modules/board';
 import {
 	FETCH_BOARD_DETAIL,
 	FETCH_BOARD_DETAIL_COMMENTS,
@@ -10,7 +11,9 @@ import {
 	fetchBoardDetailSucceeded,
 	fetchBoardDetailComments,
 	fetchBoardDetailCommentsSucceeded,
-	postBoardDetailRecommend, postBoardDetailRecommendSucceeded, postBoardDetailRecommendFailed
+	postBoardDetailRecommend,
+	postBoardDetailRecommendSucceeded,
+	postBoardDetailRecommendFailed
 } from '../modules/boardDetail';
 
 // Service
@@ -20,6 +23,7 @@ function* watchFetchBoardDetail({ payload }: ActionType<typeof fetchBoardDetail>
 	try {
 		const response = yield call(Service.fetchBoardDetail, payload);
 		yield put(fetchBoardDetailSucceeded(response.data));
+		yield put(handleBoardClickCountState());
 	} catch (error) {
 		console.log(error);
 	}

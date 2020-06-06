@@ -23,6 +23,8 @@ import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import InputBase from '@material-ui/core/InputBase';
 import DialogActions from '@material-ui/core/DialogActions';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 // Material UI Labs
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -90,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			alignItems: 'center',
 			[theme.breakpoints.down('md')]: {
 				padding: theme.spacing(0, 3),
-				borderBottom: `1px solid ${theme.palette.grey.A100}`
+				borderBottom: `1px solid ${theme.palette.grey['50']}`
 			},
 			[theme.breakpoints.down('xs')]: {
 				padding: theme.spacing(0, 2)
@@ -109,8 +111,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			width: '100%',
 			paddingTop: theme.spacing(0.7),
 			textAlign: 'center',
-			borderBottom: `1px solid ${theme.palette.grey.A100}`,
-			backgroundColor: theme.palette.grey['50'],
+			borderBottom: `1px solid ${theme.palette.grey['50']}`,
+			backgroundColor: '#fafafa',
 			'& ins': {
 				marginLeft: '0 !important'
 			}
@@ -137,6 +139,9 @@ const useStyles = makeStyles((theme: Theme) =>
 				'& > div:first-child': {
 					marginLeft: 0
 				}
+			},
+			[theme.breakpoints.down('sm')]: {
+				marginTop: theme.spacing(-1)
 			}
 		},
 		gridBox: {
@@ -207,6 +212,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: 'white',
 			'&:hover': {
 				backgroundColor: fade(theme.palette.primary.main, 1)
+			},
+			[theme.breakpoints.down('md')]: {
+				borderRadius: 'inherit',
+				backgroundColor: theme.palette.primary.main
 			}
 		},
 		inputRoot: {
@@ -232,6 +241,31 @@ const useStyles = makeStyles((theme: Theme) =>
 		formControl: {
 			margin: theme.spacing(1),
 			minWidth: 120
+		},
+		textField: {
+			flex: 1,
+			'& .MuiInput-underline': {
+				'& svg': {
+					transition: 'color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+					color: theme.palette.grey.A100
+				}
+			},
+			'& .MuiInput-underline:hover': {
+				'& svg': {
+					color: theme.palette.primary.main
+				}
+			},
+			'& .MuiInput-underline.Mui-focused': {
+				'& svg': {
+					color: theme.palette.primary.main
+				}
+			},
+			'& .MuiInput-underline:before': {
+				borderBottomColor: theme.palette.grey['50']
+			}
+		},
+		input: {
+			padding: theme.spacing(1)
 		}
 	})
 );
@@ -307,6 +341,13 @@ function BoardList() {
 								</Grid>
 							</Grid>
 						))}
+						<Hidden lgUp>
+							<Box display={'flex'} justifyContent={'center'} pl={2} pr={2}>
+								<Box flexGrow={1} ml={1} mr={1}>
+									<Skeleton height={40} animation={'wave'} />
+								</Box>
+							</Box>
+						</Hidden>
 						<Box display={'flex'} justifyContent={'center'} p={2} pt={0}>
 							<Box ml={1}>
 								<Skeleton width={30} height={40} animation={'wave'} />
@@ -425,39 +466,31 @@ function BoardList() {
 							})}
 						</Box>
 					</Grow>
-					<Hidden xsUp>
-						<Box>
-							<Grid container>
-								<Grid className={classes.gridItem} item xs={12}>
-									<Box className={classes.gridBox}>
-										<Box>
-											<Button
-												className={classes.searchButton}
-												color={'inherit'}
-												onClick={onHandleDialog}
-											>
-												{getSearchTypeLabelByType(searchState.type)}
-											</Button>
-										</Box>
-										<Box className={classes.search}>
-											<Box className={classes.searchIcon}>
-												<SearchIcon />
-											</Box>
-											<InputBase
-												classes={{
-													root: classes.inputRoot,
-													input: classes.inputInput
-												}}
-												onChange={onHandleSearchValueInput}
-												onKeyUp={onHandleSearchValueInputKey}
-												value={searchState.value}
-												placeholder={'검색'}
-											/>
-										</Box>
-									</Box>
-								</Grid>
-							</Grid>
-						</Box>
+					<Hidden lgUp>
+						<Grid container>
+							<TextField
+								className={classes.textField}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position={'start'}>
+											<SearchIcon />
+										</InputAdornment>
+									),
+									className: classes.input
+								}}
+								onChange={onHandleSearchValueInput}
+								onKeyUp={onHandleSearchValueInputKey}
+								value={searchState.value}
+								placeholder={'검색할 단어를 입력해주세요.'}
+							/>
+							<Button
+								className={classes.searchButton}
+								color={'inherit'}
+								onClick={onHandleDialog}
+							>
+								{getSearchTypeLabelByType(searchState.type)}
+							</Button>
+						</Grid>
 					</Hidden>
 					<Pagination
 						className={classes.pagination}
@@ -471,7 +504,7 @@ function BoardList() {
 					/>
 				</>
 			)}
-			<Hidden xsUp>
+			<Hidden lgUp>
 				<Dialog disableBackdropClick disableEscapeKeyDown open={dialogState} onClose={onHandleDialog}>
 					<DialogTitle>{'검색 조건'}</DialogTitle>
 					<DialogContent>

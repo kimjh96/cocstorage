@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	createStyles,
 	makeStyles,
@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 // Material UI
 import Container from '@material-ui/core/Container';
@@ -38,8 +39,8 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		adBox: {
 			textAlign: 'center',
-			borderTop: `1px solid ${theme.palette.grey.A100}`,
-			borderBottom: `1px solid ${theme.palette.grey.A100}`
+			borderTop: `1px solid ${theme.palette.grey['50']}`,
+			borderBottom: `1px solid ${theme.palette.grey['50']}`
 		}
 	})
 );
@@ -52,7 +53,11 @@ function Detail({ query }: NextPageContext) {
 	const classes = useStyles();
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-	const { board: { data } } = useBoardDetail();
+	const { board: { data }, onClearGoogleAdSenseLimit } = useBoardDetail();
+
+	useEffect(() => {
+		onClearGoogleAdSenseLimit();
+	}, [onClearGoogleAdSenseLimit]);
 
 	return (
 		<>
@@ -75,7 +80,6 @@ function Detail({ query }: NextPageContext) {
 				<meta property={'twitter:image'} content={(data && data.image) ? data.image : '/logo.png'} />
 				<meta property={'twitter:url'} content={`https://www.cocstorage.com/board/${query.id}/${query.detail}`} />
 				<meta property={'twitter:card'} content={'summary'} />
-				<meta name={'theme-color'} content={'#2F436E'} />
 				<meta name={'apple-mobile-web-app-title'} content={getMetaTagTitle(data, query.id)} />
 				<title>{getMetaTagTitle(data, query.id)}</title>
 				<link rel={'canonical'} href={`https://www.cocstorage.com/board/${query.id}/${query.detail}`} />
@@ -111,7 +115,7 @@ function Detail({ query }: NextPageContext) {
 	);
 }
 
-Detail.getInitialProps = ({ store, query }: NextPageContext) => {
+Detail.getInitialProps = async ({ store, query }: NextPageContext) => {
 	const payload = {
 		id: Number(query.detail),
 		categoryId: query.id

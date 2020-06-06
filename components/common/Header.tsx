@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		appBar: {
 			boxShadow: 'none',
-			borderBottom: `1px solid ${theme.palette.grey.A100}`
+			borderBottom: `1px solid ${theme.palette.grey['50']}`
 		},
 		toolbar: {
 			height: 80
@@ -55,9 +55,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: 'white'
 		},
 		paper: {
-			borderTop: 'none',
-			borderLeft: 'none',
-			borderRight: 'none'
+			border: 'none',
+			borderBottom: `1px solid ${theme.palette.grey['50']}`
 		},
 		logoBox: {
 			padding: theme.spacing(3, 0)
@@ -146,6 +145,8 @@ function Header() {
 
 	const handleTabChange = useCallback((event: React.ChangeEvent<{}>, newValue: string) => {
 		const isIndexRoute: boolean = newValue === '/' && true;
+		window.localStorage.removeItem('coc-page');
+		window.localStorage.removeItem('coc-searchState');
 		dispatch(clearBoardsSearchState());
 		dispatch(clearBoardsPaginationState());
 

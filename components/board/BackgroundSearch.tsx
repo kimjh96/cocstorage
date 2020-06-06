@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
 			height: 200,
-			background: 'linear-gradient(to right, #E0C3FC, #8EC5FC)',
+			background: `linear-gradient(to right, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
 			[theme.breakpoints.down('md')]: {
 				height: 'auto'
 			}

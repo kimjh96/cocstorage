@@ -15,12 +15,24 @@ const theme = createMuiTheme({
 		},
 		background: {
 			default: '#fff'
+		},
+		grey: {
+			50: '#EAEAEA'
 		}
 	},
 	typography: {
 		fontFamily: 'NanumSquareRoundR',
 		h5: {
 			fontFamily: 'NanumSquareRoundEB'
+		}
+	},
+	overrides: {
+		MuiInput: {
+			underline: {
+				'&:hover:not($disabled):before': {
+					borderBottomColor: '#8EC5FC'
+				}
+			}
 		}
 	}
 });

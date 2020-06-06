@@ -31,7 +31,6 @@ function Index() {
 				<meta property={'twitter:image'} content={'/logo_prev.png'} />
 				<meta property={'twitter:url'} content={'https://wwww.cocstorage.com'} />
 				<meta property={'twitter:card'} content={'summary'} />
-				<meta name={'theme-color'} content={'#2F436E'} />
 				<meta name={'apple-mobile-web-app-title'} content={'개념글 저장소'} />
 				<title>{'개념글 저장소'}</title>
 				<link rel={'shortcut icon'} href={'/favicon.ico'} />
@@ -45,7 +44,7 @@ function Index() {
 	);
 }
 
-Index.getInitialProps = ({ store }: NextPageContext) => {
+Index.getInitialProps = async ({ store }: NextPageContext) => {
 	store.dispatch(fetchMainContents());
 
 	return {

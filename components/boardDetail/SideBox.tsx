@@ -24,14 +24,14 @@ const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		box: {
 			margin: theme.spacing(1, 0, 0, 1),
-			border: `1px solid ${theme.palette.grey.A100}`,
+			border: `1px solid ${theme.palette.grey['50']}`,
 			backgroundColor: 'white',
 			[theme.breakpoints.down('md')]: {
 				margin: 0
 			}
 		},
 		adBox: {
-			margin: theme.spacing(1, 0, 0, 1),
+			margin: theme.spacing(1, 0, 1, 1),
 			[theme.breakpoints.down('md')]: {
 				margin: 0
 			}

@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: 'flex',
 			paddingTop: theme.spacing(2),
 			paddingBottom: theme.spacing(2),
-			borderBottom: `1px solid ${theme.palette.grey.A100}`,
+			borderBottom: `1px solid ${theme.palette.grey['50']}`,
 			[theme.breakpoints.down('md')]: {
 				paddingLeft: theme.spacing(2),
 				paddingRight: theme.spacing(2)
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderRadius: 'inherit',
 			color: theme.palette.grey.A200,
 			[theme.breakpoints.down('md')]: {
-				borderBottom: `1px solid ${theme.palette.grey.A100}`
+				borderBottom: `1px solid ${theme.palette.grey['50']}`
 			}
 		},
 		commentListItem: {
@@ -88,8 +88,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			padding: theme.spacing(2, 0),
 			wordBreak: 'break-all',
 			wordWrap: 'break-word',
+			overflow: 'hidden',
 			[theme.breakpoints.down('md')]: {
-				borderBottom: `1px solid ${theme.palette.grey.A100}`
+				borderBottom: `1px solid ${theme.palette.grey['50']}`
 			}
 		},
 		commentListItemWriterBox: {
@@ -146,11 +147,11 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		replyBox: {
 			padding: theme.spacing(2),
-			borderTop: `1px solid ${theme.palette.grey.A100}`,
-			backgroundColor: theme.palette.grey['50'],
+			borderTop: `1px solid ${theme.palette.grey['50']}`,
+			backgroundColor: '#fafafa',
 			[theme.breakpoints.down('md')]: {
 				borderTop: 'none',
-				borderBottom: `1px solid ${theme.palette.grey.A100}`
+				borderBottom: `1px solid ${theme.palette.grey['50']}`
 			}
 		},
 		replyBoxItemWriterBox: {
@@ -163,8 +164,8 @@ const useStyles = makeStyles((theme: Theme) =>
 				width: 20,
 				height: 20,
 				marginBottom: 15,
-				borderLeft: `2px solid ${theme.palette.grey.A200}`,
-				borderBottom: `2px solid ${theme.palette.grey.A200}`
+				borderLeft: `2px solid ${theme.palette.grey.A100}`,
+				borderBottom: `2px solid ${theme.palette.grey.A100}`
 			},
 			'& > div::after': {
 				content: '""',
@@ -172,9 +173,9 @@ const useStyles = makeStyles((theme: Theme) =>
 				margin: theme.spacing(1),
 				width: 3,
 				height: 3,
-				border: `1px solid ${theme.palette.grey.A200}`,
+				border: `1px solid ${theme.palette.grey.A100}`,
 				borderRadius: '50%',
-				backgroundColor: theme.palette.grey.A200,
+				backgroundColor: theme.palette.grey.A100,
 				verticalAlign: 'middle'
 			},
 			'& > div:last-child::after': {

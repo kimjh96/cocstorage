@@ -46,10 +46,8 @@ import { getCategoryNameByCategoryId } from '../../src/snippet/board';
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
-			borderTop: 0,
-			borderLeft: 0,
-			borderRight: 0,
-			borderColor: `1px solid ${theme.palette.grey.A100}`,
+			border: 'none',
+			borderBottom: `1px solid ${theme.palette.grey['50']}`,
 			backgroundColor: 'white'
 		},
 		toolbar: {
@@ -77,6 +75,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		listItemIcon: {
 			color: 'inherit'
+		},
+		divider: {
+			backgroundColor: theme.palette.grey['50']
 		}
 	})
 );
@@ -207,6 +208,8 @@ function MobileHeader() {
 
 	const handleDrawer = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
 		const categoryId: string = event.currentTarget.getAttribute('data-category-id') || '';
+		window.localStorage.removeItem('coc-page');
+		window.localStorage.removeItem('coc-searchState');
 		dispatch(clearBoardsSearchState());
 		dispatch(clearBoardsPaginationState());
 
@@ -259,7 +262,7 @@ function MobileHeader() {
 							</ListItem>
 						))}
 					</List>
-					<Divider />
+					<Divider className={classes.divider} />
 				</div>
 			</SwipeableDrawer>
 		</>
