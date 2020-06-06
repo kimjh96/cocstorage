@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			}
 		},
 		containerBox: {
-			border: `1px solid ${theme.palette.grey.A100}`,
+			border: `1px solid ${theme.palette.grey['50']}`,
 			backgroundColor: 'white',
 			[theme.breakpoints.down('md')]: {
 				padding: theme.spacing(0, 1),
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		thumbnailBoxWrapperInner: {
 			position: 'relative',
 			paddingTop: '75%',
-			border: `1px solid ${theme.palette.grey.A100}`,
+			border: `1px solid ${theme.palette.grey['50']}`,
 			overflow: 'hidden'
 		},
 		thumbnailBoxWrapperInnerSkeleton: {
