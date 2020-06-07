@@ -33,7 +33,7 @@ import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
 import HomeIcon from '@material-ui/icons/Home';
 
 // Modules
-import { clearBoardsPaginationState, clearBoardsSearchState } from '../../modules/board';
+import { clearBoardsRelatedState } from '../../modules/board';
 
 // Snippets
 import { getCategoryNameByCategoryId } from '../../snippet/board';
@@ -145,10 +145,7 @@ function Header() {
 
 	const handleTabChange = useCallback((event: React.ChangeEvent<{}>, newValue: string) => {
 		const isIndexRoute: boolean = newValue === '/' && true;
-		window.localStorage.removeItem('coc-page');
-		window.localStorage.removeItem('coc-searchState');
-		dispatch(clearBoardsSearchState());
-		dispatch(clearBoardsPaginationState());
+		dispatch(clearBoardsRelatedState());
 
 		if (isIndexRoute) {
 			router.push({
@@ -177,11 +174,13 @@ function Header() {
 		}, `/board/${categoryId}`).then();
 	}, [router, id]);
 
-	const handleLogo = useCallback(() => (
+	const handleLogo = useCallback(() => {
+		dispatch(clearBoardsRelatedState());
+
 		router.push({
 			pathname: '/'
-		}).then()
-	), [router]);
+		}).then();
+	}, [dispatch, router]);
 
 	return (
 		<>

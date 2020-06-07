@@ -27,7 +27,6 @@ export default function useBoard() {
 	), [router.query]);
 
 	const onHandlePagination = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
-		window.localStorage.setItem('coc-page', String(value));
 		dispatch(fetchBoards({ categoryId, page: value, searchState: boardState.searchState }));
 	}, [dispatch, categoryId, boardState.searchState]);
 
@@ -56,7 +55,6 @@ export default function useBoard() {
 				handle: true
 			};
 
-			window.localStorage.setItem('coc-searchState', JSON.stringify(nextSearchState));
 			dispatch(handleBoardsSearchState(nextSearchState));
 			dispatch(fetchBoards({ categoryId, page: 1, searchState: nextSearchState }));
 		}

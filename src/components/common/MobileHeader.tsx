@@ -35,7 +35,7 @@ import SportsBaseballIcon from '@material-ui/icons/SportsBaseball';
 import MenuIcon from '@material-ui/icons/Menu';
 
 // Modules
-import { clearBoardsPaginationState, clearBoardsSearchState } from '../../modules/board';
+import { clearBoardsRelatedState } from '../../modules/board';
 
 // Images
 import Logo from '../../../public/logo.png';
@@ -200,18 +200,17 @@ function MobileHeader() {
 		}, `/board/${categoryId}`).then();
 	}, [router, id]);
 
-	const handleLogo = useCallback(() => (
+	const handleLogo = useCallback(() => {
+		dispatch(clearBoardsRelatedState());
+
 		router.push({
 			pathname: '/'
-		})
-	), [router]);
+		});
+	}, [dispatch, router]);
 
 	const handleDrawer = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
 		const categoryId: string = event.currentTarget.getAttribute('data-category-id') || '';
-		window.localStorage.removeItem('coc-page');
-		window.localStorage.removeItem('coc-searchState');
-		dispatch(clearBoardsSearchState());
-		dispatch(clearBoardsPaginationState());
+		dispatch(clearBoardsRelatedState());
 
 		router.push({
 			pathname: '/board/[id]',

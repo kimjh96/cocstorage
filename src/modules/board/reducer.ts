@@ -3,9 +3,8 @@ import {
 	FETCH_BOARDS,
 	FETCH_BOARDS_SUCCEEDED,
 	HANDLE_BOARDS_SEARCH_STATE,
-	CLEAR_BOARDS_SEARCH_STATE,
 	HANDLE_BOARDS_CLICK_COUNT_STATE,
-	CLEAR_BOARDS_PAGINATION_STATE
+	CLEAR_BOARDS_RELATED_STATE
 } from './actions';
 import { BoardAction, BoardState } from './types';
 
@@ -57,20 +56,17 @@ const board = createReducer<BoardState, BoardAction>(initialState, {
 			...payload
 		}
 	}),
-	[CLEAR_BOARDS_SEARCH_STATE]: (state) => ({
+	[HANDLE_BOARDS_CLICK_COUNT_STATE]: (state) => ({
+		...state,
+		count: state.count + 1
+	}),
+	[CLEAR_BOARDS_RELATED_STATE]: (state) => ({
 		...state,
 		searchState: {
 			handle: false,
 			type: 'all',
 			value: ''
-		}
-	}),
-	[HANDLE_BOARDS_CLICK_COUNT_STATE]: (state) => ({
-		...state,
-		count: state.count + 1
-	}),
-	[CLEAR_BOARDS_PAGINATION_STATE]: (state) => ({
-		...state,
+		},
 		pagination: {
 			...state.pagination,
 			page: 1
