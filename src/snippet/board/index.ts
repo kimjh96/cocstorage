@@ -47,7 +47,7 @@ export function getCategoryNameByCategoryId(categoryId: string | string[]) {
 	case 'extra':
 		categoryName = '헬스';
 		break;
-	case 'baseball_new8':
+	case 'baseball_new9':
 		categoryName = '국내야구';
 		break;
 	default:

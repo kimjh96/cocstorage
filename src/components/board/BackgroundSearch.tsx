@@ -153,7 +153,7 @@ function getCategoryIconByCategoryId(categoryId: string | string[]) {
 	case 'extra':
 		categoryIcon = <FitnessCenterIcon fontSize={'large'} />;
 		break;
-	case 'baseball_new8':
+	case 'baseball_new9':
 		categoryIcon = <SportsBaseballIcon fontSize={'large'} />;
 		break;
 	default:

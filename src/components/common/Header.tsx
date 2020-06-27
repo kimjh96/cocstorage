@@ -123,7 +123,7 @@ function getCategoryIconByCategoryId(categoryId: string | string[]) {
 	case 'extra':
 		categoryIcon = <FitnessCenterIcon />;
 		break;
-	case 'baseball_new8':
+	case 'baseball_new9':
 		categoryIcon = <SportsBaseballIcon />;
 		break;
 	default:
