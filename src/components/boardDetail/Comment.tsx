@@ -220,7 +220,7 @@ const useStyles = makeStyles((theme: Theme) =>
 				maxWidth: 50
 			},
 			[theme.breakpoints.down('md')]: {
-				borderBottom: `1px solid ${theme.palette.grey.A100}`
+				borderBottom: `1px solid ${theme.palette.grey['50']}`
 			}
 		}
 	})
