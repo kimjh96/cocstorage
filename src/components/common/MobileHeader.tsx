@@ -180,7 +180,7 @@ function MobileHeader() {
 		{
 			label: '국내야구',
 			icon: <SportsBaseballIcon className={classes.listItemIcon} />,
-			categoryId: 'baseball_new8'
+			categoryId: 'baseball_new9'
 		}
 	]);
 	const isBoardDetail = useMemo(() => (route === '/board/[id]/[detail]'), [route]);

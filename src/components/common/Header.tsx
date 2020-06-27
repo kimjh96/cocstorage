@@ -237,7 +237,7 @@ function Header() {
 								<Tab label={'이슈'} value={'/board/issuezoom'} />
 								<Tab label={'수능'} value={'/board/exam_new'} />
 								<Tab label={'헬스'} value={'/board/extra'} />
-								<Tab label={'국내야구'} value={'/board/baseball_new8'} />
+								<Tab label={'국내야구'} value={'/board/baseball_new9'} />
 							</Tabs>
 						</Container>
 					</Paper>
