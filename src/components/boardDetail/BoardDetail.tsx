@@ -246,7 +246,7 @@ function BoardDetail() {
 								</Avatar>
 								<Box ml={1}>{`${data.nickname} ${data.ip && `(${data.ip})`}`}</Box>
 							</Box>
-							<Box>{moment(data.register_date).format('YYYY. MM. DD hh:mm:ss')}</Box>
+							<Box>{moment(data.register_date).format('YYYY. MM. DD HH:mm:ss')}</Box>
 						</Box>
 						<Box className={classes.otherInfoBox} display={'flex'} alignItems={'center'}>
 							<Button startIcon={<MessageIcon />} disabled>

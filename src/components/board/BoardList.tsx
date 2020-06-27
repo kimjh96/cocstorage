@@ -283,7 +283,7 @@ function getRegisterDate(date: string | null) {
 	let formattedDate: string | null = null;
 
 	if (isToday) {
-		formattedDate = moment(date).format('hh:mm');
+		formattedDate = moment(date).format('HH:mm');
 	} else {
 		formattedDate = moment(date).format('YYYY-MM-DD');
 	}

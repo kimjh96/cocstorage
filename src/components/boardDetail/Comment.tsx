@@ -470,7 +470,7 @@ function Comment() {
 											</Box>
 											<Hidden mdDown>
 												<Box>
-													{moment(item.register_date).format('YYYY. MM. DD hh:mm:ss')}
+													{moment(item.register_date).format('YYYY. MM. DD HH:mm:ss')}
 												</Box>
 											</Hidden>
 										</Box>
@@ -479,7 +479,7 @@ function Comment() {
 										</Box>
 										<Hidden lgUp>
 											<Box className={classes.commentListItemDate}>
-												{moment(item.register_date).format('YYYY. MM. DD hh:mm:ss')}
+												{moment(item.register_date).format('YYYY. MM. DD HH:mm:ss')}
 											</Box>
 										</Hidden>
 									</Box>
@@ -499,7 +499,7 @@ function Comment() {
 												</Box>
 												<Hidden mdDown>
 													<Box>
-														{moment(child.register_date).format('YYYY. MM. DD hh:mm:ss')}
+														{moment(child.register_date).format('YYYY. MM. DD HH:mm:ss')}
 													</Box>
 												</Hidden>
 											</Box>
@@ -508,7 +508,7 @@ function Comment() {
 											</Box>
 											<Hidden lgUp>
 												<Box className={classes.replyBoxItemWriterDate}>
-													{moment(child.register_date).format('YYYY. MM. DD hh:mm:ss')}
+													{moment(child.register_date).format('YYYY. MM. DD HH:mm:ss')}
 												</Box>
 											</Hidden>
 										</Box>
