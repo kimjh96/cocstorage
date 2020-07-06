@@ -183,14 +183,18 @@ function BackgroundSearch() {
 					<Grid className={classes.gridItem} item xs={6}>
 						<Typography className={classes.typography} variant={'h5'} component={'h5'}>
 							{getCategoryIconByCategoryId(categoryId)}
-							<Box component={'span'} ml={1}>{getCategoryNameByCategoryId(categoryId)}</Box>
+							<Box component={'span'} ml={1}>
+								{getCategoryNameByCategoryId(categoryId)}
+							</Box>
 						</Typography>
 					</Grid>
 					<Grid className={classes.gridItem} item xs={6}>
 						<Hidden mdDown>
 							<Box className={classes.gridBox}>
 								<Box>
-									<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>{getSearchTypeLabelByType(searchState.type)}</Button>
+									<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>
+										{getSearchTypeLabelByType(searchState.type)}
+									</Button>
 								</Box>
 								<Box className={classes.search}>
 									<Box className={classes.searchIcon}>

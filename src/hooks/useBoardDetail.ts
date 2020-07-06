@@ -1,8 +1,5 @@
 import React, {
-	useEffect,
-	useState,
-	useCallback,
-	useMemo
+	useEffect, useState, useCallback, useMemo
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -20,21 +17,24 @@ export default function useBoardDetail() {
 	const [errorThumbsSnackBarOpen, setErrorThumbsSnackBarOpen] = useState<boolean>(false);
 	const [disabledRecommend, setDisabledRecommend] = useState<boolean>(false);
 
-	const { id: categoryId, detail } = useMemo(() => (
-		router.query
-	), [router.query]);
+	const { id: categoryId, detail } = useMemo(() => router.query, [router.query]);
 
-	const onHandleBoardDetailRecommend = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-		const thumbsType: string = event.currentTarget.getAttribute('data-thumbs-type') || '';
+	const onHandleBoardDetailRecommend = useCallback(
+		(event: React.MouseEvent<HTMLButtonElement>) => {
+			const thumbsType: string = event.currentTarget.getAttribute('data-thumbs-type') || '';
 
-		dispatch(postBoardDetailRecommend({
-			id: Number(detail),
-			categoryId,
-			recommendType: thumbsType
-		}));
+			dispatch(
+				postBoardDetailRecommend({
+					id: Number(detail),
+					categoryId,
+					recommendType: thumbsType
+				})
+			);
 
-		setDisabledRecommend(true);
-	}, [dispatch, categoryId, detail]);
+			setDisabledRecommend(true);
+		},
+		[dispatch, categoryId, detail]
+	);
 
 	const onHandleCloseSnackBar = useCallback(() => {
 		setThumbsSnackBarOpen(false);
@@ -59,7 +59,12 @@ export default function useBoardDetail() {
 		}
 	}, [boardDetailState.recommend]);
 
-	useEffect(() => () => { dispatch(clearBoardDetailRecommendState()); }, [dispatch]);
+	useEffect(
+		() => () => {
+			dispatch(clearBoardDetailRecommendState());
+		},
+		[dispatch]
+	);
 
 	return {
 		...boardDetailState,

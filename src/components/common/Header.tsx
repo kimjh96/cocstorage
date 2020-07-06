@@ -1,13 +1,7 @@
-import React, {
-	useCallback,
-	useMemo,
-	memo
-} from 'react';
+import React, { useCallback, useMemo, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
-import {
-	makeStyles, createStyles, Theme
-} from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 // Material UI
 import Container from '@material-ui/core/Container';
@@ -138,48 +132,69 @@ function Header() {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const { route, asPath, query: { id } } = router;
-	const activatedTab = useMemo(() => ((route === '/board/[id]') ? asPath : '/'), [route, asPath]);
-	const isBoardDetail = useMemo(() => (route === '/board/[id]/[detail]'), [route]);
-	const isPolicy = useMemo(() => (route === '/policy' || route === '/privacy'), [route]);
+	const {
+		route,
+		asPath,
+		query: { id }
+	} = router;
+	const activatedTab = useMemo(() => (route === '/board/[id]' ? asPath : '/'), [route, asPath]);
+	const isBoardDetail = useMemo(() => route === '/board/[id]/[detail]', [route]);
+	const isPolicy = useMemo(() => route === '/policy' || route === '/privacy', [route]);
 
-	const handleTabChange = useCallback((event: React.ChangeEvent<{}>, newValue: string) => {
-		const isIndexRoute: boolean = newValue === '/' && true;
-		dispatch(clearBoardsRelatedState());
+	const handleTabChange = useCallback(
+		(event: React.ChangeEvent<{}>, newValue: string) => {
+			const isIndexRoute: boolean = newValue === '/' && true;
+			dispatch(clearBoardsRelatedState());
 
-		if (isIndexRoute) {
-			router.push({
-				pathname: '/'
-			}).then();
-		} else {
-			const boardId: string = newValue.split('/')[2];
+			if (isIndexRoute) {
+				router
+					.push({
+						pathname: '/'
+					})
+					.then();
+			} else {
+				const boardId: string = newValue.split('/')[2];
 
-			router.push({
-				pathname: '/board/[id]',
-				query: {
-					id: boardId
-				}
-			}, newValue).then();
-		}
-	}, [dispatch, router]);
+				router
+					.push(
+						{
+							pathname: '/board/[id]',
+							query: {
+								id: boardId
+							}
+						},
+						newValue
+					)
+					.then();
+			}
+		},
+		[dispatch, router]
+	);
 
 	const handleChip = useCallback(() => {
 		const categoryId = typeof id === 'string' ? id : '';
 
-		router.push({
-			pathname: '/board/[id]',
-			query: {
-				id: categoryId
-			}
-		}, `/board/${categoryId}`).then();
+		router
+			.push(
+				{
+					pathname: '/board/[id]',
+					query: {
+						id: categoryId
+					}
+				},
+				`/board/${categoryId}`
+			)
+			.then();
 	}, [router, id]);
 
 	const handleLogo = useCallback(() => {
 		dispatch(clearBoardsRelatedState());
 
-		router.push({
-			pathname: '/'
-		}).then();
+		router
+			.push({
+				pathname: '/'
+			})
+			.then();
 	}, [dispatch, router]);
 
 	return (

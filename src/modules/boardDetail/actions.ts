@@ -27,11 +27,15 @@ export const fetchBoardDetailSucceeded = createAction(FETCH_BOARD_DETAIL_SUCCEED
 export const fetchBoardDetailFailed = createAction(FETCH_BOARD_DETAIL_FAILED)();
 
 export const fetchBoardDetailComments = createAction(FETCH_BOARD_DETAIL_COMMENTS)<FetchBoardDetailCommentPayload>();
-export const fetchBoardDetailCommentsSucceeded = createAction(FETCH_BOARD_DETAIL_COMMENTS_SUCCEEDED)<FetchBoardDetailCommentSucceededPayload>();
+export const fetchBoardDetailCommentsSucceeded = createAction(FETCH_BOARD_DETAIL_COMMENTS_SUCCEEDED)<
+	FetchBoardDetailCommentSucceededPayload
+>();
 export const fetchBoardDetailCommentsFailed = createAction(FETCH_BOARD_DETAIL_COMMENTS_FAILED)();
 
 export const postBoardDetailRecommend = createAction(POST_BOARD_DETAIL_RECOMMEND)<PostBoardDetailRecommendPayload>();
 export const postBoardDetailRecommendSucceeded = createAction(POST_BOARD_DETAIL_RECOMMEND_SUCCEEDED)<string>();
-export const postBoardDetailRecommendFailed = createAction(POST_BOARD_DETAIL_RECOMMEND_FAILED)<PostBoardDetailRecommendFailedPayload>();
+export const postBoardDetailRecommendFailed = createAction(POST_BOARD_DETAIL_RECOMMEND_FAILED)<
+	PostBoardDetailRecommendFailedPayload
+>();
 
 export const clearBoardDetailRecommendState = createAction(CLEAR_BOARD_DETAIL_RECOMMEND_STATE)();

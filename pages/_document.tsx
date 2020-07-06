@@ -18,8 +18,10 @@ export default class CustomDocument extends Document {
 				<body style={{ backgroundColor: theme.palette.background.default }}>
 					<script async src={'https://www.googletagmanager.com/gtag/js?id=UA-147959622-1'} />
 					<script
+						/* eslint-disable-next-line react/no-danger */
 						dangerouslySetInnerHTML={{
-							__html: 'window.dataLayer = window.dataLayer || [];'
+							__html:
+								'window.dataLayer = window.dataLayer || [];'
 								+ 'function gtag(){dataLayer.push(arguments);}'
 								+ 'gtag(\'js\', new Date());'
 								+ 'gtag(\'config\', \'UA-147959622-1\');'

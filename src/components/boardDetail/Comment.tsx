@@ -229,11 +229,7 @@ const useStyles = makeStyles((theme: Theme) =>
 function Comment() {
 	const classes = useStyles();
 	const {
-		data,
-		pending,
-		count,
-		row,
-		onHandleCommentRow
+		data, pending, count, row, onHandleCommentRow
 	} = useBoardDetailComment();
 
 	return (
@@ -241,9 +237,7 @@ function Comment() {
 			<List className={classes.commentOrderList} disablePadding>
 				<ListItem className={classes.commentOrderListItem} selected>
 					<Box>
-						<Typography variant={'body1'}>
-							{'최신순'}
-						</Typography>
+						<Typography variant={'body1'}>{'최신순'}</Typography>
 					</Box>
 				</ListItem>
 			</List>
@@ -451,8 +445,8 @@ function Comment() {
 							</Box>
 						</Grow>
 					)}
-					{!pending && (
-						data.map((item: BoardDetailComment) => (
+					{!pending
+						&& data.map((item: BoardDetailComment) => (
 							<Grow key={`board-comment-${item.id}`} in>
 								<Box>
 									<Box className={classes.commentListBox}>
@@ -469,14 +463,10 @@ function Comment() {
 												</Box>
 											</Box>
 											<Hidden mdDown>
-												<Box>
-													{moment(item.register_date).format('YYYY. MM. DD HH:mm:ss')}
-												</Box>
+												<Box>{moment(item.register_date).format('YYYY. MM. DD HH:mm:ss')}</Box>
 											</Hidden>
 										</Box>
-										<Box className={classes.commentListItemContent}>
-											{item.content}
-										</Box>
+										<Box className={classes.commentListItemContent}>{item.content}</Box>
 										<Hidden lgUp>
 											<Box className={classes.commentListItemDate}>
 												{moment(item.register_date).format('YYYY. MM. DD HH:mm:ss')}
@@ -498,14 +488,10 @@ function Comment() {
 													</Box>
 												</Box>
 												<Hidden mdDown>
-													<Box>
-														{moment(child.register_date).format('YYYY. MM. DD HH:mm:ss')}
-													</Box>
+													<Box>{moment(child.register_date).format('YYYY. MM. DD HH:mm:ss')}</Box>
 												</Hidden>
 											</Box>
-											<Box className={classes.replyBoxItemContent}>
-												{child.content}
-											</Box>
+											<Box className={classes.replyBoxItemContent}>{child.content}</Box>
 											<Hidden lgUp>
 												<Box className={classes.replyBoxItemWriterDate}>
 													{moment(child.register_date).format('YYYY. MM. DD HH:mm:ss')}
@@ -515,23 +501,20 @@ function Comment() {
 									))}
 								</Box>
 							</Grow>
-						))
-					)}
+						))}
 					{!pending && data.length === 0 && (
 						<Grow in>
 							<Box className={classes.emptyCommentBox}>
 								<Box>
 									<img src={NoCommentSvg} alt={'NoCommentSvg'} />
 								</Box>
-								<Box>
-									{'댓글이 존재하지 않습니다!'}
-								</Box>
+								<Box>{'댓글이 존재하지 않습니다!'}</Box>
 							</Box>
 						</Grow>
 					)}
 				</ListItem>
 			</List>
-			{(!pending && (count > row)) && (
+			{!pending && count > row && (
 				<Button
 					className={classes.commentListMoreButton}
 					fullWidth

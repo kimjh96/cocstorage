@@ -8,6 +8,7 @@ import { fetchMainContents } from '../src/modules/home';
 // Components
 import DailyPopularBoard from '../src/components/index/DailyPopularBoard';
 import NewBoard from '../src/components/index/NewBoard';
+import TempNotice from '../src/components/index/TempNotice';
 
 function Index() {
 	return (
@@ -38,6 +39,7 @@ function Index() {
 				<link rel={'canonical'} href={'https://www.cocstorage.com'} />
 				<link rel={'manifest'} href={'/manifest.json'} />
 			</Head>
+			<TempNotice />
 			<DailyPopularBoard />
 			<NewBoard />
 		</>

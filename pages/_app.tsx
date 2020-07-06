@@ -54,9 +54,7 @@ App.getInitialProps = async ({ Component, ctx }: AppContext) => {
 const configureStore = (preloadedState: any) => {
 	const sagaMiddleware = createSagaMiddleware();
 
-	const enhancer = composeWithDevTools(
-		applyMiddleware(sagaMiddleware)
-	);
+	const enhancer = composeWithDevTools(applyMiddleware(sagaMiddleware));
 	const store = createStore(rootReducer, preloadedState, enhancer);
 	(store as any).sagaTask = sagaMiddleware.run(rootSaga);
 

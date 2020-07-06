@@ -32,11 +32,13 @@ function* watchFetchBoardDetail({ payload }: ActionType<typeof fetchBoardDetail>
 function* watchFetchBoardDetailComment({ payload }: ActionType<typeof fetchBoardDetailComments>) {
 	try {
 		const response = yield call(Service.fetchBoardDetailComments, payload);
-		yield put(fetchBoardDetailCommentsSucceeded({
-			commentList: response.data.commentList,
-			count: response.data.count,
-			loadedCount: response.data.loadedCount
-		}));
+		yield put(
+			fetchBoardDetailCommentsSucceeded({
+				commentList: response.data.commentList,
+				count: response.data.count,
+				loadedCount: response.data.loadedCount
+			})
+		);
 	} catch (error) {
 		console.log(error);
 	}
@@ -47,10 +49,12 @@ function* watchPostBoardDetailRecommend({ payload }: ActionType<typeof postBoard
 		const response = yield call(Service.postBoardDetailRecommend, payload);
 		yield put(postBoardDetailRecommendSucceeded(response.data));
 	} catch (error) {
-		yield put(postBoardDetailRecommendFailed({
-			error: true,
-			errorMessage: error.response.data
-		}));
+		yield put(
+			postBoardDetailRecommendFailed({
+				error: true,
+				errorMessage: error.response.data
+			})
+		);
 	}
 }
 

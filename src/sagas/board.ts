@@ -3,10 +3,7 @@ import { ActionType } from 'typesafe-actions';
 
 // Modules
 import {
-	FETCH_BOARDS,
-	CLEAR_BOARDS_RELATED_STATE,
-	fetchBoards,
-	fetchBoardsSucceeded
+	FETCH_BOARDS, CLEAR_BOARDS_RELATED_STATE, fetchBoards, fetchBoardsSucceeded
 } from '../modules/board/actions';
 
 // Service

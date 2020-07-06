@@ -9,10 +9,9 @@ import { RootState } from '../modules';
 export default function useBoardDetailComment() {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const {
-		board: boardDetailState,
-		comment: boardDetailCommentState
-	} = useSelector((state: RootState) => state.boardDetail);
+	const { board: boardDetailState, comment: boardDetailCommentState } = useSelector(
+		(state: RootState) => state.boardDetail
+	);
 
 	const [row, setRow] = useState<number>(20);
 
@@ -22,13 +21,14 @@ export default function useBoardDetailComment() {
 
 	useEffect(() => {
 		if (!boardDetailState.pending && boardDetailState.data.data_no) {
-			dispatch(fetchBoardDetailComments({
-				id: boardDetailState.data.id || 0,
-				boardDataNo: boardDetailState.data.data_no,
-				categoryId:
-				router.query.id,
-				row
-			}));
+			dispatch(
+				fetchBoardDetailComments({
+					id: boardDetailState.data.id || 0,
+					boardDataNo: boardDetailState.data.data_no,
+					categoryId: router.query.id,
+					row
+				})
+			);
 		}
 	}, [dispatch, router.query, boardDetailState.pending, boardDetailState.data.id, boardDetailState.data.data_no, row]);
 

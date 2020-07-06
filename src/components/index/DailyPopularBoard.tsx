@@ -224,8 +224,25 @@ function DailyPopularBoard() {
 										<a>
 											<Box className={classes.cardWrapper}>
 												<Box className={classes.cardWrapperInner}>
-													<Box className={classes.cardCentered}>{item.image ? <img src={item.image} alt={'Thumbnail'} /> : <img className={classes.cardCenteredDefaultImage} src={DefaultImageSvg} alt={'Default Thumbnail'} />}
-														{item.image ? <img src={item.image} alt={'Thumbnail'} /> : <img className={classes.cardCenteredDefaultImage} src={DefaultImageSvg} alt={'Default Thumbnail'} />}
+													<Box className={classes.cardCentered}>
+														{item.image ? (
+															<img src={item.image} alt={'Thumbnail'} />
+														) : (
+															<img
+																className={classes.cardCenteredDefaultImage}
+																src={DefaultImageSvg}
+																alt={'Default Thumbnail'}
+															/>
+														)}
+														{item.image ? (
+															<img src={item.image} alt={'Thumbnail'} />
+														) : (
+															<img
+																className={classes.cardCenteredDefaultImage}
+																src={DefaultImageSvg}
+																alt={'Default Thumbnail'}
+															/>
+														)}
 													</Box>
 												</Box>
 												<Box className={classes.cardBackground}>
@@ -236,19 +253,13 @@ function DailyPopularBoard() {
 														{item.description}
 													</Typography>
 													<Grid container justify={'space-between'} className={classes.cardInfo}>
-														<Grid item>
-															{item.nickname}
-														</Grid>
+														<Grid item>{item.nickname}</Grid>
 														<Grid item className={classes.cardInfoViewCount}>
 															<Box component={'span'} marginRight={1} fontSize={12}>
-																<ThumbUpAltIcon fontSize={'small'} />
-																{' '}
-																{Number(item.up).toLocaleString()}
+																<ThumbUpAltIcon fontSize={'small'} /> {Number(item.up).toLocaleString()}
 															</Box>
 															<Box component={'span'} fontSize={12}>
-																<VisibilityIcon fontSize={'small'} />
-																{' '}
-																{Number(item.view).toLocaleString()}
+																<VisibilityIcon fontSize={'small'} /> {Number(item.view).toLocaleString()}
 															</Box>
 														</Grid>
 													</Grid>

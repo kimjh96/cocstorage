@@ -1,10 +1,10 @@
 import React, { useEffect, memo } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 // Material UI
 import Box from '@material-ui/core/Box';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			textAlign: 'center',
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type GoogleAdSenseProps = {
 	html: string;
-}
+};
 
 function GoogleAdSense({ html }: GoogleAdSenseProps) {
 	const classes = useStyles();

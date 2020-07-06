@@ -1,9 +1,5 @@
 import React, { useEffect, useState, memo } from 'react';
-import {
-	createStyles,
-	makeStyles,
-	Theme
-} from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import moment from 'moment';
 
 // Material UI
@@ -13,7 +9,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Skeleton from '@material-ui/lab/Skeleton';
-import RootRef from '@material-ui/core/RootRef';
 import Grow from '@material-ui/core/Grow';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
@@ -196,22 +191,52 @@ function BoardDetail() {
 								<Skeleton animation={'wave'} height={50} />
 							</Typography>
 						</Box>
-						<Box className={classes.writerInfoBox} display={'flex'} alignItems={'center'} justifyContent={'space-between'} mb={2} pt={1} pb={1}>
+						<Box
+							className={classes.writerInfoBox}
+							display={'flex'}
+							alignItems={'center'}
+							justifyContent={'space-between'}
+							mb={2}
+							pt={1}
+							pb={1}
+						>
 							<Box display={'flex'} alignItems={'center'}>
-								<Box><Skeleton variant={'circle'} animation={'wave'} width={35} height={35} /></Box>
-								<Box ml={1}><Skeleton animation={'wave'} width={50} /></Box>
+								<Box>
+									<Skeleton variant={'circle'} animation={'wave'} width={35} height={35} />
+								</Box>
+								<Box ml={1}>
+									<Skeleton animation={'wave'} width={50} />
+								</Box>
 							</Box>
-							<Box><Skeleton animation={'wave'} width={100} /></Box>
+							<Box>
+								<Skeleton animation={'wave'} width={100} />
+							</Box>
 						</Box>
 						<Box className={classes.otherInfoSkeletonBox}>
-							<Box><Skeleton variant={'circle'} animation={'wave'} width={20} height={20} /></Box>
-							<Box ml={1} mr={1}><Skeleton animation={'wave'} width={35} /></Box>
-							<Box><Skeleton variant={'circle'} animation={'wave'} width={20} height={20} /></Box>
-							<Box ml={1} mr={1}><Skeleton animation={'wave'} width={35} /></Box>
-							<Box><Skeleton variant={'circle'} animation={'wave'} width={20} height={20} /></Box>
-							<Box ml={1} mr={1}><Skeleton animation={'wave'} width={35} /></Box>
-							<Box><Skeleton variant={'circle'} animation={'wave'} width={20} height={20} /></Box>
-							<Box ml={1}><Skeleton animation={'wave'} width={35} /></Box>
+							<Box>
+								<Skeleton variant={'circle'} animation={'wave'} width={20} height={20} />
+							</Box>
+							<Box ml={1} mr={1}>
+								<Skeleton animation={'wave'} width={35} />
+							</Box>
+							<Box>
+								<Skeleton variant={'circle'} animation={'wave'} width={20} height={20} />
+							</Box>
+							<Box ml={1} mr={1}>
+								<Skeleton animation={'wave'} width={35} />
+							</Box>
+							<Box>
+								<Skeleton variant={'circle'} animation={'wave'} width={20} height={20} />
+							</Box>
+							<Box ml={1} mr={1}>
+								<Skeleton animation={'wave'} width={35} />
+							</Box>
+							<Box>
+								<Skeleton variant={'circle'} animation={'wave'} width={20} height={20} />
+							</Box>
+							<Box ml={1}>
+								<Skeleton animation={'wave'} width={35} />
+							</Box>
 						</Box>
 						<Box className={classes.contentBox}>
 							<Skeleton animation={'wave'} />
@@ -239,7 +264,15 @@ function BoardDetail() {
 								{data.subject}
 							</Typography>
 						</Box>
-						<Box className={classes.writerInfoBox} display={'flex'} alignItems={'center'} justifyContent={'space-between'} mb={2} pt={1} pb={1}>
+						<Box
+							className={classes.writerInfoBox}
+							display={'flex'}
+							alignItems={'center'}
+							justifyContent={'space-between'}
+							mb={2}
+							pt={1}
+							pb={1}
+						>
 							<Box display={'flex'} alignItems={'center'}>
 								<Avatar className={classes.writerAvatar}>
 									<PersonIcon />
@@ -264,12 +297,14 @@ function BoardDetail() {
 						</Box>
 						<Box className={classes.adBox}>
 							<GoogleAdSense
-								html={'<ins class="adsbygoogle"'
-								+ 'style="display:block"'
-								+ 'data-ad-client="ca-pub-5809905264951057"'
-								+ 'data-ad-slot="3990104603"'
-								+ 'data-ad-format="auto"'
-								+ 'data-full-width-responsive="true"></ins>'}
+								html={
+									'<ins class="adsbygoogle"'
+									+ 'style="display:block"'
+									+ 'data-ad-client="ca-pub-5809905264951057"'
+									+ 'data-ad-slot="3990104603"'
+									+ 'data-ad-format="auto"'
+									+ 'data-full-width-responsive="true"></ins>'
+								}
 							/>
 						</Box>
 						<Box className={classes.contentBox}>
@@ -277,10 +312,20 @@ function BoardDetail() {
 							<Box textAlign={'center'}>
 								<Box>
 									<ButtonGroup className={classes.recommendButtonGroup}>
-										<Button endIcon={<ThumbUpAltSharpIcon />} data-thumbs-type={'up'} onClick={onHandleBoardDetailRecommend} disabled={disabledRecommend}>
+										<Button
+											endIcon={<ThumbUpAltSharpIcon />}
+											data-thumbs-type={'up'}
+											onClick={onHandleBoardDetailRecommend}
+											disabled={disabledRecommend}
+										>
 											{Number(data.up).toLocaleString()}
 										</Button>
-										<Button startIcon={<ThumbDownAltSharpIcon />} data-thumbs-type={'down'} onClick={onHandleBoardDetailRecommend} disabled={disabledRecommend}>
+										<Button
+											startIcon={<ThumbDownAltSharpIcon />}
+											data-thumbs-type={'down'}
+											onClick={onHandleBoardDetailRecommend}
+											disabled={disabledRecommend}
+										>
 											{Number(data.down).toLocaleString()}
 										</Button>
 									</ButtonGroup>
@@ -308,9 +353,7 @@ function BoardDetail() {
 				TransitionComponent={SlideTransition}
 				autoHideDuration={1500}
 			>
-				<Alert severity={'error'}>
-					{getAlterMessageByResponseBody(errorMessage)}
-				</Alert>
+				<Alert severity={'error'}>{getAlterMessageByResponseBody(errorMessage)}</Alert>
 			</Snackbar>
 			<Backdrop className={classes.backdrop} open={backdropOpen}>
 				<CircularProgress color={'inherit'} />

@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-	createStyles,
-	makeStyles,
-	Theme,
-	useTheme
+	createStyles, makeStyles, Theme, useTheme
 } from '@material-ui/core/styles';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
@@ -45,14 +42,19 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getMetaTagTitle(data: any, id: any) {
-	return data.subject ? `${data.subject} : ${getCategoryNameByCategoryId(id)} 저장소` : `${getCategoryNameByCategoryId(id)} 저장소`;
+	return data.subject
+		? `${data.subject} : ${getCategoryNameByCategoryId(id)} 저장소`
+		: `${getCategoryNameByCategoryId(id)} 저장소`;
 }
 
 function Detail({ query }: NextPageContext) {
 	const classes = useStyles();
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-	const { board: { data }, onClearGoogleAdSenseLimit } = useBoardDetail();
+	const {
+		board: { data },
+		onClearGoogleAdSenseLimit
+	} = useBoardDetail();
 
 	useEffect(() => {
 		onClearGoogleAdSenseLimit();
@@ -70,13 +72,13 @@ function Detail({ query }: NextPageContext) {
 				<meta property={'og:title'} content={getMetaTagTitle(data, query.id)} />
 				<meta property={'og:description'} content={`${data.description}`} />
 				<meta property={'og:type'} content={'website'} />
-				<meta property={'og:image'} content={(data && data.image) ? data.image : '/logo.png'} />
+				<meta property={'og:image'} content={data && data.image ? data.image : '/logo.png'} />
 				<meta property={'og:url'} content={`https://www.cocstorage.com/board/${query.id}/${query.detail}`} />
 				<meta property={'og:site_name'} content={getMetaTagTitle(data, query.id)} />
 				<meta property={'og:locale'} content={'ko_KR'} />
 				<meta property={'twitter:title'} content={getMetaTagTitle(data, query.id)} />
 				<meta property={'twitter:description'} content={`${data.description}`} />
-				<meta property={'twitter:image'} content={(data && data.image) ? data.image : '/logo.png'} />
+				<meta property={'twitter:image'} content={data && data.image ? data.image : '/logo.png'} />
 				<meta property={'twitter:url'} content={`https://www.cocstorage.com/board/${query.id}/${query.detail}`} />
 				<meta property={'twitter:card'} content={'summary'} />
 				<meta name={'apple-mobile-web-app-title'} content={getMetaTagTitle(data, query.id)} />
@@ -94,12 +96,14 @@ function Detail({ query }: NextPageContext) {
 						{isMobile && (
 							<Box className={classes.adBox}>
 								<GoogleAdSense
-									html={'<ins class="adsbygoogle"'
-									+ 'style="display:block"'
-									+ 'data-ad-client="ca-pub-5809905264951057"'
-									+ 'data-ad-slot="8033291397"'
-									+ 'data-ad-format="auto"'
-									+ 'data-full-width-responsive="true"></ins>'}
+									html={
+										'<ins class="adsbygoogle"'
+										+ 'style="display:block"'
+										+ 'data-ad-client="ca-pub-5809905264951057"'
+										+ 'data-ad-slot="8033291397"'
+										+ 'data-ad-format="auto"'
+										+ 'data-full-width-responsive="true"></ins>'
+									}
 								/>
 							</Box>
 						)}

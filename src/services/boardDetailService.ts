@@ -19,10 +19,7 @@ export function fetchBoardDetail({ id, categoryId }: FetchBoardDetailPayload) {
 }
 
 export function fetchBoardDetailComments({
-	id,
-	boardDataNo,
-	categoryId,
-	row
+	id, boardDataNo, categoryId, row
 }: FetchBoardDetailCommentPayload) {
 	const config: AxiosRequestConfig = {
 		url: `/board/${categoryId}/comment`,

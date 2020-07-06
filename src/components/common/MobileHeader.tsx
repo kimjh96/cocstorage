@@ -1,8 +1,5 @@
 import React, {
-	useState,
-	memo,
-	useCallback,
-	useMemo
+	useState, memo, useCallback, useMemo
 } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -144,7 +141,10 @@ function MobileHeader() {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const { route, query: { id } } = router;
+	const {
+		route,
+		query: { id }
+	} = router;
 	const [menuListState, setMenuListState] = useState<boolean>(false);
 	const [listItems] = useState<ListItemType[]>([
 		{
@@ -183,7 +183,7 @@ function MobileHeader() {
 			categoryId: 'baseball_new9'
 		}
 	]);
-	const isBoardDetail = useMemo(() => (route === '/board/[id]/[detail]'), [route]);
+	const isBoardDetail = useMemo(() => route === '/board/[id]/[detail]', [route]);
 
 	const handleMenuList = (): void => {
 		setMenuListState(!menuListState);
@@ -192,12 +192,17 @@ function MobileHeader() {
 	const handleChip = useCallback(() => {
 		const categoryId = typeof id === 'string' ? id : '';
 
-		router.push({
-			pathname: '/board/[id]',
-			query: {
-				id: categoryId
-			}
-		}, `/board/${categoryId}`).then();
+		router
+			.push(
+				{
+					pathname: '/board/[id]',
+					query: {
+						id: categoryId
+					}
+				},
+				`/board/${categoryId}`
+			)
+			.then();
 	}, [router, id]);
 
 	const handleLogo = useCallback(() => {
@@ -208,19 +213,27 @@ function MobileHeader() {
 		});
 	}, [dispatch, router]);
 
-	const handleDrawer = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-		const categoryId: string = event.currentTarget.getAttribute('data-category-id') || '';
-		dispatch(clearBoardsRelatedState());
+	const handleDrawer = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>) => {
+			const categoryId: string = event.currentTarget.getAttribute('data-category-id') || '';
+			dispatch(clearBoardsRelatedState());
 
-		router.push({
-			pathname: '/board/[id]',
-			query: {
-				id: categoryId
-			}
-		}, `/board/${categoryId}`).then();
+			router
+				.push(
+					{
+						pathname: '/board/[id]',
+						query: {
+							id: categoryId
+						}
+					},
+					`/board/${categoryId}`
+				)
+				.then();
 
-		setMenuListState(!menuListState);
-	}, [dispatch, router, menuListState]);
+			setMenuListState(!menuListState);
+		},
+		[dispatch, router, menuListState]
+	);
 
 	return (
 		<>

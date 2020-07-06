@@ -21,7 +21,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
-import InputBase from '@material-ui/core/InputBase';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -381,7 +380,7 @@ function BoardList() {
 					<Grow in>
 						<Box>
 							{boardList.map((item: Board, index) => {
-								if ((index) === 5 && isMobile) {
+								if (index === 5 && isMobile) {
 									return (
 										<Box key={`board-${item.id}`}>
 											<Link href={'/board/[id]/[detail]'} as={`/board/${categoryId}/${item.id}`}>
@@ -393,10 +392,16 @@ function BoardList() {
 																	{item.subject}
 																</Typography>
 																<Typography variant={'subtitle2'}>
-																	{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
+																	{item.image && (
+																		<Box pl={0.5}>
+																			<ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} />
+																		</Box>
+																	)}
 																</Typography>
 																<Typography variant={'subtitle2'}>
-																	<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
+																	<Box className={classes.commentCountBox} pl={0.5}>
+																		{`[${Number(item.commentCount).toLocaleString()}]`}
+																	</Box>
 																</Typography>
 															</Box>
 														</Grid>
@@ -407,14 +412,14 @@ function BoardList() {
 																		{item.nickname}
 																	</Typography>
 																</Box>
-																<Box className={classes.registerDate}>
-																	{getRegisterDate(item.register_date)}
-																</Box>
+																<Box className={classes.registerDate}>{getRegisterDate(item.register_date)}</Box>
 																<Box className={classes.thumbs}>
-																	<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
+																	<ThumbUpAltIcon className={classes.icon} fontSize={'small'} />{' '}
+																	{Number(item.up).toLocaleString()}
 																</Box>
 																<Box className={classes.view}>
-																	<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
+																	<VisibilityIcon className={classes.icon} fontSize={'small'} />{' '}
+																	{Number(item.view).toLocaleString()}
 																</Box>
 															</Box>
 														</Grid>
@@ -423,10 +428,12 @@ function BoardList() {
 											</Link>
 											<Grid key={`board-ad-${item.id}`} className={classes.gridAd} container justify={'center'}>
 												<GoogleAdSense
-													html={'<ins class="adsbygoogle"'
-													+ 'style="display:inline-block;width:320px;height:100px"'
-													+ 'data-ad-client="ca-pub-5809905264951057"'
-													+ 'data-ad-slot="2449792225"></ins>'}
+													html={
+														'<ins class="adsbygoogle"'
+														+ 'style="display:inline-block;width:320px;height:100px"'
+														+ 'data-ad-client="ca-pub-5809905264951057"'
+														+ 'data-ad-slot="2449792225"></ins>'
+													}
 												/>
 											</Grid>
 										</Box>
@@ -442,10 +449,16 @@ function BoardList() {
 															{item.subject}
 														</Typography>
 														<Typography variant={'subtitle2'}>
-															{item.image && <Box pl={0.5}><ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} /></Box>}
+															{item.image && (
+																<Box pl={0.5}>
+																	<ImageIcon className={classes.icon} fontSize={'small'} color={'primary'} />
+																</Box>
+															)}
 														</Typography>
 														<Typography variant={'subtitle2'}>
-															<Box className={classes.commentCountBox} pl={0.5}>{`[${Number(item.commentCount).toLocaleString()}]`}</Box>
+															<Box className={classes.commentCountBox} pl={0.5}>
+																{`[${Number(item.commentCount).toLocaleString()}]`}
+															</Box>
 														</Typography>
 													</Box>
 												</Grid>
@@ -456,14 +469,14 @@ function BoardList() {
 																{item.nickname}
 															</Typography>
 														</Box>
-														<Box className={classes.registerDate}>
-															{getRegisterDate(item.register_date)}
-														</Box>
+														<Box className={classes.registerDate}>{getRegisterDate(item.register_date)}</Box>
 														<Box className={classes.thumbs}>
-															<ThumbUpAltIcon className={classes.icon} fontSize={'small'} /> {Number(item.up).toLocaleString()}
+															<ThumbUpAltIcon className={classes.icon} fontSize={'small'} />{' '}
+															{Number(item.up).toLocaleString()}
 														</Box>
 														<Box className={classes.view}>
-															<VisibilityIcon className={classes.icon} fontSize={'small'} /> {Number(item.view).toLocaleString()}
+															<VisibilityIcon className={classes.icon} fontSize={'small'} />{' '}
+															{Number(item.view).toLocaleString()}
 														</Box>
 													</Box>
 												</Grid>
@@ -491,11 +504,7 @@ function BoardList() {
 								value={searchState.value}
 								placeholder={'검색할 단어를 입력해주세요.'}
 							/>
-							<Button
-								className={classes.searchButton}
-								color={'inherit'}
-								onClick={onHandleDialog}
-							>
+							<Button className={classes.searchButton} color={'inherit'} onClick={onHandleDialog}>
 								{getSearchTypeLabelByType(searchState.type)}
 							</Button>
 						</Grid>

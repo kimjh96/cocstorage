@@ -50,7 +50,9 @@ function getOriginalUrlByOriginCategoryId(dataNo: number | null, originalCategor
 
 function SideBox() {
 	const classes = useStyles();
-	const { board: { data } } = useBoardDetail();
+	const {
+		board: { data }
+	} = useBoardDetail();
 
 	return (
 		<Box position={'relative'}>
@@ -59,7 +61,13 @@ function SideBox() {
 					<List>
 						{data.original_category_id && (
 							<ListItem button>
-								<Link href={getOriginalUrlByOriginCategoryId(data.data_no, data.original_category_id)} target={'_blank'} className={classes.link} underline={'none'} color={'inherit'}>
+								<Link
+									href={getOriginalUrlByOriginCategoryId(data.data_no, data.original_category_id)}
+									target={'_blank'}
+									className={classes.link}
+									underline={'none'}
+									color={'inherit'}
+								>
 									<ListItemAvatar>
 										<Avatar color={'primary'}>
 											<LinkIcon />
@@ -81,12 +89,14 @@ function SideBox() {
 				</Box>
 				<Box className={classes.adBox}>
 					<GoogleAdSense
-						html={'<ins class="adsbygoogle"'
-						+ 'style="display:block"'
-						+ 'data-ad-client="ca-pub-5809905264951057"'
-						+ 'data-ad-slot="7258431621"'
-						+ 'data-ad-format="auto"'
-						+ 'data-full-width-responsive="true"></ins>'}
+						html={
+							'<ins class="adsbygoogle"'
+							+ 'style="display:block"'
+							+ 'data-ad-client="ca-pub-5809905264951057"'
+							+ 'data-ad-slot="7258431621"'
+							+ 'data-ad-format="auto"'
+							+ 'data-full-width-responsive="true"></ins>'
+						}
 					/>
 				</Box>
 			</Box>

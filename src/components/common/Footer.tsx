@@ -33,30 +33,25 @@ function Footer() {
 	const classes = useStyles();
 	const router = useRouter();
 
-	const handleChip = useCallback((event: React.MouseEvent<HTMLSpanElement>) => {
-		const path: string = event.currentTarget.getAttribute('data-path') || '';
+	const handleChip = useCallback(
+		(event: React.MouseEvent<HTMLSpanElement>) => {
+			const path: string = event.currentTarget.getAttribute('data-path') || '';
 
-		router.push(path).then();
-	}, [router]);
+			router.push(path).then();
+		},
+		[router]
+	);
 
 	return (
 		<Box className={classes.root}>
 			<Container>
 				<Grid container alignItems={'center'}>
 					<Grid item xs={12} sm={6}>
-						<Box className={classes.leftBox}>
-							{'ⓒ 개념글 저장소 All Rights Reserved.'}
-						</Box>
+						<Box className={classes.leftBox}>{'ⓒ 개념글 저장소 All Rights Reserved.'}</Box>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<Box className={classes.rightBox}>
-							<Chip
-								label={'이용약관'}
-								size={'small'}
-								variant={'outlined'}
-								data-path={'/policy'}
-								onClick={handleChip}
-							/>
+							<Chip label={'이용약관'} size={'small'} variant={'outlined'} data-path={'/policy'} onClick={handleChip} />
 							<Chip
 								label={'개인정보처리방침'}
 								size={'small'}

@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Paper from '@material-ui/core/Paper';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grow from '@material-ui/core/Grow';
 
@@ -71,7 +70,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			transition: 'box-shadow',
 			transitionDuration: '.3s',
 			'&:hover': {
-				boxShadow: 'rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px'
+				boxShadow:
+					'rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px'
 			},
 			'& a': {
 				width: '100%',
@@ -226,7 +226,12 @@ function NewBoard() {
 													<Typography variant={'subtitle2'} gutterBottom>
 														<Skeleton width={'100%'} animation={'wave'} />
 													</Typography>
-													<Typography className={classes.writerTypographySkeleton} variant={'body2'} color={'textSecondary'} gutterBottom>
+													<Typography
+														className={classes.writerTypographySkeleton}
+														variant={'body2'}
+														color={'textSecondary'}
+														gutterBottom
+													>
 														<Box component={'span'} marginRight={1}>
 															<Skeleton width={50} animation={'wave'} />
 														</Box>
@@ -234,7 +239,11 @@ function NewBoard() {
 															<Skeleton width={50} animation={'wave'} />
 														</Box>
 													</Typography>
-													<Typography className={classes.statTypographySkeleton} variant={'body2'} color={'textSecondary'}>
+													<Typography
+														className={classes.statTypographySkeleton}
+														variant={'body2'}
+														color={'textSecondary'}
+													>
 														<Box component={'span'} marginRight={1}>
 															<Skeleton width={50} animation={'wave'} />
 														</Box>
@@ -263,7 +272,15 @@ function NewBoard() {
 															<Box className={classes.thumbnailBoxWrapper} marginRight={1}>
 																<Box className={classes.thumbnailBoxWrapperInner}>
 																	<Box className={classes.thumbnailBoxCentered}>
-																		{item.image ? <img src={item.image} alt={'Thumbnail'} /> : <img className={classes.thumbnailBoxCenteredDefaultImage} src={DefaultImageSvg} alt={'Default Thumbnail'} />}
+																		{item.image ? (
+																			<img src={item.image} alt={'Thumbnail'} />
+																		) : (
+																			<img
+																				className={classes.thumbnailBoxCenteredDefaultImage}
+																				src={DefaultImageSvg}
+																				alt={'Default Thumbnail'}
+																			/>
+																		)}
 																	</Box>
 																</Box>
 															</Box>
@@ -275,11 +292,13 @@ function NewBoard() {
 																	<Box className={classes.boxDate} component={'span'}>
 																		{moment(item.register_date).startOf('hour').fromNow()}
 																	</Box>
-																	<Box component={'span'}>
-																		{item.nickname}
-																	</Box>
+																	<Box component={'span'}>{item.nickname}</Box>
 																</Typography>
-																<Typography className={classes.statTypography} variant={'body2'} color={'textSecondary'}>
+																<Typography
+																	className={classes.statTypography}
+																	variant={'body2'}
+																	color={'textSecondary'}
+																>
 																	<Box component={'span'} marginRight={1} fontSize={12}>
 																		<MessageIcon fontSize={'small'} /> {Number(item.commentCount).toLocaleString()}
 																	</Box>

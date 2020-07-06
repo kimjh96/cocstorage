@@ -19,11 +19,7 @@ export function fetchBoards({ categoryId, page }: FetchBoardPayload) {
 	return axios()(config);
 }
 
-export function fetchSearchBoards({
-	categoryId,
-	searchState,
-	page
-}: FetchBoardPayload) {
+export function fetchSearchBoards({ categoryId, searchState, page }: FetchBoardPayload) {
 	const config: AxiosRequestConfig = {
 		url: `/board/${categoryId}`,
 		params: {
