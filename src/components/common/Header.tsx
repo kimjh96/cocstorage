@@ -140,6 +140,7 @@ function Header() {
 	const activatedTab = useMemo(() => (route === '/board/[id]' ? asPath : '/'), [route, asPath]);
 	const isBoardDetail = useMemo(() => route === '/board/[id]/[detail]', [route]);
 	const isPolicy = useMemo(() => route === '/policy' || route === '/privacy', [route]);
+	const isNotice = useMemo(() => route === '/notice', [route]);
 
 	const handleTabChange = useCallback(
 		(event: React.ChangeEvent<{}>, newValue: string) => {
@@ -234,7 +235,7 @@ function Header() {
 					<Toolbar className={classes.toolbar} />
 				</>
 			)}
-			{!isBoardDetail && !isPolicy && (
+			{!isBoardDetail && !isPolicy && !isNotice && (
 				<Box>
 					<Paper className={classes.paper} variant={'outlined'} square>
 						<Container>

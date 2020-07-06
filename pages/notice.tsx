@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'flex-end'
 		},
 		contentContainer: {
-			padding: theme.spacing(1, 0),
+			paddingTop: theme.spacing(1),
 			backgroundColor: 'white'
 		},
 		typography: {
@@ -45,6 +45,11 @@ const useStyles = makeStyles((theme: Theme) =>
 		gridBox: {
 			display: 'flex',
 			justifyContent: 'flex-end'
+		},
+		list: {
+			'& li': {
+				padding: theme.spacing(1, 0)
+			}
 		},
 		box: {
 			fontWeight: 700,
@@ -99,7 +104,7 @@ function Policy() {
 				</Container>
 			</Box>
 			<Container className={classes.contentContainer}>
-				<List>
+				<List className={classes.list}>
 					<ListItem>
 						{'안녕하세요.'}
 						<br />
